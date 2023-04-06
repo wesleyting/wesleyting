@@ -21,9 +21,9 @@
 
 
 ### Glad to see you here!  
-I’m a full-stack developer who has turned years of freelancing into a full-time career. Being a full-stack allows me to not only develop client-facing apps and websites but also develop it with cutting edge backend support.
+I'm a full-stack developer with a passion for building robust and efficient systems. I have years of experience in freelancing and work, which has helped me hone my skills and become the developer I am today.
 
-I specialize in building robust backends that do all the heavy lifting for your app or website. I love designing systems that are light yet powerful, distributed yet synchronized and beautiful yet effective. I also frequently blog about the world behind the screen which involves system designs, databases, security, servers, optimisation and also promising technologies like Blockchain and PWAs.  
+My expertise lies in developing both client-facing apps and websites, as well as creating cutting-edge backends to support them. I specialize in designing systems that are not only powerful, but also light and synchronized. I believe in creating functional yet beautiful systems that enhance user experience and efficiency. 
   
 <a href="https://www.wesleyting.com/">Portfolio Link</a>
 
