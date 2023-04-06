@@ -21,7 +21,7 @@
 
 
 ### Glad to see you here!  
-I'm a full-stack developer with a passion for building robust and efficient systems. I have years of experience in freelancing and work, which has helped me hone my skills and become the developer I am today.
+I'm a full-stack developer with a passion for building robust and efficient systems. My years of experience in freelancing and work, which has helped me hone my skills and become the developer I am today.
 
 My expertise lies in developing both client-facing apps and websites, as well as creating cutting-edge backends to support them. I specialize in designing systems that are not only powerful, but also light and synchronized. I believe in creating functional yet beautiful systems that enhance user experience and efficiency. 
   
