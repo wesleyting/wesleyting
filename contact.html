@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- Theme colors -->
+    <meta name="theme-color" content="#0d0f12" media="(prefers-color-scheme: dark)">
+    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+
+    <!-- SEO -->
+    <title>Wesley Ting — Web Developer</title>
+    <meta name="description" content="Web developer building modern, motion-driven experiences with clean code, performance, and thoughtful design." />
+
+    <!-- Open Graph / Twitter -->
+    <meta property="og:title" content="Wesley Ting — Web Developer">
+    <meta property="og:description" content="Modern motion with clean code and mobile-first craft.">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="/og.jpg">
+    <meta name="twitter:card" content="summary_large_image">
+    <link rel="icon" href="/site-icon.png" />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/globals.css" />
+    <link rel="stylesheet" href="/css/preloader.css" />
+    <link rel="stylesheet" href="/css/transition.css" />
+    <link rel="stylesheet" href="/css/menu.css" />
+
+    <link rel="stylesheet" href="/css/home.css" />
+    <link rel="stylesheet" href="/css/spotlight.css" />
+  </head>
+  <body>
+    <!-- Preloader -->
+    <div class="overlay" role="status" aria-live="polite" aria-busy="true">
+      <div class="projects">
+        <div class="projects-header"><p>TOOLS</p><p>FOCUS</p></div>
+      </div>
+      <div class="loader">
+        <h1 class="logo-line-1">Wesley</h1>
+        <h1 class="logo-line-2">Ting</h1>
+      </div>
+      <div class="locations">
+        <div class="locations-header"><p>VALUES</p></div>
+      </div>
+    </div>
+
+    <!-- Preloader grid -->
+    <div class="image-grid" aria-hidden="true">
+      <div class="grid-row">
+        <div class="img"><img src="/spotlight/spotlight-1.jpg" alt="" /></div>
+        <div class="img"><img src="/spotlight/spotlight-2.jpg" alt="" /></div>
+        <div class="img"><img src="/spotlight/spotlight-3.jpg" alt="" /></div>
+      </div>
+      <div class="grid-row">
+        <div class="img"><img src="/spotlight/spotlight-4.jpg" alt="" /></div>
+        <div class="img"><img src="/spotlight/spotlight-5.jpg" alt="" /></div>
+        <div class="img"><img src="/spotlight/spotlight-6.jpg" alt="" /></div>
+      </div>
+      <div class="grid-row">
+        <div class="img"><img src="/spotlight/spotlight-7.jpg" alt="" /></div>
+        <div class="img"><img src="/spotlight/spotlight-8.jpg" alt="" /></div> <!-- fixed -->
+        <div class="img"><img src="/spotlight/spotlight-9.jpg" alt="" /></div>
+      </div>
+    </div>
+
+    <!-- Page transition cover -->
+    <div class="transition" aria-hidden="true">
+      <div class="transition-overlay"></div>
+    </div>
+
+    <!-- Nav -->
+    <nav>
+      <div class="container">
+        <div class="logo">
+          <div class="logo-container"><a href="/">Wesley Ting</a></div>
+        </div>
+        <div class="menu-toggle-btn">
+          <div class="menu-toggle-btn-wrapper"><p>Menu</p></div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="nav-overlay">
+      <div class="nav-items">
+        <div class="nav-item"><a href="/">Home</a></div>
+        <div class="nav-item"><a href="/about">About</a></div>
+        <div class="nav-item"><a href="/work">Work</a></div>
+        <div class="nav-item active"><a href="/contact">Contact</a></div>
+      </div>
+      <div class="nav-footer">
+        <div class="container">
+          <div class="nav-footer-item">
+            <a href="https://github.com/wesleyting" target="_blank" rel="noopener">GitHub</a>
+            <a href="https://x.com/wesleyting" target="_blank" rel="noopener">X</a>
+          </div>
+          <div class="nav-footer-item">
+            <a href="/contact">[ &nbsp;Drop a line&nbsp; ]</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Main content -->
+    <main id="main">
+      <h1>Contact Page</h1>
+      <!-- page sections... -->
+    </main>
+
+    <script type="module" src="/scripts/transition.js"></script>
+    <script type="module" src="/scripts/preloader.js"></script>
+    <script type="module" src="/scripts/lenis-scroll.js"></script> 
+    <script type="module" src="/scripts/menu.js"></script>
+    <script type="module" src="/scripts/spotlight.js"></script>
+  </body>
+</html>
