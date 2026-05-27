@@ -1,219 +1,358 @@
-/* home: about callout section */
-.about-callout {
-  position: relative;
-  width: 50%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin: 0 auto;
-  padding: 8rem 0 0 0;
-  text-align: center;
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* home: about copy section */
-.about-copy .container {
-  display: flex;
-  flex-direction: column;
-  gap: 4rem;
+body {
+  font-family: "Outfit";
+  color: #ffffff;
+  background-color: #000000;
+  overflow-x: hidden;
 }
 
-.about-copy .container h3 {
-  width: 75%;
-  margin: 0 auto;
-  text-align: center;
+h1 {
+  font-size: 60px;
+  font-weight: 500;
+  color: #353535;
 }
 
-.about-copy .container .about-copy-info {
-  width: 60%;
-  display: flex;
-  flex-direction: column;
-  gap: 4rem;
-  margin: 0 auto 8rem auto;
-  text-align: center;
+h2 {
+  font-size: 52px;
+  max-width: 1200px;
 }
 
-.about-copy .container .about-copy-info a {
-  width: max-content;
-  margin: 0 auto;
-  color: var(--tone-500);
+p {
+  font-size: 20px;
+  font-weight: 500;
 }
 
-/* home: banner section */
-.banner {
-  position: relative;
-  width: 100%;
-  height: 150svh;
-  overflow: hidden;
+a {
+  text-decoration: none;
+  color: #fff;
+  font-size: 20px;
+  font-weight: 500;
 }
 
-.banner .banner-img {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-}
 
-.banner .banner-img img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  will-change: transform;
-}
 
-.banner .banner-content {
-  position: relative;
-  width: 100%;
-  height: 100%;
-}
 
-.banner .banner-content .container {
+
+.hero {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  color: var(--tone-500);
-}
-
-.banner .banner-content .container h2 {
-  width: 75%;
-}
-
-.banner .banner-content .container .banner-copy {
-  width: 50%;
-}
-
-/* home: clients section */
-.clients {
-  position: relative;
+  padding: 2.5em;
+  padding-top: 8em;
   width: 100%;
   height: 100svh;
-  background-color: var(--tone-100);
-  color: var(--tone-500);
+  
+}
+
+.hero h1 {
+  position: static;
+  left: auto;
+  text-transform: none;
+  font-weight: initial;
+  font-size: initial;
+  letter-spacing: normal;
+  margin: 0 auto;
+  line-height: 1;
+  color: inherit;
+}
+
+.hero-copy {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.outro {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.intro {
+  height: 100%;
+
+  margin: 0 auto;
+}
+
+.video-container-desktop {
+  position: relative;
+  /* Change -105% to a fixed pixel value or 0 if possible, 
+     but if you need the effect, keep it and we will fix it in JS */
+  transform: translateY(-105%) scale(0.25); 
+  display: flex;
+  flex-direction: column;
+  gap: 2em;
+  will-change: transform;
+  /* Add this to prevent layout jumping */
+  margin-bottom: 0; 
+}
+
+.video-container-desktop .video-title p {
+  position: relative;
+  font-size: 78px;
+  font-weight: 500;
+}
+
+.video-container-mobile {
+  display: none;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.video-preview {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/9;
+  border-radius: 1.5rem;
+  background-color: #b9b9b3;
   overflow: hidden;
 }
 
-.clients .clients-header {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-}
-
-.clients .clients-header p {
-  color: var(--tone-400);
-}
-
-.clients .container {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 4rem;
-}
-
-.clients .grid {
-  position: relative;
-  width: 90%;
-  height: 60%;
-  display: flex;
-  flex-direction: column;
-  margin: 0 auto;
-  border: 1px solid var(--tone-200);
-}
-
-.clients .grid-row,
-.clients .grid-item {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-}
-
-.clients .grid-row:nth-child(1) {
-  border-bottom: 1px solid var(--tone-200);
-}
-
-.clients .grid-item:not(:last-child) {
-  border-right: 1px solid var(--tone-200);
-}
-
-.clients .grid-item p {
-  position: relative;
-  z-index: 2;
-  color: var(--tone-400);
-  user-select: none;
-}
-
-.clients .highlight {
+.video-wrapper {
   position: absolute;
   top: 0;
   left: 0;
-  background: white;
-  opacity: 1;
-  transition: transform 0.25s ease, width 0.25s ease, height 0.25s ease,
-    background-color 0.25s ease;
+  width: 100%;
+  height: 100%;
+  border-radius: 1.5rem;
+  overflow: hidden;
+}
+
+
+.hero-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 1.5rem;
   pointer-events: none;
 }
 
-@media (max-width: 1000px) {
-  .about-callout {
-    width: 85%;
+@media (max-width: 900px) {
+  nav,
+  section,
+  .hero {
+    padding: 1.5em;
   }
 
-  .about-copy .container h3 {
-    width: 100%;
+  .hero {
+    justify-content: flex-end;
+    gap: 2em;
   }
 
-  .about-copy .container .about-copy-info {
-    width: 90%;
+  .hero h1 {
+    font-size: 19vw;
   }
 
-  .banner {
-    height: 125svh;
+  .video-container-desktop {
+    display: none;
   }
 
-  .banner .banner-content .container h2 {
-    width: 100%;
-  }
-
-  .banner .banner-content .container .banner-copy {
-    width: 85%;
-  }
-
-  .clients {
-    height: 110svh;
-  }
-
-  .clients .grid {
-    height: max-content;
-    border: 1px solid var(--tone-400);
-  }
-
-  .clients .grid-row {
-    flex: none;
-    flex-direction: column;
-    gap: 0;
-    height: max-content;
-    padding: 0;
-    border: none;
-  }
-
-  .clients .grid-row:nth-child(1) {
-    border-bottom: 1px solid var(--tone-400);
-  }
-
-  .clients .grid-item {
-    flex: none;
-    width: 100%;
-    height: 4rem;
-    padding: 0;
-  }
-
-  .clients .grid-item:not(:last-child) {
-    border-right: none;
-    border-bottom: 1px solid var(--tone-400);
+  .video-container-mobile {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 1em;
   }
 }
+
+
+/* NEW */
+.hero-word {
+  /* occupies the same slot the text H1 had */
+  display: block;
+  width: 100%;
+  /* height scales like your former 20vw text, but clamped for sanity */
+  height: clamp(120px, 20vw, 320px);
+  margin: 0 auto;
+  line-height: 1;
+}
+
+.hero-word img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  /* ensures the graphic keeps its aspect without cropping */
+  object-fit: contain;
+}
+
+/* Mobile overrides: stack hero content at the top and let next section peek */
+@media (max-width: 900px) {
+  /* 1) Stop forcing full height on the hero */
+  .hero {                 /* section.hero already has height via `section` */
+    height: auto;         /* override the global `section { height: 100svh; }` */
+    padding-top: 5.5em;   /* room for fixed nav */
+  }
+
+  /* 2) Top-align the hero’s flex content (desktop kept as-is) */
+  .hero {
+    justify-content: flex-start;  /* instead of space-between */
+    align-items: flex-start;
+    gap: 1.1em;                   /* breathing space between H1 / H2 / meta */
+  }
+
+  /* 3) H2 smaller */
+  .hero h2 {
+    font-size: 38px;
+    line-height: 1.25;
+    max-width: 40ch;
+  }
+
+  /* 4) Bottom meta: show only location, hide “Scroll to explore” */
+  .hero-copy {
+    margin-top: 0.75em;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.4em;
+  }
+  .hero-copy p:last-child { display: none; }
+
+  /* 5) Make the mobile video title smaller */
+  .video-container-mobile .video-title { margin-top: 0.75em; }
+  .video-container-mobile .video-title p {
+    font-size: 22px !important;
+  }
+
+  /* 6) Keep video centered inside the 16:9 box */
+  .hero-video { object-fit: cover; object-position: center; }
+}
+
+
+
+
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+
+.about {
+  position: relative;
+  width: 100%;
+  height: 100svh;
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+.hero-img,
+.outro-img {
+  width: 300px;
+  aspect-ratio: 5/7;
+  overflow: hidden;
+}
+
+.services {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  /* IMPORTANT: Ensure there is no margin here */
+  margin: 0; 
+}
+
+.services-header {
+  position: relative;
+  width: 100%;
+  padding: 0 2rem;
+  will-change: transform;
+}
+
+.services-header img {
+  object-fit: contain;
+}
+
+.services-header:nth-child(1),
+.services-header:nth-child(3) {
+  transform: translateX(100%) translateY(0%);
+}
+
+.services-header:nth-child(2) {
+  transform: translateX(-100%) translateY(0%);
+  z-index: 2;
+}
+
+.services-copy {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  margin-top: 165svh;
+  padding: 2rem 2rem 25svh 2rem;
+  text-align: center;
+}
+
+.animate-text {
+  position: relative;
+  width: 60%;
+  margin: 0 auto;
+  color: #4f4f4f;
+  --clip-value: 100%;
+}
+
+.animate-text::before {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: #fff;
+  clip-path: inset(0 0 var(--clip-value) 0);
+  will-change: clip-path;
+}
+
+@media (max-width: 1000px) {
+  h1 {
+    font-size: 2rem;
+    letter-spacing: -0.05rem;
+  }
+
+  .animate-text {
+    width: 100%;
+  }
+}
+
+
+/* === Integrated mouse trail inside .services-copy === */
+.services-copy {
+  position: relative;
+  overflow: hidden;        /* ensures images don't leak outside */
+}
+
+/* Hide the pool of images; only their src is used */
+.services-copy .medias img {
+  width: 1px;
+  height: 1px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Style for the floating clones appended into .services-copy */
+.services-copy > img {
+  position: absolute !important;
+  width: 15vw !important;
+  height: 15vw !important;
+  object-fit: cover;
+  border-radius: 4%;
+  will-change: transform;
+  pointer-events: none;
+  z-index: 1;
+}
+

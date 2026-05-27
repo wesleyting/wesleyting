@@ -1,11 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&display=swap");
 
 :root {
   --tone-100: #000000;
   --tone-200: #222222;
-  --tone-300: #5b5c57;
-  --tone-400: #f2f3f0;
+  --tone-300: #353535;
+  --tone-400: hsl(0, 0%, 100%);
   --tone-500: #4c6b8b;
+
+  --radius: 1.5rem;
+  --pad-desktop: 2rem;
+  --pad-mobile: 1rem;
 }
 
 * {
@@ -14,13 +19,10 @@
   box-sizing: border-box;
 }
 
-::-webkit-scrollbar {
-  display: none;
-}
 
 body {
-  background-color: var(--tone-400);
-  color: var(--tone-100);
+  background-color: var(--tone-100);
+  color: var(--tone-400);
 }
 
 h1,
@@ -31,7 +33,6 @@ a,
 p,
 span {
   font-family: "Outfit";
-  text-transform: uppercase;
 }
 
 h1 {
@@ -67,10 +68,14 @@ p {
   line-height: 1.25;
 }
 
+section {
+  padding: 1.5em;
+}
+
 .container {
   width: 100%;
   height: 100%;
-  padding: 2rem;
+  padding: 1.5rem;
   max-width: 2000px;
   margin: 0 auto;
 }
@@ -111,6 +116,6 @@ p {
   }
 
   .container {
-    padding: 1rem;
+    padding: 1.5rem;
   }
 }

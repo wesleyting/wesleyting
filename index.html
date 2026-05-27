@@ -19,6 +19,7 @@
     <meta property="og:image" content="/og.jpg">
     <meta name="twitter:card" content="summary_large_image">
     <link rel="icon" href="/site-icon.png" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
 
     <!-- CSS -->
     <link rel="stylesheet" href="/globals.css" />
@@ -69,15 +70,13 @@
     </div>
 
     <!-- Nav -->
-    <nav>
-      <div class="container">
+    <nav class="nav">
         <div class="logo">
           <div class="logo-container"><a href="/">Wesley Ting</a></div>
         </div>
         <div class="menu-toggle-btn">
           <div class="menu-toggle-btn-wrapper"><p>Menu</p></div>
         </div>
-      </div>
     </nav>
 
     <div class="nav-overlay">
@@ -101,14 +100,93 @@
     </div>
 
     <!-- Main content -->
-    <main id="main">
-      <h1>Home Page</h1>
-      <!-- page sections... -->
-    </main>
+<main id="main">
+    <section class="hero">
+  <h1 class="hero-word" aria-label="Develop">
+    <!-- Use your own path; SVG preferred for crispness -->
+    <img src="home/develop.svg" alt="" role="presentation" />
+  </h1>
+
+      <h2>I build digital experiences that turn creative ideas into purposeful, engaging realities.</h2>
+
+      <div class="hero-copy">
+        <p><i class="fa-solid fa-location-dot"></i> Based in Vancouver, BC.</p>
+        <p>Scroll to explore ↓</p>
+      </div>
+    </section>
+
+    <section class="intro">
+      <div class="video-container-desktop">
+        <div class="video-preview">
+          <div class="video-wrapper">
+  <video
+    autoplay
+    loop
+    muted
+    playsinline
+    preload="auto"
+    class="hero-video"
+  >
+    <source src="home/video.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+          </div>
+        </div>
+        <div class="video-title">
+          <p>Project Showreel</p>
+          <p>2024 - 2025</p>
+        </div>
+      </div>
+
+      <div class="video-container-mobile">
+        <div class="video-preview">
+          <div class="video-wrapper">
+  <video
+    autoplay
+    loop
+    muted
+    playsinline
+    preload="auto"
+    class="hero-video"
+  >
+    <source src="home/video.mp4" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+          </div>
+        </div>
+        <div class="video-title">
+          <p>Project Showreel</p>
+          <p>2024 - 2025</p>
+        </div>
+      </div>
+    </section>
+
+
+
+
+      <section class="services">
+      <div class="services-header"><img src="/home/whatido.svg" /></div>
+      <div class="services-header"><img src="/home/whatido.svg" /></div>
+      <div class="services-header"><img src="/home/whatido.svg" /></div>
+    </section>
+
+<section class="services-copy">
+  <h1 class="animate-text">
+    I create websites and digital experiences that value clarity above
+    excess. Through minimal form and precise detail, I aim to build work
+    that lasts and offers a quiet sense of order.
+  </h1>
+
+</main>
+
+
 
     <script type="module" src="/scripts/transition.js"></script>
     <script type="module" src="/scripts/preloader.js"></script>
-    <script type="module" src="/scripts/lenis-scroll.js"></script> 
+        <script type="module" src="/scripts/lenis-scroll.js"></script> 
+    <script type="module" src="/scripts/hero.js"></script>
+    <script type="module" src="/scripts/services.js"></script>
+
     <script type="module" src="/scripts/menu.js"></script>
     <script type="module" src="/scripts/spotlight.js"></script>
   </body>
