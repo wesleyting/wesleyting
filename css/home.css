@@ -83,6 +83,7 @@ a {
 
 .video-container-desktop {
   position: relative;
+  z-index: 20;
   /* Change -105% to a fixed pixel value or 0 if possible, 
      but if you need the effect, keep it and we will fix it in JS */
   transform: translateY(-105%) scale(0.25); 
@@ -101,6 +102,8 @@ a {
 }
 
 .video-container-mobile {
+  position: relative;
+  z-index: 20;
   display: none;
   width: 100%;
   max-width: 800px;
@@ -168,6 +171,8 @@ a {
 /* NEW */
 .hero-word {
   /* occupies the same slot the text H1 had */
+  position: relative;
+  z-index: 4;
   display: block;
   width: 100%;
   /* height scales like your former 20vw text, but clamped for sanity */
@@ -177,6 +182,8 @@ a {
 }
 
 .hero-word img {
+  position: relative;
+  z-index: 4;
   display: block;
   width: 100%;
   height: 100%;
@@ -256,45 +263,50 @@ img {
 
 .services {
   position: relative;
+  z-index: 4;
   width: 100%;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  height: 100svh;
   overflow: hidden;
-  /* IMPORTANT: Ensure there is no margin here */
-  margin: 0; 
+  margin: -15svh 0 0;
+}
+
+.services-headers {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  pointer-events: none;
 }
 
 .services-header {
-  position: relative;
+  position: absolute;
+  top: 50%;
+  left: 0;
   width: 100%;
   padding: 0 2rem;
   will-change: transform;
 }
 
 .services-header img {
+  display: block;
+  width: 100%;
+  height: auto;
   object-fit: contain;
 }
 
-.services-header:nth-child(1),
-.services-header:nth-child(3) {
-  transform: translateX(100%) translateY(0%);
-}
-
-.services-header:nth-child(2) {
-  transform: translateX(-100%) translateY(0%);
-  z-index: 2;
-}
-
 .services-copy {
-  position: relative;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
   width: 100%;
-  height: 100%;
-  margin-top: 165svh;
-  padding: 2rem 2rem 25svh 2rem;
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   text-align: center;
+  opacity: 0;
+  transform: translateY(6vh);
+  overflow: hidden;
+  will-change: transform, opacity;
 }
 
 .animate-text {
@@ -327,12 +339,6 @@ img {
 }
 
 
-/* === Integrated mouse trail inside .services-copy === */
-.services-copy {
-  position: relative;
-  overflow: hidden;        /* ensures images don't leak outside */
-}
-
 /* Hide the pool of images; only their src is used */
 .services-copy .medias img {
   width: 1px;
@@ -355,4 +361,3 @@ img {
   pointer-events: none;
   z-index: 1;
 }
-

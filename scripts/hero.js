@@ -68,8 +68,6 @@ document.addEventListener("DOMContentLoaded", () => {
     ScrollTrigger.refresh();
   });
 
-  let refreshedAfterIntro = false;
-
   ScrollTrigger.create({
     trigger: ".intro",
     start: "top bottom",
@@ -113,15 +111,6 @@ document.addEventListener("DOMContentLoaded", () => {
         );
       }
 
-      // ✅ refresh once when intro finishes so pins below measure correctly
-      if (!refreshedAfterIntro && self.progress >= 0.999) {
-        refreshedAfterIntro = true;
-        requestAnimationFrame(() => ScrollTrigger.refresh(true));
-      }
-
-      if (refreshedAfterIntro && self.progress < 0.98) {
-        refreshedAfterIntro = false;
-      }
     },
   });
 

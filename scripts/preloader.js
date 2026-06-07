@@ -122,6 +122,10 @@ function cleanupPreloader() {
   if (lenis) {
     lenis.start();
   }
+
+  requestAnimationFrame(() => {
+    window.dispatchEvent(new Event("preloader:complete"));
+  });
 }
 
 // create animation timelines
@@ -262,6 +266,9 @@ if (force) sessionStorage.removeItem('preloaderSeen');
       lenis.start();
     }
 
+    requestAnimationFrame(() => {
+      window.dispatchEvent(new Event("preloader:complete"));
+    });
     return;
   }
 
