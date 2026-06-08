@@ -125,6 +125,7 @@ nav .logo a span {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
+  padding: 2em 2.5em;
 }
 
 .nav-overlay .nav-footer .nav-footer-item {
@@ -154,5 +155,9 @@ nav .logo a span {
 
   .nav-overlay .nav-footer .nav-footer-item {
     gap: 1rem;
+  }
+
+  .nav-overlay .nav-footer .container {
+    padding: 1.5em;
   }
 }
