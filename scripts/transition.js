@@ -1,71 +1,94 @@
 import gsap from "gsap";
 
+const TRANSITION_KEY = "page-transition-pending";
 const overlay = document.querySelector(".transition-overlay");
-const transitionKey = "routeTransition";
 let isNavigating = false;
 
-function coverPage() {
-  return gsap.fromTo(
-    overlay,
-    { yPercent: 100 },
-    { yPercent: 0, duration: 0.45, ease: "power2.inOut" }
-  );
+function resetOverlay() {
+  gsap.killTweensOf(overlay);
+  gsap.set(overlay, { yPercent: 100 });
 }
 
-function revealPage() {
-  return gsap.fromTo(
-    overlay,
-    { yPercent: 0 },
-    {
-      yPercent: 100,
-      duration: 0.45,
-      ease: "power2.inOut",
-      onComplete: () => {
-        document.documentElement.classList.remove("is-transitioning");
-      },
-    }
+function coverCurrentPage() {
+  const departureCover = document.createElement("div");
+
+  Object.assign(departureCover.style, {
+    position: "fixed",
+    inset: "0",
+    zIndex: "2147483647",
+    backgroundColor: "#7134ff",
+    pointerEvents: "none",
+    willChange: "transform",
+  });
+
+  document.body.appendChild(departureCover);
+  gsap.set(departureCover, { yPercent: 100, force3D: true });
+
+  return gsap.to(departureCover, {
+    yPercent: 0,
+    duration: 0.65,
+    ease: "power3.inOut",
+    force3D: true,
+  });
+}
+
+function revealDestination() {
+  gsap.killTweensOf(overlay);
+  gsap.set(overlay, { yPercent: 0 });
+  delete document.documentElement.dataset.pageTransition;
+
+  return gsap.to(overlay, {
+    yPercent: 100,
+    duration: 0.65,
+    ease: "power3.inOut",
+    onComplete: resetOverlay,
+  });
+}
+
+function isInternalLink(link) {
+  const href = link.getAttribute("href");
+  const target = link.getAttribute("target");
+
+  return Boolean(
+    href &&
+      target !== "_blank" &&
+      !href.startsWith("#") &&
+      !href.startsWith("http") &&
+      !href.startsWith("mailto:") &&
+      !href.startsWith("tel:")
   );
 }
 
 function isSamePage(href) {
-  if (!href || href === "#" || href === "") return true;
   return new URL(href, window.location.href).pathname === window.location.pathname;
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  if (!overlay) return;
+if (overlay) {
+  const transition = overlay.closest(".transition");
+  document.body.appendChild(transition);
 
-  const arrivedViaTransition = sessionStorage.getItem(transitionKey) === "true";
+  const arrivedViaTransition =
+    sessionStorage.getItem(TRANSITION_KEY) === "true";
+
   window.__arrivedViaTransition = arrivedViaTransition;
 
   if (arrivedViaTransition) {
-    sessionStorage.removeItem(transitionKey);
+    sessionStorage.removeItem(TRANSITION_KEY);
     document.querySelector(".home-intro")?.remove();
+    window.__homepageReady = true;
     requestAnimationFrame(() => {
       window.dispatchEvent(new Event("preloader:complete"));
     });
-    revealPage().then(() => gsap.set(overlay, { yPercent: 100 }));
+    revealDestination();
   } else {
-    gsap.set(overlay, { yPercent: 100 });
+    resetOverlay();
   }
 
   document.addEventListener("click", (event) => {
     const link = event.target.closest("a");
-    if (!link) return;
+    if (!link || !isInternalLink(link)) return;
 
     const href = link.getAttribute("href");
-    const target = link.getAttribute("target");
-
-    if (
-      !href ||
-      target === "_blank" ||
-      href.startsWith("#") ||
-      href.startsWith("http") ||
-      href.startsWith("mailto:") ||
-      href.startsWith("tel:")
-    ) {
-      return;
-    }
 
     if (isSamePage(href)) {
       event.preventDefault();
@@ -76,20 +99,20 @@ document.addEventListener("DOMContentLoaded", () => {
     if (isNavigating) return;
     isNavigating = true;
 
+    sessionStorage.setItem(TRANSITION_KEY, "true");
     const destination = new URL(href, window.location.href);
 
-    sessionStorage.setItem(transitionKey, "true");
-    coverPage().then(() => {
+    coverCurrentPage().eventCallback("onComplete", () => {
       window.location.href = destination.href;
     });
   });
-});
 
-window.addEventListener("pageshow", (event) => {
-  if (!event.persisted || !overlay) return;
+  window.addEventListener("pageshow", (event) => {
+    if (!event.persisted) return;
 
-  sessionStorage.removeItem(transitionKey);
-  document.documentElement.classList.remove("is-transitioning");
-  gsap.set(overlay, { yPercent: 100 });
-  document.documentElement.style.overflow = "";
-});
+    isNavigating = false;
+    sessionStorage.removeItem(TRANSITION_KEY);
+    delete document.documentElement.dataset.pageTransition;
+    resetOverlay();
+  });
+}

@@ -7,7 +7,7 @@ nav {
   display: flex;
   justify-content: space-between;
   mix-blend-mode: difference;
-  z-index: 100;
+  z-index: 1070;
 }
 
 
@@ -60,17 +60,29 @@ nav .logo a span {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 90;
+  z-index: 1060;
   width: 100%;
   height: 100svh;
-  background-color: var(--tone-200);
+  background-color: var(--tone-100);
   clip-path: polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%);
   overflow: hidden;
   pointer-events: none;
 }
 
+.nav-overlay::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  opacity: 0.055;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  background-size: 200px 200px;
+}
+
 .nav-overlay .nav-items {
   position: absolute;
+  z-index: 1;
   top: 50%;
   right: 0%;
   width: 50%;
@@ -96,11 +108,12 @@ nav .logo a span {
 }
 
 .nav-overlay .nav-items .nav-item.active a {
-  color: var(--tone-500);
+  color: #7134ff;
 }
 
 .nav-overlay .nav-footer {
   position: absolute;
+  z-index: 1;
   left: 0;
   bottom: 0;
   width: 100%;

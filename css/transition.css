@@ -1,11 +1,10 @@
-/* page transition */
 .transition {
   position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 1100;
+  inset: 0;
+  z-index: 1300;
   width: 100vw;
-  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
   pointer-events: none;
 }
 
@@ -14,11 +13,19 @@
   inset: 0;
   width: 100%;
   height: 100%;
-  background-color: var(--tone-500);
+  background-color: #7134ff;
   transform: translateY(100%);
   will-change: transform;
 }
 
-.is-transitioning .transition-overlay {
+html[data-page-transition="pending"] {
+  background-color: #7134ff;
+}
+
+html[data-page-transition="pending"] body > :not(.transition) {
+  visibility: hidden;
+}
+
+html[data-page-transition="pending"] .transition-overlay {
   transform: translateY(0);
 }

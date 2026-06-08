@@ -13,7 +13,11 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   };
 
-  window.addEventListener("preloader:complete", playHeroVideos, { once: true });
+  if (window.__homepageReady || !document.querySelector(".home-intro")) {
+    playHeroVideos();
+  } else {
+    window.addEventListener("preloader:complete", playHeroVideos, { once: true });
+  }
 
   if (window.innerWidth < 900) return;
 

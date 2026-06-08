@@ -51,6 +51,8 @@ function resetAllTextToOriginal() {
 }
 
 function addHoverScrambleEffect(link, type = "nav") {
+  if (link.closest(".nav-item.active")) return;
+
   let isAnimating = false;
   let currentSplit = null;
   const config = scrambleConfigs[type];
@@ -63,7 +65,7 @@ function addHoverScrambleEffect(link, type = "nav") {
       link.dataset.originalColor = getComputedStyle(link).color;
     }
 
-    link.style.color = "var(--tone-500)";
+    link.style.color = "#a5a5a5";
 
     if (currentSplit) {
       currentSplit.wordSplit?.revert();

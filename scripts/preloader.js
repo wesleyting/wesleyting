@@ -33,6 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
     onComplete: () => {
       intro.remove();
       document.body.classList.remove("intro-active");
+      window.__homepageReady = true;
       window.dispatchEvent(new Event("preloader:complete"));
     },
   })
