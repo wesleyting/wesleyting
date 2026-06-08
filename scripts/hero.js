@@ -6,6 +6,14 @@ gsap.registerPlugin(ScrollTrigger);
 
 document.addEventListener("DOMContentLoaded", () => {
   const heroVideos = document.querySelectorAll(".hero-video");
+  const revealTargets = {
+    nav: document.querySelector(".nav"),
+    word: document.querySelector(".hero-word"),
+    statement: document.querySelector(".hero h2"),
+    meta: document.querySelector(".hero-copy"),
+    videos: document.querySelectorAll(".video-preview"),
+    titles: document.querySelectorAll(".video-title"),
+  };
 
   const playHeroVideos = () => {
     heroVideos.forEach((video) => {
@@ -13,10 +21,70 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   };
 
+  gsap.set(document.body, {
+    "--grain-opacity": 0,
+    "--grid-opacity": 0,
+  });
+  gsap.set(revealTargets.nav, { autoAlpha: 0, y: -14 });
+  gsap.set(revealTargets.word, { autoAlpha: 0, y: 28, scale: 0.985 });
+  gsap.set(revealTargets.statement, { autoAlpha: 0, y: 24 });
+  gsap.set(revealTargets.meta, { autoAlpha: 0, y: 16 });
+  gsap.set(revealTargets.videos, { autoAlpha: 0, scale: 0.985 });
+  gsap.set(revealTargets.titles, { autoAlpha: 0, y: 12 });
+
+  let hasRevealed = false;
+
+  const revealHomepage = () => {
+    if (hasRevealed) return;
+    hasRevealed = true;
+
+    gsap.timeline({
+      defaults: { ease: "power3.out" },
+      onComplete: playHeroVideos,
+    })
+      .to(document.body, {
+        "--grain-opacity": 0.055,
+        "--grid-opacity": 0.65,
+        duration: 1.1,
+        ease: "power2.out",
+      }, 0)
+      .to(revealTargets.nav, {
+        autoAlpha: 1,
+        y: 0,
+        duration: 0.7,
+      }, 0.08)
+      .to(revealTargets.word, {
+        autoAlpha: 1,
+        y: 0,
+        scale: 1,
+        duration: 1,
+      }, 0.18)
+      .to(revealTargets.statement, {
+        autoAlpha: 1,
+        y: 0,
+        duration: 0.8,
+      }, 0.42)
+      .to(revealTargets.meta, {
+        autoAlpha: 1,
+        y: 0,
+        duration: 0.7,
+      }, 0.58)
+      .to(revealTargets.videos, {
+        autoAlpha: 1,
+        scale: 1,
+        duration: 0.9,
+      }, 0.5)
+      .to(revealTargets.titles, {
+        autoAlpha: 1,
+        y: 0,
+        duration: 0.65,
+      }, 0.72);
+  };
+
   if (window.__homepageReady || !document.querySelector(".home-intro")) {
-    playHeroVideos();
+    revealHomepage();
   } else {
-    window.addEventListener("preloader:complete", playHeroVideos, { once: true });
+    window.addEventListener("preloader:complete", revealHomepage, { once: true });
   }
 
   if (window.innerWidth < 900) return;
