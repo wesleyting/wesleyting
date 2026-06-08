@@ -3,6 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script>
+      if (sessionStorage.getItem("routeTransition") === "true") {
+        document.documentElement.classList.add("is-transitioning");
+      }
+    </script>
 
     <!-- Theme colors -->
     <meta name="theme-color" content="#0d0f12" media="(prefers-color-scheme: dark)">
@@ -22,47 +27,12 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="/globals.css" />
-    <link rel="stylesheet" href="/css/preloader.css" />
     <link rel="stylesheet" href="/css/transition.css" />
     <link rel="stylesheet" href="/css/menu.css" />
 
     <link rel="stylesheet" href="/css/home.css" />
-    <link rel="stylesheet" href="/css/spotlight.css" />
   </head>
   <body>
-    <!-- Preloader -->
-    <div class="overlay" role="status" aria-live="polite" aria-busy="true">
-      <div class="projects">
-        <div class="projects-header"><p>TOOLS</p><p>FOCUS</p></div>
-      </div>
-      <div class="loader">
-        <h1 class="logo-line-1">Wesley</h1>
-        <h1 class="logo-line-2">Ting</h1>
-      </div>
-      <div class="locations">
-        <div class="locations-header"><p>VALUES</p></div>
-      </div>
-    </div>
-
-    <!-- Preloader grid -->
-    <div class="image-grid" aria-hidden="true">
-      <div class="grid-row">
-        <div class="img"><img src="/spotlight/spotlight-1.jpg" alt="" /></div>
-        <div class="img"><img src="/spotlight/spotlight-2.jpg" alt="" /></div>
-        <div class="img"><img src="/spotlight/spotlight-3.jpg" alt="" /></div>
-      </div>
-      <div class="grid-row">
-        <div class="img"><img src="/spotlight/spotlight-4.jpg" alt="" /></div>
-        <div class="img"><img src="/spotlight/spotlight-5.jpg" alt="" /></div>
-        <div class="img"><img src="/spotlight/spotlight-6.jpg" alt="" /></div>
-      </div>
-      <div class="grid-row">
-        <div class="img"><img src="/spotlight/spotlight-7.jpg" alt="" /></div>
-        <div class="img"><img src="/spotlight/spotlight-8.jpg" alt="" /></div> <!-- fixed -->
-        <div class="img"><img src="/spotlight/spotlight-9.jpg" alt="" /></div>
-      </div>
-    </div>
-
     <!-- Page transition cover -->
     <div class="transition" aria-hidden="true">
       <div class="transition-overlay"></div>
@@ -107,9 +77,7 @@
     </main>
 
     <script type="module" src="/scripts/transition.js"></script>
-    <script type="module" src="/scripts/preloader.js"></script>
     <script type="module" src="/scripts/lenis-scroll.js"></script> 
     <script type="module" src="/scripts/menu.js"></script>
-    <script type="module" src="/scripts/spotlight.js"></script>
   </body>
 </html>

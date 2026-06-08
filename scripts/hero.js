@@ -5,6 +5,16 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 document.addEventListener("DOMContentLoaded", () => {
+  const heroVideos = document.querySelectorAll(".hero-video");
+
+  const playHeroVideos = () => {
+    heroVideos.forEach((video) => {
+      video.play().catch(() => {});
+    });
+  };
+
+  window.addEventListener("preloader:complete", playHeroVideos, { once: true });
+
   if (window.innerWidth < 900) return;
 
   const videoContainer = document.querySelector(".video-container-desktop");

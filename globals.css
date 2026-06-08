@@ -19,11 +19,38 @@
   box-sizing: border-box;
 }
 
+html {
+  overflow-y: scroll;
+  scrollbar-gutter: stable;
+  scrollbar-color: var(--tone-500) var(--tone-100);
+  scrollbar-width: thin;
+}
 
 body {
   background-color: var(--tone-100);
   color: var(--tone-400);
   overflow-x: hidden;
+}
+
+body.intro-active {
+  height: 100svh;
+  overflow: hidden;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--tone-100);
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: var(--tone-500);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #6d89a6;
 }
 
 body::before,

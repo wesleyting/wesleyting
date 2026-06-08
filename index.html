@@ -3,6 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script>
+      if (sessionStorage.getItem("routeTransition") === "true") {
+        document.documentElement.classList.add("is-transitioning");
+      }
+    </script>
 
     <!-- Theme colors -->
     <meta name="theme-color" content="#0d0f12" media="(prefers-color-scheme: dark)">
@@ -28,40 +33,43 @@
     <link rel="stylesheet" href="/css/menu.css" />
 
     <link rel="stylesheet" href="/css/home.css" />
-    <link rel="stylesheet" href="/css/spotlight.css" />
   </head>
   <body>
-    <!-- Preloader -->
-    <div class="overlay" role="status" aria-live="polite" aria-busy="true">
-      <div class="projects">
-        <div class="projects-header"><p>TOOLS</p><p>FOCUS</p></div>
-      </div>
-      <div class="loader">
-        <h1 class="logo-line-1">Wesley</h1>
-        <h1 class="logo-line-2">Ting</h1>
-      </div>
-      <div class="locations">
-        <div class="locations-header"><p>VALUES</p></div>
-      </div>
-    </div>
-
-    <!-- Preloader grid -->
-    <div class="image-grid" aria-hidden="true">
-      <div class="grid-row">
-        <div class="img"><img src="/spotlight/spotlight-1.jpg" alt="" /></div>
-        <div class="img"><img src="/spotlight/spotlight-2.jpg" alt="" /></div>
-        <div class="img"><img src="/spotlight/spotlight-3.jpg" alt="" /></div>
-      </div>
-      <div class="grid-row">
-        <div class="img"><img src="/spotlight/spotlight-4.jpg" alt="" /></div>
-        <div class="img"><img src="/spotlight/spotlight-5.jpg" alt="" /></div>
-        <div class="img"><img src="/spotlight/spotlight-6.jpg" alt="" /></div>
-      </div>
-      <div class="grid-row">
-        <div class="img"><img src="/spotlight/spotlight-7.jpg" alt="" /></div>
-        <div class="img"><img src="/spotlight/spotlight-8.jpg" alt="" /></div> <!-- fixed -->
-        <div class="img"><img src="/spotlight/spotlight-9.jpg" alt="" /></div>
-      </div>
+    <!-- Homepage intro -->
+    <div class="home-intro" role="status" aria-live="polite" aria-busy="true">
+      <svg
+        class="home-intro-logo"
+        width="160"
+        height="160"
+        viewBox="-4 -4 133 136"
+        fill="none"
+        aria-label="Wesley Ting"
+      >
+        <path
+          d="M25.0553 28H1V52.0553H25.0553V28Z"
+          fill="none"
+          stroke="#FEFFF8"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+        <path
+          d="M125 28L111.1 52.0553L84.7756 97.6546H57.0195L83.3438 52.0553L97.2218 28H125Z"
+          fill="none"
+          stroke="#FEFFF8"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+        <path
+          d="M79.9727 28L66.0947 52.0553L39.7704 97.6546H1V73.5993H25.8703L38.3165 52.0553L52.1946 28H79.9727Z"
+          fill="none"
+          stroke="#FEFFF8"
+          stroke-width="1.5"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        />
+      </svg>
     </div>
 
     <!-- Page transition cover -->
@@ -120,7 +128,6 @@
         <div class="video-preview">
           <div class="video-wrapper">
   <video
-    autoplay
     loop
     muted
     playsinline
@@ -142,7 +149,6 @@
         <div class="video-preview">
           <div class="video-wrapper">
   <video
-    autoplay
     loop
     muted
     playsinline
@@ -190,6 +196,5 @@
     <script type="module" src="/scripts/services.js"></script>
 
     <script type="module" src="/scripts/menu.js"></script>
-    <script type="module" src="/scripts/spotlight.js"></script>
   </body>
 </html>

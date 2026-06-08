@@ -1,100 +1,95 @@
 import gsap from "gsap";
 
-// animation functions
-function revealTransition() {
-  return new Promise((resolve) => {
-    gsap.set(".transition-overlay", { scaleY: 1, transformOrigin: "top" });
-    gsap.to(".transition-overlay", {
-      scaleY: 0,
-      duration: 0.6,
-      delay: 0.5,
-      ease: "power2.inOut",
-      onComplete: resolve,
-    });
-  });
+const overlay = document.querySelector(".transition-overlay");
+const transitionKey = "routeTransition";
+let isNavigating = false;
+
+function coverPage() {
+  return gsap.fromTo(
+    overlay,
+    { yPercent: 100 },
+    { yPercent: 0, duration: 0.45, ease: "power2.inOut" }
+  );
 }
 
-function animateTransition() {
-  return new Promise((resolve) => {
-    gsap.set(".transition-overlay", { scaleY: 0, transformOrigin: "bottom" });
-    gsap.to(".transition-overlay", {
-      scaleY: 1,
-      duration: 0.6,
+function revealPage() {
+  return gsap.fromTo(
+    overlay,
+    { yPercent: 0 },
+    {
+      yPercent: 100,
+      duration: 0.45,
       ease: "power2.inOut",
-      onComplete: resolve,
-    });
-  });
-}
-
-// utility functions
-function closeMenuIfOpen() {
-  const menuToggleBtn = document.querySelector(".menu-toggle-btn");
-  if (menuToggleBtn && menuToggleBtn.classList.contains("menu-open")) {
-    menuToggleBtn.click();
-  }
+      onComplete: () => {
+        document.documentElement.classList.remove("is-transitioning");
+      },
+    }
+  );
 }
 
 function isSamePage(href) {
   if (!href || href === "#" || href === "") return true;
-  const currentPath = window.location.pathname;
-  if (href === currentPath) return true;
-
-  if (
-    (currentPath === "/" || currentPath === "/index.html") &&
-    (href === "/" ||
-      href === "/index.html" ||
-      href === "index.html" ||
-      href === "./index.html")
-  ) {
-    return true;
-  }
-
-  const currentFileName = currentPath.split("/").pop() || "index.html";
-  const hrefFileName = href.split("/").pop();
-  if (currentFileName === hrefFileName) return true;
-
-  return false;
+  return new URL(href, window.location.href).pathname === window.location.pathname;
 }
 
-// main execution
 document.addEventListener("DOMContentLoaded", () => {
-  const isPageNavigation = sessionStorage.getItem("pageTransition") === "true";
+  if (!overlay) return;
 
-  if (isPageNavigation) {
-    sessionStorage.removeItem("pageTransition");
-    revealTransition();
+  const arrivedViaTransition = sessionStorage.getItem(transitionKey) === "true";
+  window.__arrivedViaTransition = arrivedViaTransition;
+
+  if (arrivedViaTransition) {
+    sessionStorage.removeItem(transitionKey);
+    document.querySelector(".home-intro")?.remove();
+    requestAnimationFrame(() => {
+      window.dispatchEvent(new Event("preloader:complete"));
+    });
+    revealPage().then(() => gsap.set(overlay, { yPercent: 100 }));
   } else {
-    gsap.set(".transition-overlay", { scaleY: 0 });
+    gsap.set(overlay, { yPercent: 100 });
   }
 
-  // handle link clicks
   document.addEventListener("click", (event) => {
     const link = event.target.closest("a");
     if (!link) return;
 
     const href = link.getAttribute("href");
+    const target = link.getAttribute("target");
 
     if (
-      href &&
-      (href.startsWith("http") ||
-        href.startsWith("mailto:") ||
-        href.startsWith("tel:"))
+      !href ||
+      target === "_blank" ||
+      href.startsWith("#") ||
+      href.startsWith("http") ||
+      href.startsWith("mailto:") ||
+      href.startsWith("tel:")
     ) {
       return;
     }
 
-    // prevent same page navigation
     if (isSamePage(href)) {
       event.preventDefault();
-      closeMenuIfOpen();
       return;
     }
 
-    // animate transition to new page
     event.preventDefault();
-    sessionStorage.setItem("pageTransition", "true");
-    animateTransition().then(() => {
-      window.location.href = href;
+    if (isNavigating) return;
+    isNavigating = true;
+
+    const destination = new URL(href, window.location.href);
+
+    sessionStorage.setItem(transitionKey, "true");
+    coverPage().then(() => {
+      window.location.href = destination.href;
     });
   });
+});
+
+window.addEventListener("pageshow", (event) => {
+  if (!event.persisted || !overlay) return;
+
+  sessionStorage.removeItem(transitionKey);
+  document.documentElement.classList.remove("is-transitioning");
+  gsap.set(overlay, { yPercent: 100 });
+  document.documentElement.style.overflow = "";
 });
