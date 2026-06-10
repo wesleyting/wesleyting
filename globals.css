@@ -27,7 +27,7 @@ html {
 body {
   background-color: var(--tone-100);
   color: var(--tone-400);
-  overflow-x: hidden;
+  overflow-x: clip;
   --grain-opacity: 0.055;
   --grid-opacity: 0.65;
 }
