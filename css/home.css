@@ -117,6 +117,7 @@ a {
   border-radius: 1.5rem;
   background-color: #000;
   overflow: hidden;
+  cursor: pointer;
 }
 
 .video-wrapper {
@@ -136,6 +137,70 @@ a {
   border-radius: inherit;
   object-fit: cover;
   pointer-events: none;
+}
+
+.showreel-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 1250;
+  padding: clamp(1rem, 3vw, 3rem);
+  display: grid;
+  place-items: center;
+  visibility: hidden;
+  opacity: 0;
+  background-color: rgba(0, 0, 0, 0.88);
+  pointer-events: none;
+}
+
+.showreel-modal.is-open {
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.showreel-modal-dialog {
+  position: relative;
+  width: min(1440px, 92vw);
+  background-color: #050505;
+  border: 1px solid #292929;
+  transform: scale(0.97);
+}
+
+.showreel-modal-video {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background-color: #000;
+  object-fit: contain;
+}
+
+.showreel-modal-close {
+  position: absolute;
+  top: 0.75rem;
+  right: 0.75rem;
+  z-index: 1;
+  width: 48px;
+  height: 48px;
+  display: grid;
+  place-items: center;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.55);
+  border: 0;
+  border-radius: 0;
+  font: inherit;
+  font-size: 1.75rem;
+  font-weight: 400;
+  line-height: 1;
+  cursor: pointer;
+  transition: color 0.25s ease, background-color 0.25s ease;
+}
+
+.showreel-modal-close:hover {
+  color: #a5a5a5;
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+body.showreel-open .site-scrollbar {
+  opacity: 0;
 }
 
 @media (max-width: 900px) {
@@ -228,6 +293,14 @@ a {
 
   /* 6) Keep video centered inside the 16:9 box */
   .hero-video { object-fit: cover; object-position: center; }
+
+  .showreel-modal {
+    padding: 1rem;
+  }
+
+  .showreel-modal-dialog {
+    width: 100%;
+  }
 }
 
 
