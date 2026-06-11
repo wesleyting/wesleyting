@@ -30,6 +30,56 @@ nav .menu-toggle-btn p {
 }
 
 nav .logo a {
+  font-size: 1.35rem;
+  font-weight: 600;
+}
+
+nav .menu-toggle-btn {
+  padding: 0;
+}
+
+nav .menu-toggle-btn-wrapper {
+  position: relative;
+  width: 4.5rem;
+  height: 1.7rem;
+  padding: 0;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+}
+
+nav .menu-toggle-btn p {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: var(--tone-400);
+  font-size: 1.35rem;
+  font-weight: 600;
+  line-height: 1;
+  margin: 0;
+  transition: transform 0.58s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+nav .menu-toggle-text-primary {
+  transform: translateY(0);
+}
+
+nav .menu-toggle-text-secondary {
+  transform: translateY(105%);
+}
+
+nav .menu-toggle-btn:hover .menu-toggle-text-primary,
+nav .menu-toggle-btn:focus-visible .menu-toggle-text-primary {
+  transform: translateY(-105%);
+}
+
+nav .menu-toggle-btn:hover .menu-toggle-text-secondary,
+nav .menu-toggle-btn:focus-visible .menu-toggle-text-secondary {
+  transform: translateY(0);
+}
+
+nav .logo a {
   display: flex;
   justify-content: center;
   align-items: center;

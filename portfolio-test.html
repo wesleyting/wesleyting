@@ -1,253 +1,219 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>BrandAppart Sticky Cards | Codegrid</title>
-    <link rel="stylesheet" href="/styles.css" />
-    <style>
-      @import url("https://fonts.googleapis.com/css2?family=Barlow+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap");
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>MWG 044</title>
+		<link rel="stylesheet" href="assets/style.css">
+		<link rel="icon" type="image/png" href="assets/favicon-96x96.png" sizes="96x96" />
+		<style>
+			@import url('https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap');
 
-:root {
-  --base-1: #3d2fa9;
-  --base-2: #ff7722;
-  --base-3: #ff3d33;
-  --base-4: #785f47;
-}
-
+/* NORMALIZE */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    appearance: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
 }
+/* NORMALIZE */
 
-img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+body {
+    background: #121212;
+    color: #F1F1F1;
+    font: 500 normal 22px/1.3 'Inter', sans-serif;
 }
-
-h1 {
-  text-transform: uppercase;
-  font-family: "Barlow Condensed", sans-serif;
-  font-size: 3rem;
-  font-weight: 800;
-  line-height: 1;
+.mwg_effect044 .root {
+    position: relative;
 }
-
-p {
-  text-transform: uppercase;
-  font-family: "DM Mono", monospace;
-  font-size: 0.9rem;
-}
-
-section {
-  position: relative;
-  width: 100%;
-  height: 100svh;
-  overflow: hidden;
-}
-
-.intro,
-.outro {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.sticky-cards {
-  background-color: #e3e3db;
-  perspective: 1000px;
-}
-
-.sticky-cards .card {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 65%;
-  height: 60%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 1rem;
-  padding: 2.5rem;
-  border-radius: 1rem;
-  color: #fff;
-  transform-origin: center bottom;
-  will-change: transform;
-}
-
-.card .col {
-  flex: 1;
-  height: 100%;
-}
-
-.card .col:nth-child(1) {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 0.5rem;
-}
-
-.card .col:nth-child(2) {
-  border-radius: 0.75rem;
-  overflow: hidden;
-}
-
-.card#card-1 {
-  background-color: var(--base-1);
-  z-index: 5;
-}
-
-.card#card-2 {
-  background-color: var(--base-2);
-  z-index: 4;
-}
-
-.card#card-3 {
-  background-color: var(--base-3);
-  z-index: 3;
-}
-
-.card#card-4 {
-  background-color: var(--base-4);
-  z-index: 2;
-}
-
-@media (max-width: 1000px) {
-  .sticky-cards .card {
-    width: calc(100% - 4rem);
-    height: 75%;
-    flex-direction: column;
-  }
-
-  .card .col {
+.mwg_effect044 .header,
+.mwg_effect044 .footer {
+    display: flex;
+    justify-content: space-between;
     width: 100%;
-  }
+    padding: 25px 0;
+}
+.mwg_effect044 .header p,
+.mwg_effect044 .footer p {
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    font-size: 16px;
+}
+.mwg_effect044 .footer {
+    position: relative;
+    border-top: 1px solid rgb(95, 95, 95);
+    margin: calc(2 * 25px) 0 0;
+}
+.mwg_effect044 .footer p {
+    color: rgb(95, 95, 95)
+}
+.mwg_effect044 .footer a {
+    color: inherit;
+    text-decoration: none;
+}
+.mwg_effect044 .duplicate .footer p {
+    color: var(--white);
+}
+.mwg_effect044 .line {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.mwg_effect044 .line p {
+    font: 500 normal 10.5vw / 0.9 'Inter', sans-serif;
+    letter-spacing: -0.05em;
+    text-transform: uppercase;
+}
+.mwg_effect044 .line p:first-child {
+    margin: 0 0 0 -0.07em;
+}
+.mwg_effect044 .photo {
+    width: 11.2vw;
+    height: max-content;
+    aspect-ratio: 1.5;
+    object-fit: cover;
+    transform: translate(0, -5%);
+    border-radius: 0.5vw;
+}
+.mwg_effect044 .icon {
+    width: 7.8vw;
+    height: auto;
+}
+.mwg_effect044 .containers {
+    position: relative;
+    pointer-events: none;
+}
+.mwg_effect044 .container {
+    position: relative;
+    padding: 0 25px;
+    height: 100vh;
+}
+.mwg_effect044 .duplicate {
+    --xpercent: 50%;
+    --ypercent: 50%;
+    mask-image: radial-gradient(circle at var(--xpercent) var(--ypercent), #000 20%, transparent 25%); 
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    color: #C9FE6E;
+}
+.mwg_effect044 .duplicate .header {
+    color: #C9FE6E;
 }
 
-    </style>
-  </head>
-  <body>
-    <section class="intro">
-      <h1>Enter the Frame</h1>
-    </section>
+@media (max-width: 768px) {
+    .mwg_effect044 .header p:last-child, 
+    .mwg_effect044 .footer p:last-child {
+        display: none;
+    }
+    .mwg_effect044 .photo {
+        width: 8vw;
+        transform: translate(0, -15%);
+    }
+}
+		</style>
+	</head>
+	<body>
+		<section class="mwg_effect044">
+			<div class="root">
+				<div class="containers">
+					<div class="container">
+						<div class="header">
+							<p>MNR Studio®</p>
+							<p>Work, Infos</p>
+							<p>05:05</p>
+							<p>Contact</p>
+						</div>
+						<div class="line">
+							<p>Fancy a cool</p>
+						</div>
+						<div class="line">
+							<p>Hello</p>
+							<img class="photo" src="assets/medias/1.png" alt="">
+							<p>website?</p>
+						</div>
+						<div class="line">
+							<svg class="icon" fill="none" height="115" viewBox="0 0 118 115" width="118" xmlns="http://www.w3.org/2000/svg"><g fill="currentColor"><path d="m76.5346 31.8467 41.4654 41.5767-41.4654 41.5766h-18.429l33.9984-34.0896h-92.0658671v-14.974h92.0658671l-33.9984-34.0897z"/><path d="m.00000377 80.7447-.00000377-80.74469922 14.6416-.00000078v80.7447z"/></g></svg>
+							
+							<p>@mnr.studio</p>
+						</div>
+						<div class="footer">
+							<p>Instagram</p>
+							<p>Bluesky</p>
+							<p>(212) 555 7890</p>
+							<p>København</p>
+						</div>
+					</div>
+					<div class="container duplicate" aria-hidden="true">
+						<div class="header">
+							<p>MNR Studio®</p>
+							<p>Work, Infos</p>
+							<p>05:05</p>
+							<p>Contact</p>
+						</div>
+						<div class="line">
+							<p>Fancy a cool</p>
+						</div>
+						<div class="line">
+							<p>Hello</p>
+							<img class="photo" src="assets/medias/2.png" alt="">
+							<p>website?</p>
+						</div>
+						<div class="line">
+							<svg class="icon" fill="none" height="115" viewBox="0 0 118 115" width="118" xmlns="http://www.w3.org/2000/svg"><g fill="currentColor"><path d="m76.5346 31.8467 41.4654 41.5767-41.4654 41.5766h-18.429l33.9984-34.0896h-92.0658671v-14.974h92.0658671l-33.9984-34.0897z"/><path d="m.00000377 80.7447-.00000377-80.74469922 14.6416-.00000078v80.7447z"/></g></svg>
+				
+							<p>@mnr.studio</p>
+						</div>
+						<div class="footer">
+							<p>Instagram</p>
+							<p>Bluesky</p>
+							<p>(212) 555 7890</p>
+							<p>København</p>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
 
-    <section class="sticky-cards">
-      <div class="card" id="card-1">
-        <div class="col">
-          <p>Quiet Control</p>
-          <h1>Signal Drift</h1>
-        </div>
-        <div class="col">
-          <img src="/card-img-1.jpg" alt="" />
-        </div>
-      </div>
-      <div class="card" id="card-2">
-        <div class="col">
-          <p>Fluid Structures</p>
-          <h1>Skyline Drift</h1>
-        </div>
-        <div class="col">
-          <img src="/card-img-2.jpg" alt="" />
-        </div>
-      </div>
-      <div class="card" id="card-3">
-        <div class="col">
-          <p>Wired Thought</p>
-          <h1>Neural Assembly</h1>
-        </div>
-        <div class="col">
-          <img src="/card-img-3.jpg" alt="" />
-        </div>
-      </div>
-      <div class="card" id="card-4">
-        <div class="col">
-          <p>Silent Repetition</p>
-          <h1>Learning Loop</h1>
-        </div>
-        <div class="col">
-          <img src="/card-img-4.jpg" alt="" />
-        </div>
-      </div>
-    </section>
+		<!-- GSAP -->
+		<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
 
-    <section class="outro">
-      <h1>Loop Complete</h1>
-    </section>
-    <script type="module" src="/script.js"></script>
-    <script>import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import Lenis from "lenis";
+		<!-- EFFECT CODE -->
+		<script src="assets/script.js"></script>
+		<script>
+			window.addEventListener("DOMContentLoaded", () => {
+    // Modifies the CSS variable --xpercent
+    const xTo = gsap.quickTo('.mwg_effect044 .duplicate', '--xpercent', {
+        duration: 0.4, // Changes over 0.4s
+        ease: "back" // With a slight bounce at the end of the movement
+    })
 
-gsap.registerPlugin(ScrollTrigger);
+    // Modifies the CSS variable --ypercent
+    const yTo = gsap.quickTo('.mwg_effect044 .duplicate', '--ypercent', {
+        duration: 0.4, // Changes over 0.4s
+        ease: "back" // With a slight bounce at the end of the movement
+    })
 
-document.addEventListener("DOMContentLoaded", () => {
-  const lenis = new Lenis();
-  lenis.on("scroll", ScrollTrigger.update);
-  gsap.ticker.add((time) => {
-    lenis.raf(time * 1000);
-  });
-  gsap.ticker.lagSmoothing(0);
-
-  const cards = document.querySelectorAll(".sticky-cards .card");
-  const totalCards = cards.length;
-  const segmentSize = 1 / totalCards;
-
-  const cardYOffset = 5;
-  const cardScaleStep = 0.075;
-
-  cards.forEach((card, i) => {
-    gsap.set(card, {
-      xPercent: -50,
-      yPercent: -50 + i * cardYOffset,
-      scale: 1 - i * cardScaleStep,
-    });
-  });
-
-  ScrollTrigger.create({
-    trigger: ".sticky-cards",
-    start: "top top",
-    end: `+=${window.innerHeight * 8}px`,
-    pin: true,
-    pinSpacing: true,
-    scrub: 1,
-    onUpdate: (self) => {
-      const progress = self.progress;
-
-      const activeIndex = Math.min(
-        Math.floor(progress / segmentSize),
-        totalCards - 1,
-      );
-      const segProgress = (progress - activeIndex * segmentSize) / segmentSize;
-
-      cards.forEach((card, i) => {
-        if (i < activeIndex) {
-          gsap.set(card, {
-            yPercent: -250,
-            rotationX: 35,
-          });
-        } else if (i === activeIndex) {
-          gsap.set(card, {
-            yPercent: gsap.utils.interpolate(-50, -200, segProgress),
-            rotationX: gsap.utils.interpolate(0, 35, segProgress),
-            scale: 1,
-          });
-        } else {
-          const behindIndex = i - activeIndex;
-          const currentYOffset = (behindIndex - segProgress) * cardYOffset;
-          const currentScale = 1 - (behindIndex - segProgress) * cardScaleStep;
-
-          gsap.set(card, {
-            yPercent: -50 + currentYOffset,
-            rotationX: 0,
-            scale: currentScale,
-          });
-        }
-      });
-    },
-  });
-});
-</script>
-  </body>
+    document.querySelector('.mwg_effect044').addEventListener("mousemove", (e) => {  
+        // Maps the mouse's X position from the window width range (0 to innerWidth)  
+        // to a normalized range (0 to 100)  
+        const mRangeX = gsap.utils.mapRange(0, window.innerWidth, 0, 100, e.clientX)  
+    
+        // Update the X position smoothly  
+        xTo(mRangeX)
+    
+        // Maps the mouse's Y position relative to the element’s bounding box  
+        // to a normalized range (0 to 100)  
+        const bound = e.target.getBoundingClientRect()  
+        const mRangeY = gsap.utils.mapRange(bound.top, bound.top + bound.height, 0, 100, e.clientY)  
+    
+        // Update the Y position smoothly  
+        yTo(mRangeY)
+    })
+})
+		</script>
+	</body>
 </html>

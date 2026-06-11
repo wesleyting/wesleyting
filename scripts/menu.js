@@ -9,6 +9,23 @@ let isMenuOpen = false;
 let isAnimating = false;
 let scrambleInstances = [];
 
+function initializeMenuToggleText() {
+  const wrapper = document.querySelector(".menu-toggle-btn-wrapper");
+  const primary = wrapper?.querySelector("p");
+
+  if (!wrapper || !primary || wrapper.querySelector(".menu-toggle-text-secondary")) {
+    return;
+  }
+
+  primary.classList.add("menu-toggle-text-primary");
+
+  const secondary = primary.cloneNode(true);
+  secondary.classList.remove("menu-toggle-text-primary");
+  secondary.classList.add("menu-toggle-text-secondary");
+  secondary.setAttribute("aria-hidden", "true");
+  wrapper.appendChild(secondary);
+}
+
 // scramble configs
 const scrambleConfigs = {
   nav: {
@@ -222,6 +239,8 @@ function closeMenu() {
 
 // main execution - wait for fonts to load
 document.fonts.ready.then(() => {
+  initializeMenuToggleText();
+
   const menuToggleBtn = document.querySelector(".menu-toggle-btn");
   const navOverlay = document.querySelector(".nav-overlay");
   const navItems = document.querySelectorAll(".nav-item");
