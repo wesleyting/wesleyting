@@ -25,21 +25,20 @@ document.addEventListener("DOMContentLoaded", () => {
     },
   );
 
-  cards.forEach((card) => {
-    gsap.fromTo(
-      card,
-      { autoAlpha: 0, y: 48 },
-      {
-        autoAlpha: 1,
-        y: 0,
-        duration: 0.9,
-        ease: "power3.out",
-        scrollTrigger: {
-          trigger: card,
-          start: "top 86%",
-          toggleActions: "restart reverse restart reverse",
-        },
+  gsap.fromTo(
+    cards,
+    { autoAlpha: 0, y: 30 },
+    {
+      autoAlpha: 1,
+      y: 0,
+      duration: 0.6,
+      stagger: 0.1,
+      ease: "power3.out",
+      scrollTrigger: {
+        trigger: cards[0],
+        start: "top 86%",
+        toggleActions: "restart reverse restart reverse",
       },
-    );
-  });
+    },
+  );
 });

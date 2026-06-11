@@ -40,8 +40,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     gsap.timeline({
       defaults: { ease: "power3.out" },
-      onComplete: playHeroVideos,
     })
+      .call(playHeroVideos, null, 0.15)
       .to(document.body, {
         "--grain-opacity": 0.055,
         "--grid-opacity": 0.65,

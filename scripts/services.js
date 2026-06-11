@@ -5,11 +5,12 @@ document.addEventListener("DOMContentLoaded", () => {
   gsap.registerPlugin(ScrollTrigger);
 
   const services = document.querySelector(".services");
+  const headerGroup = document.querySelector(".services-headers");
   const headers = gsap.utils.toArray(".services-header");
   const copy = document.querySelector(".services-copy");
   const copyText = document.querySelector(".services-copy .animate-text");
 
-  if (!services || headers.length !== 3 || !copy || !copyText) return;
+  if (!services || !headerGroup || headers.length !== 3 || !copy || !copyText) return;
 
   copyText.setAttribute("data-text", copyText.textContent.trim());
 
@@ -29,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
     scrollTrigger: {
       trigger: services,
       start: "top top",
-      end: () => `+=${window.innerHeight * 3}`,
+      end: () => `+=${window.innerHeight * 4.25}`,
       pin: true,
       pinSpacing: true,
       scrub: true,
@@ -47,7 +48,13 @@ document.addEventListener("DOMContentLoaded", () => {
       duration: 1,
     })
     .to(copy, { autoAlpha: 1, y: 0, duration: 0.6 }, 2.65)
-    .to(copyText, { "--clip-value": "0%", duration: 0.8 }, 2.8);
+    .to(copyText, { "--clip-value": "0%", duration: 0.8 }, 2.8)
+    .to({}, { duration: 0.8 })
+    .to([headerGroup, copy], {
+      autoAlpha: 0,
+      duration: 0.6,
+      ease: "power1.out",
+    });
 
   window.addEventListener("preloader:complete", () => {
     requestAnimationFrame(() => ScrollTrigger.refresh(true));

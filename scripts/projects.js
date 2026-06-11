@@ -4,9 +4,28 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 document.addEventListener("DOMContentLoaded", () => {
+  const intro = document.querySelector(".projects-intro");
   const cards = gsap.utils.toArray(".sticky-cards .project-card");
 
   if (!cards.length) return;
+
+  if (intro) {
+    gsap.fromTo(
+      intro,
+      { autoAlpha: 0, y: 36 },
+      {
+        autoAlpha: 1,
+        y: 0,
+        duration: 0.9,
+        ease: "power3.out",
+        scrollTrigger: {
+          trigger: intro,
+          start: "top 82%",
+          toggleActions: "restart reverse restart reverse",
+        },
+      },
+    );
+  }
 
   const totalCards = cards.length;
   const transitionCount = Math.max(1, totalCards - 1);
