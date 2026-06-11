@@ -1,0 +1,160 @@
+.site-footer {
+  position: relative;
+  z-index: 4;
+  width: 100%;
+  padding: 0;
+  overflow: hidden;
+  background-color: #080808;
+}
+
+.footer-root,
+.footer-containers {
+  position: relative;
+}
+
+.footer-container {
+  position: relative;
+  min-height: 100svh;
+  padding: 1.5rem 2.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.footer-header,
+.footer-bottom {
+  width: 100%;
+  padding: 1.25rem 0;
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.footer-header {
+  position: absolute;
+  top: 0;
+  left: 2.5rem;
+  width: calc(100% - 5rem);
+}
+
+.footer-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 2.5rem;
+  width: calc(100% - 5rem);
+  border-top: 1px solid #353535;
+}
+
+.footer-header p,
+.footer-header a,
+.footer-bottom p,
+.footer-bottom a {
+  color: #777;
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  transition: color 0.3s ease;
+}
+
+.footer-header a:hover,
+.footer-bottom a:hover {
+  color: #fff;
+}
+
+.footer-line {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+.footer-line p {
+  color: #f3f3ef;
+  font-size: clamp(4.5rem, 10.2vw, 12rem);
+  font-weight: 500;
+  line-height: 0.88;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+.footer-photo {
+  width: 11vw;
+  height: auto;
+  aspect-ratio: 1.5;
+  flex: 0 0 auto;
+  object-fit: cover;
+  border-radius: 4px;
+  transform: translateY(-5%);
+}
+
+.footer-contact-line {
+  color: inherit;
+}
+
+.footer-icon {
+  width: 7vw;
+  height: auto;
+  flex: 0 0 auto;
+  filter: brightness(0) invert(1);
+}
+
+.footer-duplicate {
+  --xpercent: 50%;
+  --ypercent: 50%;
+  position: absolute;
+  inset: 0;
+  color: #7134ff;
+  pointer-events: none;
+  mask-image: radial-gradient(
+    circle at var(--xpercent) var(--ypercent),
+    #000 18%,
+    transparent 27%
+  );
+}
+
+.footer-duplicate .footer-line p,
+.footer-duplicate .footer-header p,
+.footer-duplicate .footer-bottom p {
+  color: #7134ff;
+}
+
+.footer-duplicate .footer-icon {
+  filter: invert(25%) sepia(92%) saturate(6545%) hue-rotate(257deg) brightness(96%);
+}
+
+@media (max-width: 900px) {
+  .footer-container {
+    min-height: 72svh;
+    padding: 1.25rem 1.5rem;
+  }
+
+  .footer-header,
+  .footer-bottom {
+    left: 1.5rem;
+    width: calc(100% - 3rem);
+  }
+
+  .footer-header p:nth-child(2),
+  .footer-header p:nth-child(3),
+  .footer-bottom a:nth-child(2),
+  .footer-bottom p {
+    display: none;
+  }
+
+  .footer-line {
+    gap: 0.65rem;
+  }
+
+  .footer-line p {
+    font-size: clamp(2.6rem, 12vw, 5rem);
+  }
+
+  .footer-photo {
+    width: 13vw;
+  }
+
+  .footer-icon {
+    width: 9vw;
+  }
+}
