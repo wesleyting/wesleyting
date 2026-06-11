@@ -37,6 +37,67 @@ body.intro-active {
   overflow: hidden;
 }
 
+body.intro-active,
+body.intro-active *,
+body.transition-active,
+body.transition-active *,
+html[data-page-transition="pending"],
+html[data-page-transition="pending"] * {
+  cursor: none !important;
+}
+
+.cursor-label {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1400;
+  color: #090909;
+  opacity: 0;
+  pointer-events: none;
+  transform: translate3d(-100px, -100px, 0) scale(0.96);
+  transform-origin: center;
+  will-change: transform, opacity;
+}
+
+.cursor-label-inner {
+  padding: 1.05rem 1.4rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.9rem;
+  color: #090909;
+  background-color: #fff;
+  border-radius: 3px;
+  will-change: transform;
+}
+
+.cursor-label-text,
+.cursor-label-arrow {
+  color: inherit;
+  font-size: 1.15rem;
+  font-weight: 800;
+  line-height: 1;
+  white-space: nowrap;
+  text-transform: uppercase;
+}
+
+.cursor-label-arrow {
+  font-size: 1.6rem;
+  font-weight: 900;
+  line-height: 0.7;
+}
+
+body.intro-active .cursor-label,
+body.transition-active .cursor-label,
+html[data-page-transition="pending"] .cursor-label {
+  opacity: 0 !important;
+}
+
+@media (hover: none), (pointer: coarse) {
+  .cursor-label {
+    display: none;
+  }
+}
+
 ::-webkit-scrollbar {
   display: none;
   width: 0;

@@ -10,6 +10,7 @@ function resetOverlay() {
 }
 
 function coverCurrentPage() {
+  document.body.classList.add("transition-active");
   const departureCover = document.createElement("div");
 
   Object.assign(departureCover.style, {
@@ -33,6 +34,7 @@ function coverCurrentPage() {
 }
 
 function revealDestination() {
+  document.body.classList.add("transition-active");
   gsap.killTweensOf(overlay);
   gsap.set(overlay, { yPercent: 0 });
   delete document.documentElement.dataset.pageTransition;
@@ -41,7 +43,10 @@ function revealDestination() {
     yPercent: 100,
     duration: 0.65,
     ease: "power3.inOut",
-    onComplete: resetOverlay,
+    onComplete: () => {
+      resetOverlay();
+      document.body.classList.remove("transition-active");
+    },
   });
 }
 
@@ -111,6 +116,7 @@ if (overlay) {
     if (!event.persisted) return;
 
     isNavigating = false;
+    document.body.classList.remove("transition-active");
     sessionStorage.removeItem(TRANSITION_KEY);
     delete document.documentElement.dataset.pageTransition;
     resetOverlay();
