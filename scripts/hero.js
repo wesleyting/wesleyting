@@ -99,28 +99,19 @@ document.addEventListener("DOMContentLoaded", () => {
   // gsap.ticker.add((time) => lenis.raf(time * 1000));
   // gsap.ticker.lagSmoothing(0);
 
-  const breakpoints = [
-    { maxWidth: 1000, translateY: -135, movMultiplier: 450 },
-    { maxWidth: 1100, translateY: -130, movMultiplier: 500 },
-    { maxWidth: 1200, translateY: -125, movMultiplier: 550 },
-    { maxWidth: 1300, translateY: -120, movMultiplier: 600 },
-  ];
-
   const getInitialValues = () => {
     const width = window.innerWidth;
+    const height = window.innerHeight;
 
-    for (const bp of breakpoints) {
-      if (width <= bp.maxWidth) {
-        return {
-          translateY: bp.translateY,
-          movementMultiplier: bp.movMultiplier,
-        };
-      }
-    }
+    const widthProgress = gsap.utils.clamp(0, 1, (width - 900) / 540);
+    const widthTranslateY = gsap.utils.interpolate(-132, -98, widthProgress);
+
+    // Short viewports need the video lower; tall viewports can carry it higher.
+    const heightCorrection = gsap.utils.clamp(-9, 16, (850 - height) * 0.055);
 
     return {
-      translateY: -98,
-      movementMultiplier: 650,
+      translateY: gsap.utils.clamp(-140, -88, widthTranslateY + heightCorrection),
+      movementMultiplier: gsap.utils.interpolate(450, 650, widthProgress),
     };
   };
 
