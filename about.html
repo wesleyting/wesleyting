@@ -8,53 +8,35 @@
         document.documentElement.dataset.pageTransition = "pending";
       }
     </script>
-    <!-- Theme colors -->
-    <meta name="theme-color" content="#0d0f12" media="(prefers-color-scheme: dark)">
-    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
-
-    <!-- SEO -->
-    <title>Wesley Ting — Web Developer</title>
-    <meta name="description" content="Web developer building modern, motion-driven experiences with clean code, performance, and thoughtful design." />
-
-    <!-- Open Graph / Twitter -->
-    <meta property="og:title" content="Wesley Ting — Web Developer">
-    <meta property="og:description" content="Modern motion with clean code and mobile-first craft.">
-    <meta property="og:type" content="website">
-    <meta property="og:image" content="/og.jpg">
-    <meta name="twitter:card" content="summary_large_image">
-    <link rel="icon" href="/site-icon.png" />
-
-    <!-- CSS -->
+    <meta name="theme-color" content="#0d0f12" />
+    <title>About | Wesley Ting</title>
+    <meta name="description" content="About Wesley Ting, a frontend and ecommerce developer focused on responsive websites, Shopify storefronts, and practical digital experiences." />
+    <link rel="icon" href="/logo.png" />
     <link rel="stylesheet" href="/globals.css" />
     <link rel="stylesheet" href="/css/transition.css" />
     <link rel="stylesheet" href="/css/menu.css" />
-
-    <link rel="stylesheet" href="/css/home.css" />
+    <link rel="stylesheet" href="/css/pages.css" />
   </head>
   <body>
-    <!-- Page transition cover -->
     <div class="transition" aria-hidden="true">
       <div class="transition-overlay"></div>
     </div>
 
-    <!-- Nav -->
     <nav>
-      <div class="container">
-        <div class="logo">
-          <div class="logo-container"><a href="/">Wesley Ting</a></div>
-        </div>
-        <div class="menu-toggle-btn">
-          <div class="menu-toggle-btn-wrapper"><p>Menu</p></div>
-        </div>
+      <div class="logo">
+        <div class="logo-container"><a href="/">Wesley Ting</a></div>
+      </div>
+      <div class="menu-toggle-btn">
+        <div class="menu-toggle-btn-wrapper"><p>Menu</p></div>
       </div>
     </nav>
 
     <div class="nav-overlay">
       <div class="nav-items">
         <div class="nav-item"><a href="/">Home</a></div>
-        <div class="nav-item active"><a href="/about">About</a></div>
-        <div class="nav-item"><a href="/work">Work</a></div>
-        <div class="nav-item"><a href="/contact">Contact</a></div>
+        <div class="nav-item active"><a href="/about.html">About</a></div>
+        <div class="nav-item"><a href="/work.html">Work</a></div>
+        <div class="nav-item"><a href="/contact.html">Contact</a></div>
       </div>
       <div class="nav-footer">
         <div class="container">
@@ -63,20 +45,103 @@
             <a href="https://x.com/wesleytingdev" target="_blank" rel="noopener">X</a>
           </div>
           <div class="nav-footer-item">
-            <a href="/contact">[ &nbsp;Get In Touch&nbsp; ]</a>
+            <a href="/contact.html">[ &nbsp;Get In Touch&nbsp; ]</a>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Main content -->
-    <main id="main">
-      <h1>About Page</h1>
-      <!-- page sections... -->
+    <main class="page-shell" id="main">
+      <section class="page-hero">
+        <p class="page-kicker">About</p>
+        <h1>Frontend work with a practical eye.</h1>
+        <p class="page-lede">I am a frontend developer focused on responsive websites, ecommerce storefronts, and practical digital experiences. I combine strong execution with good design judgement so businesses can ship sites that look sharp and work reliably.</p>
+      </section>
+
+      <section class="page-section" aria-labelledby="about-focus-title">
+        <div class="page-section-header">
+          <p class="page-eyebrow">Focus</p>
+          <h2 id="about-focus-title">I build, maintain, optimize, and troubleshoot real business websites.</h2>
+        </div>
+        <div class="page-grid">
+          <article class="page-card">
+            <h3>Shopify and ecommerce</h3>
+            <p>Storefront updates, landing pages, product pages, theme work, and ongoing ecommerce support.</p>
+          </article>
+          <article class="page-card">
+            <h3>Responsive frontend</h3>
+            <p>HTML, CSS, JavaScript, and polished implementation across desktop, tablet, and mobile layouts.</p>
+          </article>
+          <article class="page-card">
+            <h3>Reliable execution</h3>
+            <p>Clear communication, Git-based workflows, practical problem solving, and steady project follow-through.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="page-section">
+        <div class="page-section-header">
+          <p class="page-eyebrow">How I Work</p>
+          <h2>I keep projects organized, practical, and easy to maintain after launch.</h2>
+        </div>
+        <div class="page-grid two-column">
+          <article class="project-note">
+            <h3>Build with context</h3>
+            <p>I start by understanding what the site needs to do for the business: sell products, explain services, support campaigns, improve content workflows, or fix technical issues that are slowing the team down.</p>
+          </article>
+          <article class="project-note">
+            <h3>Ship usable work</h3>
+            <p>I focus on implementation that can actually be used: responsive layouts, clear page structure, maintainable styles, practical CMS or Shopify editing patterns, and careful QA before handoff.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="page-section">
+        <div class="page-section-header">
+          <p class="page-eyebrow">Experience</p>
+          <h2>Useful across ecommerce, marketing sites, and small business web teams.</h2>
+        </div>
+        <ul class="project-scope">
+          <li>Shopify storefront work including product pages, landing pages, theme updates, and Liquid development.</li>
+          <li>Frontend implementation with HTML, CSS, JavaScript, responsive layouts, and interaction details.</li>
+          <li>Website maintenance, technical troubleshooting, content updates, and visual QA across devices.</li>
+          <li>SEO fundamentals, analytics and tracking setup, form integrations, and third-party tools.</li>
+          <li>Collaboration with clients, designers, marketers, and small teams to move work from request to launch.</li>
+          <li>Clear documentation and Git-based workflows so updates are easier to review and maintain.</li>
+        </ul>
+      </section>
+
+      <section class="page-section">
+        <div class="page-section-header">
+          <p class="page-eyebrow">Fit</p>
+          <h2>Roles and projects I am best suited for right now.</h2>
+        </div>
+        <div class="page-grid">
+          <article class="page-card">
+            <h3>Frontend roles</h3>
+            <p>Building responsive pages, implementing designs, improving interfaces, and supporting production websites.</p>
+          </article>
+          <article class="page-card">
+            <h3>Shopify roles</h3>
+            <p>Theme work, ecommerce updates, product page improvements, storefront maintenance, and launch support.</p>
+          </article>
+          <article class="page-card">
+            <h3>Agency work</h3>
+            <p>Reliable execution across client sites, marketing pages, CMS updates, QA, and technical problem solving.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="page-section">
+        <div class="page-link-row">
+          <a href="/work.html">View work <span aria-hidden="true">&nearr;</span></a>
+          <a href="/contact.html">Get in touch <span aria-hidden="true">&nearr;</span></a>
+        </div>
+      </section>
     </main>
 
     <script type="module" src="/scripts/transition.js"></script>
-    <script type="module" src="/scripts/lenis-scroll.js"></script> 
+    <script type="module" src="/scripts/lenis-scroll.js"></script>
     <script type="module" src="/scripts/menu.js"></script>
   </body>
 </html>

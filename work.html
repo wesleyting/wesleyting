@@ -8,53 +8,35 @@
         document.documentElement.dataset.pageTransition = "pending";
       }
     </script>
-    <!-- Theme colors -->
-    <meta name="theme-color" content="#0d0f12" media="(prefers-color-scheme: dark)">
-    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
-
-    <!-- SEO -->
-    <title>Wesley Ting — Web Developer</title>
-    <meta name="description" content="Web developer building modern, motion-driven experiences with clean code, performance, and thoughtful design." />
-
-    <!-- Open Graph / Twitter -->
-    <meta property="og:title" content="Wesley Ting — Web Developer">
-    <meta property="og:description" content="Modern motion with clean code and mobile-first craft.">
-    <meta property="og:type" content="website">
-    <meta property="og:image" content="/og.jpg">
-    <meta name="twitter:card" content="summary_large_image">
-    <link rel="icon" href="/site-icon.png" />
-
-    <!-- CSS -->
+    <meta name="theme-color" content="#0d0f12" />
+    <title>Work | Wesley Ting</title>
+    <meta name="description" content="Selected frontend, Shopify, ecommerce, and business website projects by Wesley Ting." />
+    <link rel="icon" href="/logo.png" />
     <link rel="stylesheet" href="/globals.css" />
     <link rel="stylesheet" href="/css/transition.css" />
     <link rel="stylesheet" href="/css/menu.css" />
-
-    <link rel="stylesheet" href="/css/home.css" />
+    <link rel="stylesheet" href="/css/pages.css" />
   </head>
   <body>
-    <!-- Page transition cover -->
     <div class="transition" aria-hidden="true">
       <div class="transition-overlay"></div>
     </div>
 
-    <!-- Nav -->
     <nav>
-      <div class="container">
-        <div class="logo">
-          <div class="logo-container"><a href="/">Wesley Ting</a></div>
-        </div>
-        <div class="menu-toggle-btn">
-          <div class="menu-toggle-btn-wrapper"><p>Menu</p></div>
-        </div>
+      <div class="logo">
+        <div class="logo-container"><a href="/">Wesley Ting</a></div>
+      </div>
+      <div class="menu-toggle-btn">
+        <div class="menu-toggle-btn-wrapper"><p>Menu</p></div>
       </div>
     </nav>
 
     <div class="nav-overlay">
       <div class="nav-items">
         <div class="nav-item"><a href="/">Home</a></div>
-        <div class="nav-item"><a href="/about">About</a></div>
-        <div class="nav-item active"><a href="/work">Work</a></div>
-        <div class="nav-item"><a href="/contact">Contact</a></div>
+        <div class="nav-item"><a href="/about.html">About</a></div>
+        <div class="nav-item active"><a href="/work.html">Work</a></div>
+        <div class="nav-item"><a href="/contact.html">Contact</a></div>
       </div>
       <div class="nav-footer">
         <div class="container">
@@ -63,20 +45,120 @@
             <a href="https://x.com/wesleytingdev" target="_blank" rel="noopener">X</a>
           </div>
           <div class="nav-footer-item">
-            <a href="/contact">[ &nbsp;Get In Touch&nbsp; ]</a>
+            <a href="/contact.html">[ &nbsp;Get In Touch&nbsp; ]</a>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Main content -->
-    <main id="main">
-      <h1>Work Page</h1>
-      <!-- page sections... -->
+    <main class="page-shell" id="main">
+      <section class="page-hero">
+        <p class="page-kicker">Selected Work</p>
+        <h1>Websites built for launches, stores, and teams.</h1>
+        <p class="page-lede">A first look at ecommerce, frontend, and business website projects across Shopify, product presentation, professional services, and storefront support.</p>
+      </section>
+
+      <section class="page-section" aria-label="Project index">
+        <div class="project-list">
+          <a class="project-list-card" href="/projects/duuduu-mattress.html" data-cursor-label="View Case Study">
+            <div class="project-list-copy">
+              <div>
+                <p class="project-meta">Shopify Ecommerce / 2026</p>
+                <h2>DuuDuu Mattress</h2>
+                <h3>Product and landing page support for an Australian Shopify mattress brand.</h3>
+                <p>DuuDuu Mattress sells mattresses and sleep products in Australia. The work focuses on product education, landing pages, responsive storefront updates, and conversion-focused Shopify support.</p>
+              </div>
+              <div class="project-list-footer">
+                <span>Shopify / Liquid / Ecommerce</span>
+                <span>View case study &nearr;</span>
+              </div>
+            </div>
+            <div class="project-list-media">
+              <img src="/home/project-duuduu.png" alt="DuuDuu Mattress project preview" />
+            </div>
+          </a>
+
+          <a class="project-list-card" href="/projects/vegaspaulyc.html" data-cursor-label="View Case Study">
+            <div class="project-list-copy">
+              <div>
+                <p class="project-meta">Shopify Storefront / 2026</p>
+                <h2>VegasPaulyC</h2>
+                <h3>A social media influencer merch store built around launches and ongoing sales.</h3>
+                <p>VegasPaulyC is a Shopify storefront for influencer merchandise. The work centers on product drops, storefront maintenance, product presentation, and fulfillment-related ecommerce support.</p>
+              </div>
+              <div class="project-list-footer">
+                <span>Shopify / Products / Fulfillment</span>
+                <span>View case study &nearr;</span>
+              </div>
+            </div>
+            <div class="project-list-media">
+              <img src="/home/project-vegaspaulyc.webp" alt="VegasPaulyC project preview" />
+            </div>
+          </a>
+
+          <a class="project-list-card" href="/projects/token-studio.html" data-cursor-label="View Case Study">
+            <div class="project-list-copy">
+              <div>
+                <p class="project-meta">Interactive Frontend / 2025</p>
+                <h2>Token Studio</h2>
+                <h3>An interactive frontend concept for blind boxes and collectible product drops.</h3>
+                <p>Token Studio focuses on product discovery, visual presentation, motion, and responsive frontend execution for a blind box shopping experience.</p>
+              </div>
+              <div class="project-list-footer">
+                <span>Frontend / Animation / UI</span>
+                <span>View case study &nearr;</span>
+              </div>
+            </div>
+            <div class="project-list-media">
+              <img src="/home/project-token-studio.webp" alt="Token Studio project preview" />
+            </div>
+          </a>
+
+          <a class="project-list-card" href="/projects/clearbooks-tech.html" data-cursor-label="View Case Study">
+            <div class="project-list-copy">
+              <div>
+                <p class="project-meta">Professional Services / 2025</p>
+                <h2>Clearbooks Tech</h2>
+                <h3>A business-focused website for accounting and CFO services.</h3>
+                <p>Clearbooks Tech supports service communication, content management, deployment workflow, Calendly integration, and a clear path for business inquiries.</p>
+              </div>
+              <div class="project-list-footer">
+                <span>CMS / Deployment / Calendly</span>
+                <span>View case study &nearr;</span>
+              </div>
+            </div>
+            <div class="project-list-media">
+              <img src="/home/project-clearbooks.png" alt="Clearbooks Tech project preview" />
+            </div>
+          </a>
+        </div>
+      </section>
+
+      <section class="page-section">
+        <div class="page-section-header">
+          <p class="page-eyebrow">Project Types</p>
+          <h2>A mix of storefronts, service websites, and interactive frontend work.</h2>
+        </div>
+        <div class="page-grid">
+          <article class="page-card">
+            <h3>Ecommerce</h3>
+            <p>Shopify storefronts, product pages, collections, launch support, fulfillment touchpoints, and conversion-focused updates.</p>
+          </article>
+          <article class="page-card">
+            <h3>Business websites</h3>
+            <p>Service pages, CMS structures, booking flows, content updates, and clear paths for prospective clients.</p>
+          </article>
+          <article class="page-card">
+            <h3>Interactive frontend</h3>
+            <p>Visual presentation, motion systems, responsive design, and polished interfaces for product-led websites.</p>
+          </article>
+        </div>
+      </section>
     </main>
 
     <script type="module" src="/scripts/transition.js"></script>
-    <script type="module" src="/scripts/lenis-scroll.js"></script> 
+    <script type="module" src="/scripts/lenis-scroll.js"></script>
+    <script type="module" src="/scripts/cursor-label.js"></script>
     <script type="module" src="/scripts/menu.js"></script>
   </body>
 </html>

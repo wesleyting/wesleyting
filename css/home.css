@@ -433,6 +433,48 @@ img {
   z-index: 1;
 }
 
+.what-i-do-cards {
+  position: relative;
+  z-index: 4;
+  width: 100%;
+  padding: 10svh 2.5rem 8svh;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.service-card {
+  min-height: 320px;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #090909;
+  border: 1px solid #292929;
+  transition: border-color 0.35s ease, transform 0.35s ease;
+}
+
+.service-card:hover {
+  border-color: #7134ff;
+  transform: translateY(-4px);
+}
+
+.service-card h3 {
+  max-width: 11ch;
+  color: #f3f3ef;
+  font-size: clamp(1.8rem, 2.5vw, 3.25rem);
+  font-weight: 500;
+  line-height: 1;
+}
+
+.service-card p {
+  max-width: 34ch;
+  color: #858585;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.55;
+}
+
 .capabilities {
   position: relative;
   z-index: 4;
@@ -456,7 +498,7 @@ img {
 
 .capabilities-list {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 1rem;
 }
 
@@ -565,12 +607,22 @@ img {
 }
 
 @media (max-width: 1200px) {
+  .what-i-do-cards,
   .capabilities-list {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @media (max-width: 900px) {
+  .what-i-do-cards {
+    padding: 8svh 1.5rem;
+    grid-template-columns: 1fr;
+  }
+
+  .service-card {
+    min-height: 280px;
+  }
+
   .capabilities {
     margin-top: -14svh;
     padding: 14svh 1.5rem 16svh;
@@ -812,8 +864,24 @@ img {
   color: #a5a5a5;
 }
 
-.all-projects a:hover span {
-  transform: translate(3px, -3px);
+  .all-projects a:hover span {
+    transform: translate(3px, -3px);
+}
+
+.about-summary {
+  position: relative;
+  z-index: 4;
+  width: min(1100px, 82vw);
+  margin: 0 auto;
+  padding: 10svh 0 14svh;
+  text-align: center;
+}
+
+.about-summary p {
+  color: #f3f3ef;
+  font-size: clamp(1.8rem, 3.5vw, 4.25rem);
+  font-weight: 500;
+  line-height: 1;
 }
 
 @media (max-width: 1000px) {
@@ -872,5 +940,10 @@ img {
   .all-projects-inner {
     width: 100%;
     justify-content: flex-start;
+  }
+
+  .about-summary {
+    width: calc(100% - 3rem);
+    padding: 8svh 0 12svh;
   }
 }

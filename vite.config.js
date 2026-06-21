@@ -1,0 +1,20 @@
+import { resolve } from "node:path";
+import { defineConfig } from "vite";
+
+export default defineConfig({
+  build: {
+    rollupOptions: {
+      input: {
+        main: resolve(__dirname, "index.html"),
+        about: resolve(__dirname, "about.html"),
+        work: resolve(__dirname, "work.html"),
+        contact: resolve(__dirname, "contact.html"),
+        success: resolve(__dirname, "success.html"),
+        "projects/duuduu-mattress": resolve(__dirname, "projects/duuduu-mattress.html"),
+        "projects/vegaspaulyc": resolve(__dirname, "projects/vegaspaulyc.html"),
+        "projects/token-studio": resolve(__dirname, "projects/token-studio.html"),
+        "projects/clearbooks-tech": resolve(__dirname, "projects/clearbooks-tech.html"),
+      },
+    },
+  },
+});

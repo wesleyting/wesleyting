@@ -8,53 +8,35 @@
         document.documentElement.dataset.pageTransition = "pending";
       }
     </script>
-    <!-- Theme colors -->
-    <meta name="theme-color" content="#0d0f12" media="(prefers-color-scheme: dark)">
-    <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
-
-    <!-- SEO -->
-    <title>Wesley Ting — Web Developer</title>
-    <meta name="description" content="Web developer building modern, motion-driven experiences with clean code, performance, and thoughtful design." />
-
-    <!-- Open Graph / Twitter -->
-    <meta property="og:title" content="Wesley Ting — Web Developer">
-    <meta property="og:description" content="Modern motion with clean code and mobile-first craft.">
-    <meta property="og:type" content="website">
-    <meta property="og:image" content="/og.jpg">
-    <meta name="twitter:card" content="summary_large_image">
-    <link rel="icon" href="/site-icon.png" />
-
-    <!-- CSS -->
+    <meta name="theme-color" content="#0d0f12" />
+    <title>Contact | Wesley Ting</title>
+    <meta name="description" content="Contact Wesley Ting for frontend, Shopify, ecommerce, and website development work." />
+    <link rel="icon" href="/logo.png" />
     <link rel="stylesheet" href="/globals.css" />
     <link rel="stylesheet" href="/css/transition.css" />
     <link rel="stylesheet" href="/css/menu.css" />
-
-    <link rel="stylesheet" href="/css/home.css" />
+    <link rel="stylesheet" href="/css/pages.css" />
   </head>
   <body>
-    <!-- Page transition cover -->
     <div class="transition" aria-hidden="true">
       <div class="transition-overlay"></div>
     </div>
 
-    <!-- Nav -->
     <nav>
-      <div class="container">
-        <div class="logo">
-          <div class="logo-container"><a href="/">Wesley Ting</a></div>
-        </div>
-        <div class="menu-toggle-btn">
-          <div class="menu-toggle-btn-wrapper"><p>Menu</p></div>
-        </div>
+      <div class="logo">
+        <div class="logo-container"><a href="/">Wesley Ting</a></div>
+      </div>
+      <div class="menu-toggle-btn">
+        <div class="menu-toggle-btn-wrapper"><p>Menu</p></div>
       </div>
     </nav>
 
     <div class="nav-overlay">
       <div class="nav-items">
         <div class="nav-item"><a href="/">Home</a></div>
-        <div class="nav-item"><a href="/about">About</a></div>
-        <div class="nav-item"><a href="/work">Work</a></div>
-        <div class="nav-item active"><a href="/contact">Contact</a></div>
+        <div class="nav-item"><a href="/about.html">About</a></div>
+        <div class="nav-item"><a href="/work.html">Work</a></div>
+        <div class="nav-item active"><a href="/contact.html">Contact</a></div>
       </div>
       <div class="nav-footer">
         <div class="container">
@@ -63,20 +45,93 @@
             <a href="https://x.com/wesleytingdev" target="_blank" rel="noopener">X</a>
           </div>
           <div class="nav-footer-item">
-            <a href="/contact">[ &nbsp;Get In Touch&nbsp; ]</a>
+            <a href="/contact.html">[ &nbsp;Get In Touch&nbsp; ]</a>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Main content -->
-    <main id="main">
-      <h1>Contact Page</h1>
-      <!-- page sections... -->
+    <main class="page-shell" id="main">
+      <section class="page-hero">
+        <p class="page-kicker">Contact</p>
+        <h1>Need help with a website?</h1>
+        <p class="page-lede">Send a note about the site, storefront, page, or technical issue you want help with. I am open to frontend, Shopify, ecommerce, and web production work.</p>
+      </section>
+
+      <section class="page-section">
+        <div class="contact-layout">
+          <div class="contact-panel">
+            <h2>Start with the basics.</h2>
+            <p>Email directly at <a href="mailto:wesleytingdev@gmail.com">wesleytingdev@gmail.com</a>, or use the form. The form is ready for Netlify Forms and will submit once the site is deployed on Netlify.</p>
+          </div>
+
+          <div class="contact-panel">
+            <form class="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" action="/success.html">
+              <input type="hidden" name="form-name" value="contact" />
+              <p class="form-hidden">
+                <label>Do not fill this out if you are human: <input name="bot-field" /></label>
+              </p>
+              <label>
+                Name
+                <input type="text" name="name" autocomplete="name" required />
+              </label>
+              <label>
+                Email
+                <input type="email" name="email" autocomplete="email" required />
+              </label>
+              <label>
+                Project type
+                <input type="text" name="project_type" placeholder="Shopify, frontend, website updates, troubleshooting..." />
+              </label>
+              <label>
+                Message
+                <textarea name="message" required></textarea>
+              </label>
+              <button class="page-button" type="submit">Send message</button>
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <section class="page-section">
+        <div class="page-section-header">
+          <p class="page-eyebrow">Good Fit</p>
+          <h2>Useful requests to send through.</h2>
+        </div>
+        <div class="page-grid">
+          <article class="page-card">
+            <h3>Shopify help</h3>
+            <p>Product pages, landing pages, storefront updates, theme fixes, launch support, and ecommerce maintenance.</p>
+          </article>
+          <article class="page-card">
+            <h3>Frontend work</h3>
+            <p>Responsive page builds, design implementation, animation support, UI polish, and technical cleanup.</p>
+          </article>
+          <article class="page-card">
+            <h3>Existing websites</h3>
+            <p>Performance issues, broken layouts, mobile problems, tracking setup, form issues, or general site improvements.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="page-section">
+        <div class="page-section-header">
+          <p class="page-eyebrow">What To Include</p>
+          <h2>A few details make it easier to respond with useful next steps.</h2>
+        </div>
+        <ul class="project-scope">
+          <li>The website or store URL, if one already exists.</li>
+          <li>What you need help with: new build, update, bug fix, redesign, launch, or ongoing support.</li>
+          <li>Any platform details, such as Shopify, WordPress, custom frontend, or another CMS.</li>
+          <li>Timeline, budget range, and whether the work is urgent or flexible.</li>
+          <li>Links to designs, references, product pages, or examples of the issue.</li>
+          <li>The best way to follow up if email is not preferred.</li>
+        </ul>
+      </section>
     </main>
 
     <script type="module" src="/scripts/transition.js"></script>
-    <script type="module" src="/scripts/lenis-scroll.js"></script> 
+    <script type="module" src="/scripts/lenis-scroll.js"></script>
     <script type="module" src="/scripts/menu.js"></script>
   </body>
 </html>
