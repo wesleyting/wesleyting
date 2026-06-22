@@ -22,6 +22,8 @@ h1 {
 h2 {
   font-size: 52px;
   max-width: 1200px;
+  line-height: 1.12;
+  letter-spacing: 0;
 }
 
 p {
@@ -61,6 +63,22 @@ a {
   margin: 0 auto;
   line-height: 1;
   color: inherit;
+}
+
+.hero h2 {
+  max-width: 1120px;
+  color: rgba(255, 255, 255, 0.94);
+  font-weight: 560;
+  text-wrap: balance;
+}
+
+.hero h2 span {
+  color: #ffffff;
+  font-weight: inherit;
+  text-decoration-line: underline;
+  text-decoration-color: var(--tone-500);
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.12em;
 }
 
 .hero-copy {
@@ -382,9 +400,13 @@ img {
 
 .animate-text {
   position: relative;
-  width: 60%;
+  width: min(1120px, 72vw);
   margin: 0 auto;
   color: #4f4f4f;
+  font-weight: 560;
+  line-height: 1.12;
+  letter-spacing: 0;
+  text-wrap: balance;
   --clip-value: 100%;
 }
 
@@ -399,13 +421,10 @@ img {
 }
 
 @media (max-width: 1000px) {
-  h1 {
-    font-size: 2rem;
-    letter-spacing: -0.05rem;
-  }
-
   .animate-text {
     width: 100%;
+    font-size: clamp(2rem, 8vw, 3.5rem);
+    line-height: 1.16;
   }
 }
 
