@@ -19,8 +19,8 @@ document.addEventListener("DOMContentLoaded", () => {
       ease: "power3.out",
       scrollTrigger: {
         trigger: intro,
-        start: "top 82%",
-        toggleActions: "restart reverse restart reverse",
+        start: "top 88%",
+        toggleActions: "play none none reverse",
       },
     },
   );
@@ -36,8 +36,8 @@ document.addEventListener("DOMContentLoaded", () => {
       ease: "power3.out",
       scrollTrigger: {
         trigger: cards[0],
-        start: "top 86%",
-        toggleActions: "restart reverse restart reverse",
+        start: "top 90%",
+        toggleActions: "play none none reverse",
       },
     },
   );
