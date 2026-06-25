@@ -143,14 +143,16 @@
   min-height: 520px;
   padding: 1.5rem;
   display: grid;
-  grid-template-columns: minmax(320px, 0.8fr) minmax(0, 1.35fr);
+  grid-template-columns: minmax(380px, 1fr) minmax(0, 1.05fr);
   gap: 2rem;
   color: #f3f3ef;
+  border-width: 2px;
+  border-color: rgba(243, 243, 239, 0.68);
   transition: border-color 0.35s ease, transform 0.35s ease;
 }
 
 .project-list-card:hover {
-  border-color: #7134ff;
+  border-color: #ffffff;
   transform: translateY(-4px);
 }
 
@@ -169,17 +171,43 @@
 }
 
 .project-list-card h3 {
-  max-width: 24ch;
-  margin-top: 1.5rem;
+  max-width: 48ch;
+  margin-top: 1.25rem;
   color: #f3f3ef;
   font-size: clamp(1.2rem, 1.6vw, 1.75rem);
   font-weight: 500;
   line-height: 1.12;
 }
 
+.project-list-tech {
+  margin-top: 1.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.85rem 1.2rem;
+}
+
+.project-list-tech span {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #f3f3ef;
+  font-size: 0.86rem;
+  font-weight: 700;
+  line-height: 1;
+  text-transform: uppercase;
+}
+
+.project-list-tech img {
+  width: 24px;
+  height: 24px;
+  object-fit: contain;
+  opacity: 0.82;
+}
+
 .project-list-media {
   min-height: 0;
   overflow: hidden;
+  opacity: 0.9;
 }
 
 .project-list-media img,
@@ -196,7 +224,6 @@
   justify-content: space-between;
   gap: 1rem;
   padding-top: 1rem;
-  border-top: 1px solid #303030;
 }
 
 .project-list-footer span,
@@ -208,7 +235,7 @@
 }
 
 .project-list-footer span:last-child {
-  color: #7134ff;
+  color: #f3f3ef;
 }
 
 .project-detail-layout {
@@ -381,5 +408,9 @@
   .project-detail-facts,
   .page-link-row {
     flex-direction: column;
+  }
+
+  .project-list-footer span {
+    font-size: 1rem;
   }
 }
