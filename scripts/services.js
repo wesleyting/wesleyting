@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded", () => {
       end: () => `+=${window.innerHeight * 4.25}`,
       pin: true,
       pinSpacing: true,
-      scrub: true,
+      scrub: 0.85,
       anticipatePin: 1,
       invalidateOnRefresh: true,
     },
@@ -47,9 +47,9 @@ document.addEventListener("DOMContentLoaded", () => {
       y: () => -window.innerHeight * 0.28,
       duration: 1,
     })
-    .to(copy, { autoAlpha: 1, y: 0, duration: 0.6 }, 2.65)
-    .to(copyText, { "--clip-value": "0%", duration: 0.8 }, 2.8)
-    .to({}, { duration: 0.8 })
+    .to(copy, { autoAlpha: 1, y: 0, duration: 0.85, ease: "power2.out" }, 2.55)
+    .to(copyText, { "--clip-value": "0%", duration: 1.35, ease: "power2.inOut" }, 2.75)
+    .to({}, { duration: 0.55 })
     .to([headerGroup, copy], {
       autoAlpha: 0,
       duration: 0.6,

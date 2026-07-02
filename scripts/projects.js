@@ -30,8 +30,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const totalCards = cards.length;
   const transitionCount = Math.max(1, totalCards - 1);
   const segmentSize = 1 / transitionCount;
-  const cardYOffset = 5;
-  const cardScaleStep = 0.075;
+  const isMobile = window.matchMedia("(max-width: 1000px)").matches;
+  const cardYOffset = isMobile ? 3.5 : 5;
+  const cardScaleStep = isMobile ? 0.055 : 0.075;
+  const exitYPercent = isMobile ? -170 : -200;
+  const pastYPercent = isMobile ? -215 : -250;
+  const exitRotation = isMobile ? 24 : 35;
 
   const renderCards = (progress) => {
     const activeIndex = Math.min(
@@ -47,15 +51,15 @@ document.addEventListener("DOMContentLoaded", () => {
       if (index < activeIndex) {
         gsap.set(card, {
           xPercent: -50,
-          yPercent: -250,
-          rotationX: 35,
+          yPercent: pastYPercent,
+          rotationX: exitRotation,
           scale: 1,
         });
       } else if (index === activeIndex) {
         gsap.set(card, {
           xPercent: -50,
-          yPercent: gsap.utils.interpolate(-50, -200, segmentProgress),
-          rotationX: gsap.utils.interpolate(0, 35, segmentProgress),
+          yPercent: gsap.utils.interpolate(-50, exitYPercent, segmentProgress),
+          rotationX: gsap.utils.interpolate(0, exitRotation, segmentProgress),
           scale: 1,
         });
       } else {
@@ -79,7 +83,7 @@ document.addEventListener("DOMContentLoaded", () => {
     trigger: ".sticky-cards",
     start: "top top",
     end: "bottom bottom",
-    scrub: true,
+    scrub: isMobile ? 0.35 : true,
     invalidateOnRefresh: true,
     onRefresh: (self) => renderCards(self.progress),
     onUpdate: ({ progress }) => renderCards(progress),

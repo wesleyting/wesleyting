@@ -9,11 +9,12 @@ document.addEventListener("DOMContentLoaded", () => {
   const isMobile = window.innerWidth <= 1000;
 
   lenis = new Lenis({
-    duration: isMobile ? 0.8 : 1.2,
-    lerp: isMobile ? 0.075 : 0.1,
+    duration: isMobile ? 1 : 1.2,
+    lerp: isMobile ? 0.09 : 0.1,
     smoothWheel: true,
     syncTouch: true,
-    touchMultiplier: isMobile ? 1.5 : 2,
+    syncTouchLerp: isMobile ? 0.08 : 0.075,
+    touchMultiplier: isMobile ? 2.2 : 2,
   });
 
   // integrate with gsap and scrolltrigger
