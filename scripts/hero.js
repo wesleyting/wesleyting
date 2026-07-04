@@ -34,6 +34,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   let hasRevealed = false;
 
+  const forceHeroTextVisible = () => {
+    gsap.set([revealTargets.statement, revealTargets.meta].filter(Boolean), {
+      autoAlpha: 1,
+      y: 0,
+    });
+  };
+
   const revealHomepage = () => {
     if (hasRevealed) return;
     hasRevealed = true;
@@ -78,14 +85,23 @@ document.addEventListener("DOMContentLoaded", () => {
         autoAlpha: 1,
         y: 0,
         duration: 0.65,
-      }, 0.72);
+      }, 0.72)
+      .call(forceHeroTextVisible);
   };
 
   if (window.__homepageReady || !document.querySelector(".home-intro")) {
     revealHomepage();
   } else {
     window.addEventListener("preloader:complete", revealHomepage, { once: true });
+    window.addEventListener("load", () => {
+      window.setTimeout(revealHomepage, 1200);
+    }, { once: true });
   }
+
+  window.setTimeout(() => {
+    if (!hasRevealed) revealHomepage();
+    forceHeroTextVisible();
+  }, 2800);
 
   if (window.innerWidth < 900) return;
 

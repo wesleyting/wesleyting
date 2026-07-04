@@ -1,219 +1,529 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<title>MWG 044</title>
-		<link rel="stylesheet" href="assets/style.css">
-		<link rel="icon" type="image/png" href="assets/favicon-96x96.png" sizes="96x96" />
-		<style>
-			@import url('https://fonts.googleapis.com/css2?family=Inter:wght@500&display=swap');
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>LukeBaffait Animated Footer | Codegrid</title>
+    <link rel="stylesheet" href="/styles.css" />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Instrument+Sans:ital,wght@0,400..700;1,400..700&display=swap");
 
-/* NORMALIZE */
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    appearance: none;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-/* NORMALIZE */
 
 body {
-    background: #121212;
-    color: #F1F1F1;
-    font: 500 normal 22px/1.3 'Inter', sans-serif;
-}
-.mwg_effect044 .root {
-    position: relative;
-}
-.mwg_effect044 .header,
-.mwg_effect044 .footer {
-    display: flex;
-    justify-content: space-between;
-    width: 100%;
-    padding: 25px 0;
-}
-.mwg_effect044 .header p,
-.mwg_effect044 .footer p {
-    text-transform: uppercase;
-    letter-spacing: -0.01em;
-    font-size: 16px;
-}
-.mwg_effect044 .footer {
-    position: relative;
-    border-top: 1px solid rgb(95, 95, 95);
-    margin: calc(2 * 25px) 0 0;
-}
-.mwg_effect044 .footer p {
-    color: rgb(95, 95, 95)
-}
-.mwg_effect044 .footer a {
-    color: inherit;
-    text-decoration: none;
-}
-.mwg_effect044 .duplicate .footer p {
-    color: var(--white);
-}
-.mwg_effect044 .line {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-.mwg_effect044 .line p {
-    font: 500 normal 10.5vw / 0.9 'Inter', sans-serif;
-    letter-spacing: -0.05em;
-    text-transform: uppercase;
-}
-.mwg_effect044 .line p:first-child {
-    margin: 0 0 0 -0.07em;
-}
-.mwg_effect044 .photo {
-    width: 11.2vw;
-    height: max-content;
-    aspect-ratio: 1.5;
-    object-fit: cover;
-    transform: translate(0, -5%);
-    border-radius: 0.5vw;
-}
-.mwg_effect044 .icon {
-    width: 7.8vw;
-    height: auto;
-}
-.mwg_effect044 .containers {
-    position: relative;
-    pointer-events: none;
-}
-.mwg_effect044 .container {
-    position: relative;
-    padding: 0 25px;
-    height: 100vh;
-}
-.mwg_effect044 .duplicate {
-    --xpercent: 50%;
-    --ypercent: 50%;
-    mask-image: radial-gradient(circle at var(--xpercent) var(--ypercent), #000 20%, transparent 25%); 
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    color: #C9FE6E;
-}
-.mwg_effect044 .duplicate .header {
-    color: #C9FE6E;
+  font-family: "Instrument Sans";
 }
 
-@media (max-width: 768px) {
-    .mwg_effect044 .header p:last-child, 
-    .mwg_effect044 .footer p:last-child {
-        display: none;
+section {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100svh;
+  background-color: #1b1b1b;
+  color: #ff6a00;
+  padding: 2rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+
+section h1 {
+  font-size: clamp(2rem, 5vw, 8rem);
+  font-weight: 500;
+  letter-spacing: -2%;
+}
+
+.footer-revealer {
+  position: relative;
+  width: 100%;
+  height: 100svh;
+}
+
+footer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100svh;
+  background-color: #0f0f0f;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.footer-images {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.footer-hand-img {
+  position: relative;
+  width: 40%;
+  min-width: 200px;
+  will-change: transform;
+}
+
+.footer-hand-img img {
+  display: block;
+  width: 100%;
+  opacity: 0;
+}
+
+.footer-hand-img canvas {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.footer-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  padding: 2rem;
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  color: #fff;
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.footer-links a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1.1rem;
+}
+
+.footer-text {
+  max-width: 28rem;
+}
+
+.footer-text p {
+  font-size: 1.1rem;
+  line-height: 1.4;
+}
+
+.footer-header {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  color: #fff;
+}
+
+.footer-header h1 {
+  font-size: clamp(5rem, 15vw, 15rem);
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: -2%;
+  overflow: hidden;
+}
+
+@media (max-width: 1000px) {
+  .footer-content {
+    flex-direction: column;
+  }
+
+  .footer-text {
+    max-width: 100%;
+  }
+
+  .footer-header h1 {
+    font-size: 3rem;
+  }
+}
+
+    </style>
+  </head>
+  <body>
+    <section class="one"><h1>One</h1></section>
+    <section class="two"><h1>Two</h1></section>
+    <section class="three"><h1>Three</h1></section>
+
+    <div class="footer-revealer"></div>
+
+    <footer>
+      <div class="footer-images">
+        <div class="footer-hand-img">
+          <img class="ascii-hand" src="/hand-left.jpg" alt="" />
+        </div>
+
+        <div class="footer-hand-img">
+          <img class="ascii-hand" src="/hand-right.jpg" alt="" />
+        </div>
+      </div>
+
+      <div class="footer-content">
+        <nav class="footer-links">
+          <a href="#">Work</a>
+          <a href="#">About</a>
+          <a href="#">Journal</a>
+          <a href="#">Contact</a>
+        </nav>
+
+        <div class="footer-text">
+          <p>
+            A multidisciplinary studio working across direction, design and
+            motion. We build considered digital experiences for brands that care
+            about the details.
+          </p>
+        </div>
+      </div>
+
+      <div class="footer-header">
+        <h1>Blank</h1>
+        <h1>Canvas</h1>
+      </div>
+    </footer>
+    <script type="module" src="/script.js"></script>
+    <script>
+      import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { SplitText } from "gsap/SplitText";
+import Lenis from "lenis";
+
+gsap.registerPlugin(ScrollTrigger, SplitText);
+
+const lenis = new Lenis();
+lenis.on("scroll", ScrollTrigger.update);
+gsap.ticker.add((time) => lenis.raf(time * 1000));
+gsap.ticker.lagSmoothing(0);
+
+const splitHeadingChars = () => {
+  const headings = document.querySelectorAll(".footer-header h1");
+  const chars = [];
+
+  headings.forEach((heading) => {
+    const split = SplitText.create(heading, {
+      type: "chars",
+      charsClass: "char",
+    });
+    chars.push(...split.chars);
+  });
+
+  gsap.set(chars, { position: "relative", yPercent: 125 });
+  return chars;
+};
+
+const splitContentLines = () => {
+  const elements = document.querySelectorAll(".footer-links a, .footer-text p");
+  const lines = [];
+
+  elements.forEach((element) => {
+    const split = SplitText.create(element, {
+      type: "lines",
+      mask: "lines",
+      linesClass: "line",
+    });
+    lines.push(...split.lines);
+  });
+
+  gsap.set(lines, { yPercent: 100 });
+  return lines;
+};
+
+const headingChars = splitHeadingChars();
+const contentLines = splitContentLines();
+
+const ASCII_CHARS = "........:::=+xX#0369";
+const FONT_SIZE = 18;
+const CELL_SIZE = 20;
+const ASCII_COLUMNS = 80;
+const DPR = 2;
+
+const CHAR_COLOR = "#803500";
+const HOVER_COLOR = "#ff6a00";
+const HOVER_CHAR_COLOR = "#0f0f0f";
+
+const HOVER_RADIUS = 8;
+const CLUSTER_SIZE = 10;
+const HIGHLIGHT_LIFETIME = 300;
+
+const backgroundCharIndex = ASCII_CHARS.lastIndexOf(".");
+
+const sampleImagePixels = (image, gridRows) => {
+  const canvas = document.createElement("canvas");
+  canvas.width = ASCII_COLUMNS;
+  canvas.height = gridRows;
+
+  const ctx = canvas.getContext("2d");
+  ctx.drawImage(image, 0, 0, ASCII_COLUMNS, gridRows);
+  return ctx.getImageData(0, 0, ASCII_COLUMNS, gridRows).data;
+};
+
+const pixelToCharIndex = (pixels, pixelOffset) => {
+  const brightness =
+    (pixels[pixelOffset] * 0.299 +
+      pixels[pixelOffset + 1] * 0.587 +
+      pixels[pixelOffset + 2] * 0.114) /
+    255;
+
+  return Math.min(
+    ASCII_CHARS.length - 1,
+    Math.floor((1 - brightness) * ASCII_CHARS.length),
+  );
+};
+
+const buildCells = (image) => {
+  const rows = Math.round(
+    ASCII_COLUMNS / (image.naturalWidth / image.naturalHeight),
+  );
+  const pixels = sampleImagePixels(image, rows);
+  const cells = new Map();
+
+  for (let row = 0; row < rows; row++) {
+    for (let col = 0; col < ASCII_COLUMNS; col++) {
+      const charIndex = pixelToCharIndex(
+        pixels,
+        (row * ASCII_COLUMNS + col) * 4,
+      );
+      if (charIndex <= backgroundCharIndex) continue;
+
+      cells.set(`${col},${row}`, {
+        col,
+        row,
+        char: ASCII_CHARS[charIndex],
+        highlightEndTime: 0,
+      });
     }
-    .mwg_effect044 .photo {
-        width: 8vw;
-        transform: translate(0, -15%);
+  }
+
+  return { rows, cells };
+};
+
+const setupHand = (image) => {
+  const { rows, cells } = buildCells(image);
+  const cellList = [...cells.values()];
+
+  const canvas = image.closest(".footer-hand-img").querySelector("canvas");
+  canvas.width = ASCII_COLUMNS * CELL_SIZE * DPR;
+  canvas.height = rows * CELL_SIZE * DPR;
+
+  const ctx = canvas.getContext("2d");
+  ctx.setTransform(DPR, 0, 0, DPR, 0, 0);
+  ctx.font = `${FONT_SIZE}px monospace`;
+  ctx.textAlign = "center";
+  ctx.textBaseline = "alphabetic";
+
+  const metrics = ctx.measureText("X");
+  const glyphHeight =
+    metrics.actualBoundingBoxAscent + metrics.actualBoundingBoxDescent;
+  const baselineOffset =
+    CELL_SIZE / 2 + glyphHeight / 2 - metrics.actualBoundingBoxDescent;
+
+  const canvasWidth = ASCII_COLUMNS * CELL_SIZE;
+  const canvasHeight = rows * CELL_SIZE;
+
+  const render = () => {
+    const now = Date.now();
+    ctx.clearRect(0, 0, canvasWidth, canvasHeight);
+
+    for (const cell of cellList) {
+      const x = cell.col * CELL_SIZE;
+      const y = cell.row * CELL_SIZE;
+      const isHighlighted = cell.highlightEndTime > now;
+
+      if (isHighlighted) {
+        ctx.fillStyle = HOVER_COLOR;
+        ctx.fillRect(x, y, CELL_SIZE, CELL_SIZE);
+      }
+
+      ctx.fillStyle = isHighlighted ? HOVER_CHAR_COLOR : CHAR_COLOR;
+      ctx.fillText(cell.char, x + CELL_SIZE / 2, y + baselineOffset);
     }
-}
-		</style>
-	</head>
-	<body>
-		<section class="mwg_effect044">
-			<div class="root">
-				<div class="containers">
-					<div class="container">
-						<div class="header">
-							<p>MNR Studio®</p>
-							<p>Work, Infos</p>
-							<p>05:05</p>
-							<p>Contact</p>
-						</div>
-						<div class="line">
-							<p>Fancy a cool</p>
-						</div>
-						<div class="line">
-							<p>Hello</p>
-							<img class="photo" src="assets/medias/1.png" alt="">
-							<p>website?</p>
-						</div>
-						<div class="line">
-							<svg class="icon" fill="none" height="115" viewBox="0 0 118 115" width="118" xmlns="http://www.w3.org/2000/svg"><g fill="currentColor"><path d="m76.5346 31.8467 41.4654 41.5767-41.4654 41.5766h-18.429l33.9984-34.0896h-92.0658671v-14.974h92.0658671l-33.9984-34.0897z"/><path d="m.00000377 80.7447-.00000377-80.74469922 14.6416-.00000078v80.7447z"/></g></svg>
-							
-							<p>@mnr.studio</p>
-						</div>
-						<div class="footer">
-							<p>Instagram</p>
-							<p>Bluesky</p>
-							<p>(212) 555 7890</p>
-							<p>København</p>
-						</div>
-					</div>
-					<div class="container duplicate" aria-hidden="true">
-						<div class="header">
-							<p>MNR Studio®</p>
-							<p>Work, Infos</p>
-							<p>05:05</p>
-							<p>Contact</p>
-						</div>
-						<div class="line">
-							<p>Fancy a cool</p>
-						</div>
-						<div class="line">
-							<p>Hello</p>
-							<img class="photo" src="assets/medias/2.png" alt="">
-							<p>website?</p>
-						</div>
-						<div class="line">
-							<svg class="icon" fill="none" height="115" viewBox="0 0 118 115" width="118" xmlns="http://www.w3.org/2000/svg"><g fill="currentColor"><path d="m76.5346 31.8467 41.4654 41.5767-41.4654 41.5766h-18.429l33.9984-34.0896h-92.0658671v-14.974h92.0658671l-33.9984-34.0897z"/><path d="m.00000377 80.7447-.00000377-80.74469922 14.6416-.00000078v80.7447z"/></g></svg>
-				
-							<p>@mnr.studio</p>
-						</div>
-						<div class="footer">
-							<p>Instagram</p>
-							<p>Bluesky</p>
-							<p>(212) 555 7890</p>
-							<p>København</p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
 
-		<!-- GSAP -->
-		<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+    requestAnimationFrame(render);
+  };
 
-		<!-- EFFECT CODE -->
-		<script src="assets/script.js"></script>
-		<script>
-			window.addEventListener("DOMContentLoaded", () => {
-    // Modifies the CSS variable --xpercent
-    const xTo = gsap.quickTo('.mwg_effect044 .duplicate', '--xpercent', {
-        duration: 0.4, // Changes over 0.4s
-        ease: "back" // With a slight bounce at the end of the movement
-    })
+  render();
 
-    // Modifies the CSS variable --ypercent
-    const yTo = gsap.quickTo('.mwg_effect044 .duplicate', '--ypercent', {
-        duration: 0.4, // Changes over 0.4s
-        ease: "back" // With a slight bounce at the end of the movement
-    })
+  return { canvas, cells, cellList, rows };
+};
 
-    document.querySelector('.mwg_effect044').addEventListener("mousemove", (e) => {  
-        // Maps the mouse's X position from the window width range (0 to innerWidth)  
-        // to a normalized range (0 to 100)  
-        const mRangeX = gsap.utils.mapRange(0, window.innerWidth, 0, 100, e.clientX)  
-    
-        // Update the X position smoothly  
-        xTo(mRangeX)
-    
-        // Maps the mouse's Y position relative to the element’s bounding box  
-        // to a normalized range (0 to 100)  
-        const bound = e.target.getBoundingClientRect()  
-        const mRangeY = gsap.utils.mapRange(bound.top, bound.top + bound.height, 0, 100, e.clientY)  
-    
-        // Update the Y position smoothly  
-        yTo(mRangeY)
-    })
-})
-		</script>
-	</body>
+const hands = [];
+document.querySelectorAll("img.ascii-hand").forEach((image) => {
+  const canvas = document.createElement("canvas");
+  image.closest(".footer-hand-img").appendChild(canvas);
+
+  const start = () => hands.push(setupHand(image));
+  if (image.complete && image.naturalWidth) start();
+  else image.addEventListener("load", start);
+});
+
+const highlightCluster = (cells, startCell) => {
+  const now = Date.now();
+  startCell.highlightEndTime = now + HIGHLIGHT_LIFETIME;
+
+  const steps = Math.floor(Math.random() * CLUSTER_SIZE) + 1;
+  const litCells = [startCell];
+  let current = startCell;
+
+  for (let step = 0; step < steps; step++) {
+    const neighbours = [];
+    for (let dy = -1; dy <= 1; dy++) {
+      for (let dx = -1; dx <= 1; dx++) {
+        if (dx === 0 && dy === 0) continue;
+        const neighbour = cells.get(`${current.col + dx},${current.row + dy}`);
+        if (neighbour && !litCells.includes(neighbour))
+          neighbours.push(neighbour);
+      }
+    }
+    if (neighbours.length === 0) break;
+
+    const next = neighbours[Math.floor(Math.random() * neighbours.length)];
+    next.highlightEndTime = now + HIGHLIGHT_LIFETIME + step * 10;
+    litCells.push(next);
+    current = next;
+  }
+};
+
+const hoverHand = (hand, clientX, clientY) => {
+  const rect = hand.canvas.getBoundingClientRect();
+  const mouseCol = ((clientX - rect.left) / rect.width) * ASCII_COLUMNS;
+  const mouseRow = ((clientY - rect.top) / rect.height) * hand.rows;
+
+  let closest = null;
+  let closestDist = Infinity;
+  for (const cell of hand.cellList) {
+    const dx = mouseCol - cell.col;
+    const dy = mouseRow - cell.row;
+    const dist = Math.sqrt(dx * dx + dy * dy);
+    if (dist < closestDist) {
+      closestDist = dist;
+      closest = cell;
+    }
+  }
+
+  if (closest && closestDist <= HOVER_RADIUS) {
+    highlightCluster(hand.cells, closest);
+  }
+};
+
+window.addEventListener("mousemove", (event) => {
+  hands.forEach((hand) => hoverHand(hand, event.clientX, event.clientY));
+});
+
+const PARALLAX_STRENGTH = 20;
+const PARALLAX_EASE = 0.05;
+
+const footer = document.querySelector("footer");
+const handWrappers = [...document.querySelectorAll(".footer-hand-img")];
+
+const parallaxScale = 1 + (PARALLAX_STRENGTH * 2) / 200;
+
+const pointer = { x: 0, y: 0 };
+const drift = { x: 0, y: 0 };
+
+const reveal = { left: -125, right: 125 };
+
+const setPointerTarget = (clientX, clientY) => {
+  const rect = footer.getBoundingClientRect();
+  pointer.x =
+    ((clientX - rect.left) / rect.width - 0.5) * PARALLAX_STRENGTH * 2;
+  pointer.y =
+    ((clientY - rect.top) / rect.height - 0.5) * PARALLAX_STRENGTH * 2;
+};
+
+const renderParallax = () => {
+  drift.x += (pointer.x - drift.x) * PARALLAX_EASE;
+  drift.y += (pointer.y - drift.y) * PARALLAX_EASE;
+
+  handWrappers.forEach((wrapper, i) => {
+    const direction = i === 0 ? 1 : -1;
+    const revealX = i === 0 ? reveal.left : reveal.right;
+    const x = drift.x * direction;
+    const y = -drift.y;
+    wrapper.style.transform = `translate(calc(${x}px + ${revealX}%), ${y}px) scale(${parallaxScale})`;
+  });
+
+  requestAnimationFrame(renderParallax);
+};
+
+renderParallax();
+
+window.addEventListener("mousemove", (event) => {
+  setPointerTarget(event.clientX, event.clientY);
+});
+
+const charStagger = { each: 0.04, from: "center" };
+
+const animateIn = () => {
+  gsap.to(reveal, {
+    left: 0,
+    right: 0,
+    duration: 1,
+    ease: "power3.out",
+    overwrite: true,
+  });
+  gsap.to(headingChars, {
+    yPercent: 0,
+    duration: 1,
+    ease: "power3.out",
+    stagger: charStagger,
+    overwrite: true,
+  });
+  gsap.to(contentLines, {
+    yPercent: 0,
+    duration: 1,
+    ease: "power3.out",
+    stagger: 0.08,
+    overwrite: true,
+  });
+};
+
+const animateOut = () => {
+  gsap.to(reveal, {
+    left: -125,
+    right: 125,
+    duration: 0.4,
+    ease: "power2.in",
+    overwrite: true,
+  });
+  gsap.to(headingChars, {
+    yPercent: 125,
+    duration: 0.4,
+    ease: "power2.in",
+    stagger: { each: 0.01, from: "center" },
+    overwrite: true,
+  });
+  gsap.to(contentLines, {
+    yPercent: 100,
+    duration: 0.4,
+    ease: "power2.in",
+    stagger: 0.02,
+    overwrite: true,
+  });
+};
+
+ScrollTrigger.create({
+  trigger: ".footer-revealer",
+  start: "top 50%",
+  onEnter: animateIn,
+});
+
+ScrollTrigger.create({
+  trigger: ".footer-revealer",
+  start: "top 85%",
+  onLeaveBack: animateOut,
+});
+
+    </script>
+  </body>
 </html>

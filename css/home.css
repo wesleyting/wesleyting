@@ -13,6 +13,12 @@ body {
   overflow-x: clip;
 }
 
+main {
+  position: relative;
+  z-index: 2;
+  background-color: transparent;
+}
+
 h1 {
   font-size: 60px;
   font-weight: 500;
@@ -66,6 +72,8 @@ a {
 }
 
 .hero h2 {
+  position: relative;
+  z-index: 30;
   max-width: 1120px;
   color: rgba(255, 255, 255, 0.94);
   font-weight: 560;
@@ -82,9 +90,20 @@ a {
 }
 
 .hero-copy {
+  position: relative;
+  z-index: 6;
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
+  color: rgba(255, 255, 255, 0.88);
+}
+
+.hero-copy p {
+  color: inherit;
+}
+
+.hero-copy span {
+  font: inherit;
 }
 
 .outro {
@@ -101,7 +120,7 @@ a {
 
 .video-container-desktop {
   position: relative;
-  z-index: 20;
+  z-index: 42;
   /* Change -105% to a fixed pixel value or 0 if possible, 
      but if you need the effect, keep it and we will fix it in JS */
   transform: translateY(-105%) scale(0.25); 
@@ -115,6 +134,7 @@ a {
 
 .video-container-desktop .video-title p {
   position: relative;
+  z-index: 43;
   font-size: 78px;
   font-weight: 500;
 }
@@ -301,8 +321,6 @@ body.showreel-open .site-scrollbar {
     align-items: flex-start;
     gap: 0.4em;
   }
-  .hero-copy p:last-child { display: none; }
-
   /* 5) Make the mobile video title smaller */
   .video-container-mobile .video-title { margin-top: 0.75em; }
   .video-container-mobile .video-title p {
@@ -717,7 +735,8 @@ img {
 .all-projects {
   position: relative;
   z-index: 4;
-  padding: 1svh 2.5rem 14svh;
+  padding: 1svh 2.5rem 28svh;
+  background-color: #000;
 }
 
 .all-projects-inner {
@@ -877,7 +896,7 @@ img {
   }
 
   .all-projects {
-    padding: 1svh 1.5rem 12svh;
+    padding: 1svh 1.5rem 24svh;
   }
 
   .all-projects-inner {
