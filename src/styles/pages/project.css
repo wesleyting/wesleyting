@@ -1,0 +1,36 @@
+.project-page main {
+  min-height: 100svh;
+  padding: 8rem 2.5rem 4rem;
+}
+
+.project-shell {
+  min-height: calc(100svh - 12rem);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 1.5rem;
+}
+
+.project-kicker {
+  color: rgba(255, 255, 255, 0.62);
+  font-size: 0.88rem;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.project-title {
+  max-width: 12ch;
+  color: #f3f3ef;
+  font-size: clamp(4rem, 11vw, 12rem);
+  line-height: 0.88;
+}
+
+@media (max-width: 900px) {
+  .project-page main {
+    padding: 6.5rem 1.5rem 2.5rem;
+  }
+
+  .project-shell {
+    min-height: calc(100svh - 9rem);
+  }
+}

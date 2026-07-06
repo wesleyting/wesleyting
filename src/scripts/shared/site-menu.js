@@ -1,7 +1,7 @@
 import gsap from "gsap";
 import { SplitText } from "gsap/SplitText";
-import { scrambleIn, scrambleOut, scrambleVisible } from "./scramble.js";
-import { lenis } from "./lenis-scroll.js";
+import { scrambleIn, scrambleOut, scrambleVisible } from "./scramble-text.js";
+import { lenis } from "./smooth-scroll.js";
 
 gsap.registerPlugin(SplitText);
 
@@ -256,6 +256,17 @@ document.fonts.ready.then(() => {
     if (!isMenuOpen) {
       openMenu();
     } else {
+      closeMenu();
+    }
+  });
+
+  navOverlay.addEventListener("click", (event) => {
+    const link = event.target.closest("a");
+    const href = link?.getAttribute("href") || "";
+
+    if (!isMenuOpen || !link) return;
+
+    if (href.startsWith("#") || href.startsWith("mailto:")) {
       closeMenu();
     }
   });

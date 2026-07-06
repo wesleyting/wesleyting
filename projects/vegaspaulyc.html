@@ -8,31 +8,33 @@
         document.documentElement.dataset.pageTransition = "pending";
       }
     </script>
-    <meta name="theme-color" content="#0d0f12" />
     <title>VegasPaulyC | Wesley Ting</title>
-    <meta name="description" content="VegasPaulyC Shopify storefront case study by Wesley Ting." />
+    <meta name="description" content="VegasPaulyC project page by Wesley Ting." />
     <link rel="icon" href="/favicon/favicon.ico" sizes="any" />
     <link rel="icon" href="/favicon/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon/favicon-96x96.png" type="image/png" sizes="96x96" />
     <link rel="apple-touch-icon" href="/favicon/apple-touch-icon.png" />
     <link rel="manifest" href="/favicon/site.webmanifest" />
-    <link rel="stylesheet" href="/globals.css" />
-    <link rel="stylesheet" href="/css/transition.css" />
-    <link rel="stylesheet" href="/css/menu.css" />
-    <link rel="stylesheet" href="/css/pages.css" />
+    <link rel="stylesheet" href="/src/styles/base/global.css" />
+    <link rel="stylesheet" href="/src/styles/components/page-transition.css" />
+    <link rel="stylesheet" href="/src/styles/components/site-menu.css" />
+    <link rel="stylesheet" href="/src/styles/pages/project.css" />
   </head>
-  <body>
-    <div class="transition" aria-hidden="true"><div class="transition-overlay"></div></div>
-    <nav>
+  <body class="project-page">
+    <div class="transition" aria-hidden="true">
+      <div class="transition-overlay"></div>
+    </div>
+
+    <nav class="nav">
       <div class="logo"><div class="logo-container"><a href="/">Wesley Ting</a></div></div>
       <div class="menu-toggle-btn"><div class="menu-toggle-btn-wrapper"><p>Menu</p></div></div>
     </nav>
+
     <div class="nav-overlay">
       <div class="nav-items">
         <div class="nav-item"><a href="/">Home</a></div>
-        <div class="nav-item"><a href="/about.html">About</a></div>
         <div class="nav-item active"><a href="/work.html">Work</a></div>
-        <div class="nav-item"><a href="/contact.html">Contact</a></div>
+        <div class="nav-item"><a href="mailto:wesleytingdev@gmail.com">Contact</a></div>
       </div>
       <div class="nav-footer">
         <div class="container">
@@ -40,94 +42,20 @@
             <a href="https://github.com/wesleyting" target="_blank" rel="noopener">GitHub</a>
             <a href="https://x.com/wesleytingdev" target="_blank" rel="noopener">X</a>
           </div>
-          <div class="nav-footer-item"><a href="/contact.html">[ &nbsp;Get In Touch&nbsp; ]</a></div>
+          <div class="nav-footer-item"><a href="mailto:wesleytingdev@gmail.com">[ &nbsp;Get In Touch&nbsp; ]</a></div>
         </div>
       </div>
     </div>
 
-    <main class="page-shell" id="main">
-      <section class="page-hero">
-        <p class="page-kicker">Shopify Storefront / 2026</p>
-        <h1>VegasPaulyC</h1>
-        <p class="page-lede">Shopify storefront support for a social media influencer merch store built around product launches, audience demand, and ongoing ecommerce operations.</p>
-      </section>
-
-      <section class="page-section">
-        <div class="project-detail-layout">
-          <div class="project-detail-copy">
-            <h2>A merchandise storefront designed for product drops and everyday store management.</h2>
-            <p>VegasPaulyC is a social media influencer merch store where the website needs to move quickly around new products, promotions, and fulfillment requirements. The focus is keeping the Shopify experience clear, flexible, and easy to maintain.</p>
-            <div class="project-detail-facts">
-              <span>Shopify</span>
-              <span>Products</span>
-              <span>Fulfillment</span>
-            </div>
-          </div>
-          <div class="project-detail-media">
-            <img src="/home/project-vegaspaulyc.webp" alt="VegasPaulyC website preview" />
-          </div>
-        </div>
-      </section>
-
-      <section class="page-section">
-        <div class="page-section-header">
-          <p class="page-eyebrow">Overview</p>
-          <h2>Merch stores need speed, clarity, and reliable product handling.</h2>
-        </div>
-        <div class="page-grid two-column">
-          <article class="project-note">
-            <h3>Challenge</h3>
-            <p>Influencer merch stores often need to react quickly to launches and audience attention. Product pages, collections, inventory messaging, and fulfillment details all need to be clear when traffic arrives.</p>
-          </article>
-          <article class="project-note">
-            <h3>Approach</h3>
-            <p>The draft direction focuses on Shopify maintenance, product presentation, launch readiness, and integrations that keep the store operational without overcomplicating the customer experience.</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="page-section">
-        <div class="page-section-header">
-          <p class="page-eyebrow">Work Delivered</p>
-          <h2>Storefront updates built around merch launches and fulfillment workflows.</h2>
-        </div>
-        <ul class="project-scope">
-          <li>Shopify storefront updates for product drops, seasonal campaigns, and merchandise releases.</li>
-          <li>Product and collection page support for clear merchandising and easier browsing.</li>
-          <li>Responsive layout checks so purchase paths work cleanly for mobile-first audiences.</li>
-          <li>Fulfillment integration support and operational QA around order flow requirements.</li>
-          <li>Theme adjustments using Liquid, HTML, CSS, and JavaScript.</li>
-          <li>Ongoing ecommerce maintenance for content updates, small fixes, and launch support.</li>
-        </ul>
-      </section>
-
-      <section class="page-section">
-        <div class="page-section-header">
-          <p class="page-eyebrow">Outcome</p>
-          <h2>A simpler merch storefront that can support audience-driven ecommerce activity.</h2>
-        </div>
-        <div class="page-grid two-column">
-          <article class="project-note">
-            <h3>Business Value</h3>
-            <p>The store is structured to support product launches, ongoing merchandise sales, and practical backend workflows without requiring a full redesign every time the catalog changes.</p>
-          </article>
-          <article class="project-note">
-            <h3>Stack</h3>
-            <p>Shopify, Liquid, ecommerce operations, product management, fulfillment integrations, responsive QA, and storefront maintenance.</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="page-section">
-        <div class="page-link-row">
-          <a href="/work.html">All projects <span aria-hidden="true">&nearr;</span></a>
-          <a href="/contact.html">Discuss a project <span aria-hidden="true">&nearr;</span></a>
-        </div>
+    <main id="main">
+      <section class="project-shell" aria-labelledby="project-title">
+        <p class="project-kicker">Project</p>
+        <h1 class="project-title" id="project-title">VegasPaulyC</h1>
       </section>
     </main>
 
-    <script type="module" src="/scripts/transition.js"></script>
-    <script type="module" src="/scripts/lenis-scroll.js"></script>
-    <script type="module" src="/scripts/menu.js"></script>
+    <script type="module" src="/src/scripts/shared/page-transition.js"></script>
+    <script type="module" src="/src/scripts/shared/smooth-scroll.js"></script>
+    <script type="module" src="/src/scripts/shared/site-menu.js"></script>
   </body>
 </html>

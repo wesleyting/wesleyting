@@ -8,25 +8,24 @@
         document.documentElement.dataset.pageTransition = "pending";
       }
     </script>
-    <meta name="theme-color" content="#0d0f12" />
     <title>Work | Wesley Ting</title>
-    <meta name="description" content="Selected frontend, Shopify, ecommerce, and business website projects by Wesley Ting." />
+    <meta name="description" content="Selected frontend, ecommerce, and website work by Wesley Ting." />
     <link rel="icon" href="/favicon/favicon.ico" sizes="any" />
     <link rel="icon" href="/favicon/favicon.svg" type="image/svg+xml" />
     <link rel="icon" href="/favicon/favicon-96x96.png" type="image/png" sizes="96x96" />
     <link rel="apple-touch-icon" href="/favicon/apple-touch-icon.png" />
     <link rel="manifest" href="/favicon/site.webmanifest" />
-    <link rel="stylesheet" href="/globals.css" />
-    <link rel="stylesheet" href="/css/transition.css" />
-    <link rel="stylesheet" href="/css/menu.css" />
-    <link rel="stylesheet" href="/css/pages.css" />
+    <link rel="stylesheet" href="/src/styles/base/global.css" />
+    <link rel="stylesheet" href="/src/styles/components/page-transition.css" />
+    <link rel="stylesheet" href="/src/styles/components/site-menu.css" />
+    <link rel="stylesheet" href="/src/styles/pages/work.css" />
   </head>
-  <body>
+  <body class="work-page">
     <div class="transition" aria-hidden="true">
       <div class="transition-overlay"></div>
     </div>
 
-    <nav>
+    <nav class="nav">
       <div class="logo">
         <div class="logo-container"><a href="/">Wesley Ting</a></div>
       </div>
@@ -38,9 +37,8 @@
     <div class="nav-overlay">
       <div class="nav-items">
         <div class="nav-item"><a href="/">Home</a></div>
-        <div class="nav-item"><a href="/about.html">About</a></div>
         <div class="nav-item active"><a href="/work.html">Work</a></div>
-        <div class="nav-item"><a href="/contact.html">Contact</a></div>
+        <div class="nav-item"><a href="mailto:wesleytingdev@gmail.com">Contact</a></div>
       </div>
       <div class="nav-footer">
         <div class="container">
@@ -49,136 +47,21 @@
             <a href="https://x.com/wesleytingdev" target="_blank" rel="noopener">X</a>
           </div>
           <div class="nav-footer-item">
-            <a href="/contact.html">[ &nbsp;Get In Touch&nbsp; ]</a>
+            <a href="mailto:wesleytingdev@gmail.com">[ &nbsp;Get In Touch&nbsp; ]</a>
           </div>
         </div>
       </div>
     </div>
 
-    <main class="page-shell" id="main">
-      <section class="page-hero">
-        <p class="page-kicker">Selected Work</p>
-        <h1>Websites built for launches, stores, and teams.</h1>
-        <p class="page-lede">A first look at ecommerce, frontend, and business website projects across Shopify, product presentation, professional services, and storefront support.</p>
-      </section>
-
-      <section class="page-section" aria-label="Project index">
-        <div class="project-list">
-          <a class="project-list-card" href="/projects/duuduu-mattress.html" data-cursor-label="View Case Study">
-            <div class="project-list-copy">
-              <div>
-                <p class="project-meta">Shopify Ecommerce / 2026</p>
-                <h2>DuuDuu Mattress</h2>
-                <h3>Ongoing Shopify development for an Australian ecommerce brand, including theme customization, landing pages, campaign updates, responsive UI improvements, and technical support.</h3>
-                <div class="project-list-tech" aria-label="Technologies used">
-                  <span><img src="/icons/shopify.svg" alt="" />Shopify</span>
-                  <span>Liquid</span>
-                  <span><img src="/icons/javascript.svg" alt="" />JavaScript</span>
-                  <span><img src="/icons/css.svg" alt="" />CSS</span>
-                </div>
-              </div>
-              <div class="project-list-footer">
-                <span>View case study &nearr;</span>
-              </div>
-            </div>
-            <div class="project-list-media">
-              <img src="/home/project-duuduu.png" alt="DuuDuu Mattress project preview" />
-            </div>
-          </a>
-
-          <a class="project-list-card" href="/projects/vegaspaulyc.html" data-cursor-label="View Case Study">
-            <div class="project-list-copy">
-              <div>
-                <p class="project-meta">Shopify Storefront / 2026</p>
-                <h2>VegasPaulyC</h2>
-                <h3>Shopify storefront support for influencer merchandise, with product drop updates, storefront maintenance, product presentation, and fulfillment workflow support.</h3>
-                <div class="project-list-tech" aria-label="Technologies used">
-                  <span><img src="/icons/shopify.svg" alt="" />Shopify</span>
-                  <span>Liquid</span>
-                  <span><img src="/icons/css.svg" alt="" />CSS</span>
-                  <span><img src="/icons/github.svg" alt="" />Git</span>
-                </div>
-              </div>
-              <div class="project-list-footer">
-                <span>View case study &nearr;</span>
-              </div>
-            </div>
-            <div class="project-list-media">
-              <img src="/home/project-vegaspaulyc.webp" alt="VegasPaulyC project preview" />
-            </div>
-          </a>
-
-          <a class="project-list-card" href="/projects/token-studio.html" data-cursor-label="View Case Study">
-            <div class="project-list-copy">
-              <div>
-                <p class="project-meta">Interactive Frontend / 2025</p>
-                <h2>Token Studio</h2>
-                <h3>Interactive frontend concept for collectible product drops, focused on motion, responsive product layouts, UI transitions, and product discovery.</h3>
-                <div class="project-list-tech" aria-label="Technologies used">
-                  <span><img src="/icons/javascript.svg" alt="" />JavaScript</span>
-                  <span><img src="/icons/html5.svg" alt="" />HTML</span>
-                  <span><img src="/icons/css.svg" alt="" />CSS</span>
-                  <span><img src="/icons/gsap.svg" alt="" />GSAP</span>
-                </div>
-              </div>
-              <div class="project-list-footer">
-                <span>View case study &nearr;</span>
-              </div>
-            </div>
-            <div class="project-list-media">
-              <img src="/home/project-token-studio.webp" alt="Token Studio project preview" />
-            </div>
-          </a>
-
-          <a class="project-list-card" href="/projects/clearbooks-tech.html" data-cursor-label="View Case Study">
-            <div class="project-list-copy">
-              <div>
-                <p class="project-meta">Professional Services / 2025</p>
-                <h2>Clearbooks Tech</h2>
-                <h3>Professional services website implementation, supporting content structure, CMS workflow, Calendly integration, deployment setup, and a clear inquiry path.</h3>
-                <div class="project-list-tech" aria-label="Technologies used">
-                  <span><img src="/icons/webflow.svg" alt="" />Webflow</span>
-                  <span><img src="/icons/html5.svg" alt="" />HTML</span>
-                  <span><img src="/icons/css.svg" alt="" />CSS</span>
-                  <span><img src="/icons/figma.svg" alt="" />Figma</span>
-                </div>
-              </div>
-              <div class="project-list-footer">
-                <span>View case study &nearr;</span>
-              </div>
-            </div>
-            <div class="project-list-media">
-              <img src="/home/project-clearbooks.png" alt="Clearbooks Tech project preview" />
-            </div>
-          </a>
-        </div>
-      </section>
-
-      <section class="page-section">
-        <div class="page-section-header">
-          <p class="page-eyebrow">Project Types</p>
-          <h2>A mix of storefronts, service websites, and interactive frontend work.</h2>
-        </div>
-        <div class="page-grid">
-          <article class="page-card">
-            <h3>Ecommerce</h3>
-            <p>Shopify storefronts, product pages, collections, launch support, fulfillment touchpoints, and conversion-focused updates.</p>
-          </article>
-          <article class="page-card">
-            <h3>Business websites</h3>
-            <p>Service pages, CMS structures, booking flows, content updates, and clear paths for prospective clients.</p>
-          </article>
-          <article class="page-card">
-            <h3>Interactive frontend</h3>
-            <p>Visual presentation, motion systems, responsive design, and polished interfaces for product-led websites.</p>
-          </article>
-        </div>
+    <main id="main">
+      <section class="work-shell" aria-labelledby="work-title">
+        <p class="work-kicker">Selected Work</p>
+        <h1 class="work-title" id="work-title">Work</h1>
       </section>
     </main>
 
-    <script type="module" src="/scripts/transition.js"></script>
-    <script type="module" src="/scripts/lenis-scroll.js"></script>
-    <script type="module" src="/scripts/cursor-label.js"></script>
-    <script type="module" src="/scripts/menu.js"></script>
+    <script type="module" src="/src/scripts/shared/page-transition.js"></script>
+    <script type="module" src="/src/scripts/shared/smooth-scroll.js"></script>
+    <script type="module" src="/src/scripts/shared/site-menu.js"></script>
   </body>
 </html>
