@@ -6,6 +6,8 @@ let lenis = null;
 
 // initialization
 document.addEventListener("DOMContentLoaded", () => {
+  if (document.body.hasAttribute("data-native-scroll")) return;
+
   const isMobile = window.innerWidth <= 1000;
 
   lenis = new Lenis({

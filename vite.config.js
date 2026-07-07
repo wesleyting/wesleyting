@@ -6,7 +6,6 @@ export default defineConfig({
     rollupOptions: {
       input: {
         main: resolve(__dirname, "index.html"),
-        work: resolve(__dirname, "work.html"),
         "projects/duuduu-mattress": resolve(__dirname, "projects/duuduu-mattress.html"),
         "projects/vegaspaulyc": resolve(__dirname, "projects/vegaspaulyc.html"),
         "projects/token-studio": resolve(__dirname, "projects/token-studio.html"),

@@ -20,7 +20,7 @@
     <link rel="stylesheet" href="/src/styles/components/site-menu.css" />
     <link rel="stylesheet" href="/src/styles/pages/project.css" />
   </head>
-  <body class="project-page">
+  <body class="project-page" data-native-scroll>
     <div class="transition" aria-hidden="true">
       <div class="transition-overlay"></div>
     </div>
@@ -33,7 +33,7 @@
     <div class="nav-overlay">
       <div class="nav-items">
         <div class="nav-item"><a href="/">Home</a></div>
-        <div class="nav-item active"><a href="/work.html">Work</a></div>
+        <div class="nav-item active"><a href="/#selected-work">Work</a></div>
         <div class="nav-item"><a href="mailto:wesleytingdev@gmail.com">Contact</a></div>
       </div>
       <div class="nav-footer">
@@ -48,14 +48,273 @@
     </div>
 
     <main id="main">
-      <section class="project-shell" aria-labelledby="project-title">
-        <p class="project-kicker">Project</p>
-        <h1 class="project-title" id="project-title">DuuDuu Mattress</h1>
+      <section class="case-hero" aria-labelledby="project-title">
+        <div class="case-hero-inner" data-reveal-group>
+          <p class="case-eyebrow">Case Study</p>
+          <h1 class="case-title" id="project-title">DuuDuu Mattress</h1>
+          <div class="case-hero-meta">
+            <p>Shopify Ecommerce • 2026</p>
+            <p>Case study content is placeholder text for layout review.</p>
+          </div>
+          <div class="case-hero-grid">
+            <p class="case-summary">
+              Placeholder summary describing the project, business context, and the customer experience. This area should become two or three concise sentences that explain what was built, why it mattered, and how the work improved the storefront.
+            </p>
+            <dl class="case-details" aria-label="Project details">
+              <div>
+                <dt>Role</dt>
+                <dd>Frontend Developer</dd>
+              </div>
+              <div>
+                <dt>Tech Stack</dt>
+                <dd>HTML / CSS / JavaScript / GSAP / Shopify</dd>
+              </div>
+            </dl>
+          </div>
+        </div>
+
+        <figure class="case-image-placeholder case-hero-image" role="img" aria-label="Placeholder hero image for the DuuDuu Mattress project" data-reveal>
+          <span>Placeholder image</span>
+          <strong>Hero storefront screenshot</strong>
+        </figure>
+      </section>
+
+      <section class="case-section case-reading" aria-labelledby="overview-title" data-reveal>
+        <p class="case-section-kicker">Overview</p>
+        <h2 id="overview-title">Project Overview</h2>
+        <div class="case-copy">
+          <p>Placeholder paragraph explaining the project goals, product context, and the type of ecommerce experience this page will eventually document. The final content can describe the brand, the storefront state before the work, and the main areas of contribution.</p>
+          <p>Placeholder paragraph describing how the project balanced design quality with practical implementation. This section is intentionally comfortable to read, with a focused text width and enough space around each idea.</p>
+          <p>Placeholder paragraph for additional context, such as collaboration, constraints, timeline, or technical responsibilities. Replace this with real project details when the case study content is ready.</p>
+        </div>
+      </section>
+
+      <section class="case-section case-split" aria-labelledby="challenge-title" data-reveal>
+        <div>
+          <p class="case-section-kicker">Challenge</p>
+          <h2 id="challenge-title">The Challenge</h2>
+        </div>
+        <div class="case-copy">
+          <p>Placeholder text describing the problem the storefront needed to solve. Use this space to explain customer friction, content clarity issues, campaign needs, or areas where the implementation needed to become more maintainable.</p>
+          <p>Placeholder text expanding on the constraints and decisions that shaped the work. Keep the language practical, specific, and tied to the project outcome.</p>
+          <ul class="case-list">
+            <li>Placeholder challenge related to responsive product storytelling.</li>
+            <li>Placeholder challenge related to campaign or landing page flexibility.</li>
+            <li>Placeholder challenge related to storefront performance and clarity.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="case-section case-solution" aria-labelledby="solution-title" data-reveal>
+        <div class="case-solution-copy">
+          <p class="case-section-kicker">Solution</p>
+          <h2 id="solution-title">The Solution</h2>
+          <div class="case-copy">
+            <p>Placeholder text describing the approach: simplify the structure, clarify the content hierarchy, improve reusable sections, and make the interface feel steady across screen sizes.</p>
+            <p>Placeholder text explaining the implementation strategy. Replace this with concrete notes about Shopify sections, Liquid templates, JavaScript enhancements, QA, or deployment workflow.</p>
+          </div>
+        </div>
+        <figure class="case-image-placeholder case-solution-image" role="img" aria-label="Placeholder supporting image for the project solution" data-reveal>
+          <span>Placeholder image</span>
+          <strong>Supporting interface detail</strong>
+        </figure>
+      </section>
+
+      <section class="case-section" aria-labelledby="features-title">
+        <div class="case-section-heading" data-reveal>
+          <p class="case-section-kicker">Features</p>
+          <h2 id="features-title">Key Features</h2>
+        </div>
+        <div class="feature-grid" data-reveal-group>
+          <article class="feature-card">
+            <span class="feature-icon" aria-hidden="true"></span>
+            <h3>Responsive Design</h3>
+            <p>Placeholder description for mobile, tablet, and desktop layouts that keep the purchase path clear.</p>
+          </article>
+          <article class="feature-card">
+            <span class="feature-icon" aria-hidden="true"></span>
+            <h3>Performance Optimization</h3>
+            <p>Placeholder description for lightweight UI choices, optimized assets, and faster browsing.</p>
+          </article>
+          <article class="feature-card">
+            <span class="feature-icon" aria-hidden="true"></span>
+            <h3>Accessibility</h3>
+            <p>Placeholder description for semantic structure, focus states, readable contrast, and usable controls.</p>
+          </article>
+          <article class="feature-card">
+            <span class="feature-icon" aria-hidden="true"></span>
+            <h3>CMS Integration</h3>
+            <p>Placeholder description for content editing patterns, reusable sections, and easier updates.</p>
+          </article>
+          <article class="feature-card">
+            <span class="feature-icon" aria-hidden="true"></span>
+            <h3>Animation</h3>
+            <p>Placeholder description for subtle motion that supports hierarchy without distracting from shopping.</p>
+          </article>
+          <article class="feature-card">
+            <span class="feature-icon" aria-hidden="true"></span>
+            <h3>SEO</h3>
+            <p>Placeholder description for structured content, metadata, and search-friendly page foundations.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="case-section" aria-labelledby="gallery-title">
+        <div class="case-section-heading" data-reveal>
+          <p class="case-section-kicker">Visuals</p>
+          <h2 id="gallery-title">Visual Gallery</h2>
+        </div>
+        <div class="case-gallery" data-reveal-group>
+          <figure class="case-image-placeholder gallery-wide" role="img" aria-label="Placeholder desktop screenshot">
+            <span>Placeholder image</span>
+            <strong>Large desktop screenshot</strong>
+          </figure>
+          <figure class="case-image-placeholder gallery-small" role="img" aria-label="Placeholder product detail screenshot">
+            <span>Placeholder image</span>
+            <strong>Product detail</strong>
+          </figure>
+          <figure class="case-image-placeholder gallery-small" role="img" aria-label="Placeholder campaign module screenshot">
+            <span>Placeholder image</span>
+            <strong>Campaign module</strong>
+          </figure>
+          <figure class="case-image-placeholder gallery-mobile" role="img" aria-label="Placeholder mobile screenshot">
+            <span>Placeholder image</span>
+            <strong>Mobile screenshot</strong>
+          </figure>
+          <figure class="case-image-placeholder gallery-banner" role="img" aria-label="Placeholder wide banner screenshot">
+            <span>Placeholder image</span>
+            <strong>Wide banner image</strong>
+          </figure>
+        </div>
+      </section>
+
+      <section class="case-section" aria-labelledby="code-title">
+        <div class="case-section-heading" data-reveal>
+          <p class="case-section-kicker">Implementation</p>
+          <h2 id="code-title">Code Highlights</h2>
+        </div>
+        <div class="code-grid" data-reveal-group>
+          <article class="code-card">
+            <div class="code-card-header">
+              <span>HTML</span>
+              <span>Placeholder</span>
+            </div>
+            <pre><code>&lt;section class="product-story"&gt;
+  &lt;p class="eyebrow"&gt;Sleep better&lt;/p&gt;
+  &lt;h2&gt;Designed for everyday comfort.&lt;/h2&gt;
+&lt;/section&gt;</code></pre>
+          </article>
+          <article class="code-card">
+            <div class="code-card-header">
+              <span>CSS</span>
+              <span>Placeholder</span>
+            </div>
+            <pre><code>.product-story {
+  display: grid;
+  gap: clamp(1rem, 3vw, 2rem);
+  max-width: 72rem;
+}</code></pre>
+          </article>
+          <article class="code-card">
+            <div class="code-card-header">
+              <span>JavaScript</span>
+              <span>Placeholder</span>
+            </div>
+            <pre><code>gsap.from("[data-reveal]", {
+  autoAlpha: 0,
+  y: 24,
+  duration: 0.7
+});</code></pre>
+          </article>
+        </div>
+      </section>
+
+      <section class="case-section" aria-labelledby="process-title">
+        <div class="case-section-heading" data-reveal>
+          <p class="case-section-kicker">Process</p>
+          <h2 id="process-title">Development Process</h2>
+        </div>
+        <div class="process-list" data-reveal-group>
+          <article>
+            <span>01</span>
+            <h3>Discovery</h3>
+            <p>Placeholder process text describing research, project goals, content review, and constraints.</p>
+          </article>
+          <article>
+            <span>02</span>
+            <h3>Design</h3>
+            <p>Placeholder process text describing layout direction, content hierarchy, and UI decisions.</p>
+          </article>
+          <article>
+            <span>03</span>
+            <h3>Development</h3>
+            <p>Placeholder process text describing frontend build, Shopify structure, and reusable sections.</p>
+          </article>
+          <article>
+            <span>04</span>
+            <h3>Testing</h3>
+            <p>Placeholder process text describing browser checks, responsive QA, accessibility review, and fixes.</p>
+          </article>
+          <article>
+            <span>05</span>
+            <h3>Launch</h3>
+            <p>Placeholder process text describing handoff, deployment, review, and post-launch refinement.</p>
+          </article>
+        </div>
+      </section>
+
+      <section class="case-section" aria-labelledby="results-title">
+        <div class="case-section-heading" data-reveal>
+          <p class="case-section-kicker">Results</p>
+          <h2 id="results-title">Results</h2>
+        </div>
+        <div class="results-grid" data-reveal-group>
+          <article>
+            <strong>+35%</strong>
+            <span>Conversion</span>
+          </article>
+          <article>
+            <strong>95</strong>
+            <span>Lighthouse</span>
+          </article>
+          <article>
+            <strong>Fast</strong>
+            <span>Load Times</span>
+          </article>
+          <article>
+            <strong>Responsive</strong>
+            <span>Across Devices</span>
+          </article>
+          <article>
+            <strong>SEO</strong>
+            <span>Optimized</span>
+          </article>
+        </div>
+      </section>
+
+      <section class="case-section case-reading" aria-labelledby="learned-title" data-reveal>
+        <p class="case-section-kicker">Reflection</p>
+        <h2 id="learned-title">What I Learned</h2>
+        <div class="case-copy">
+          <p>Placeholder reflection about the project lessons, tradeoffs, and technical decisions. This section can later describe what changed in your process, what you would refine further, and what the project taught you about ecommerce development.</p>
+        </div>
+      </section>
+
+      <section class="case-section next-project" aria-labelledby="next-title" data-reveal>
+        <p class="case-section-kicker">Next Project</p>
+        <a class="next-project-card" href="/projects/vegaspaulyc.html" data-cursor-label="View Next Project">
+          <div>
+            <h2 id="next-title">VegasPaulyC</h2>
+            <p>Placeholder description for the next project preview. Replace this with a short transition into the next case study.</p>
+          </div>
+          <span>View Next Project &nearr;</span>
+        </a>
       </section>
     </main>
 
     <script type="module" src="/src/scripts/shared/page-transition.js"></script>
-    <script type="module" src="/src/scripts/shared/smooth-scroll.js"></script>
     <script type="module" src="/src/scripts/shared/site-menu.js"></script>
+    <script type="module" src="/src/scripts/shared/cursor-label.js"></script>
+    <script type="module" src="/src/scripts/projects/case-study.js"></script>
   </body>
 </html>
