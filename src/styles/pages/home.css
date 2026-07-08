@@ -231,10 +231,6 @@ a {
   background-color: rgba(0, 0, 0, 0.8);
 }
 
-body.showreel-open .site-scrollbar {
-  opacity: 0;
-}
-
 @media (max-width: 900px) {
   nav,
   section,

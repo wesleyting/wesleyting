@@ -21,7 +21,8 @@
 
 html {
   overflow-y: auto;
-  scrollbar-width: none;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(243, 243, 239, 0.32) transparent;
 }
 
 body {
@@ -101,43 +102,24 @@ html[data-page-transition="pending"] .cursor-label {
 }
 
 ::-webkit-scrollbar {
-  display: none;
-  width: 0;
-  height: 0;
+  display: block;
+  width: 8px;
+  height: 8px;
 }
 
-.site-scrollbar {
-  position: fixed;
-  top: 8px;
-  right: 5px;
-  bottom: 8px;
-  z-index: 1050;
-  width: 4px;
-  opacity: 1;
-  pointer-events: none;
-  transition: opacity 0.25s ease;
+::-webkit-scrollbar-track {
+  background: transparent;
 }
 
-.site-scrollbar.is-hidden,
-body.intro-active .site-scrollbar {
-  opacity: 0;
+::-webkit-scrollbar-thumb {
+  background-color: rgba(243, 243, 239, 0.28);
+  border: 2px solid transparent;
+  border-radius: 999px;
+  background-clip: content-box;
 }
 
-.site-scrollbar-thumb {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  min-height: 32px;
-  border-radius: 2px;
-  background-color: var(--tone-500);
-  cursor: grab;
-  pointer-events: auto;
-  will-change: transform, height;
-}
-
-.site-scrollbar-thumb:active {
-  cursor: grabbing;
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(243, 243, 239, 0.44);
 }
 
 body::before,
