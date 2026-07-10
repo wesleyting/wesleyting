@@ -4,6 +4,20 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script>
+      if ("scrollRestoration" in history) {
+        history.scrollRestoration = "manual";
+      }
+      if (!window.location.hash) {
+        const resetProjectScroll = () => {
+          window.scrollTo(0, 0);
+          requestAnimationFrame(() => window.scrollTo(0, 0));
+          setTimeout(() => window.scrollTo(0, 0), 80);
+        };
+        resetProjectScroll();
+        window.addEventListener("DOMContentLoaded", resetProjectScroll, { once: true });
+        window.addEventListener("load", resetProjectScroll, { once: true });
+        window.addEventListener("pageshow", resetProjectScroll, { once: true });
+      }
       if (sessionStorage.getItem("page-transition-pending") === "true") {
         document.documentElement.dataset.pageTransition = "pending";
       }
@@ -20,7 +34,7 @@
     <link rel="stylesheet" href="/src/styles/components/site-menu.css" />
     <link rel="stylesheet" href="/src/styles/pages/project.css" />
   </head>
-  <body class="project-page" data-native-scroll>
+  <body class="project-page vegas-case" data-native-scroll>
     <div class="transition" aria-hidden="true">
       <div class="transition-overlay"></div>
     </div>
@@ -48,62 +62,92 @@
     </div>
 
     <main id="main">
-      <section class="case-hero" aria-labelledby="project-title">
+      <section class="case-hero vegas-hero" aria-labelledby="project-title">
+        <figure class="vegas-hero-banner" data-reveal>
+          <img src="/projects/vegaspaulyc/test-banner.png" alt="VegasPaulyC brand, homepage, and merch banner placeholder" />
+        </figure>
+
         <div class="case-hero-inner" data-reveal-group>
-          <p class="case-eyebrow">Case Study</p>
-          <h1 class="case-title" id="project-title">VegasPaulyC</h1>
-          <p class="case-subtitle">Turning a social audience into a global ecommerce business.</p>
-          <div class="case-hero-meta">
-            <p>Shopify Ecommerce • 2024-2025</p>
-            <p>Creator commerce, operations, fulfillment, and support systems.</p>
-          </div>
+          <p class="case-eyebrow vegas-year">2024&ndash;Present</p>
+          <h1 class="case-title vegas-title" id="project-title">VegasPaulyC</h1>
+          <p class="case-subtitle vegas-subtitle">Building the ecommerce foundation behind a creator-led brand.</p>
           <div class="case-hero-grid">
-            <div class="case-copy case-intro-copy">
-              <p>Vegas Pauly C had already built a large audience across TikTok and Instagram, with more than one million followers combined. What he did not have yet was the infrastructure to turn that audience into a business.</p>
-              <p>There was no website, no ecommerce store, no inventory system, no fulfillment workflow, and no clear operational process behind the scenes.</p>
-              <p>My role was to help build that foundation, not just by creating the website, but by setting up the systems that allowed his audience to become customers.</p>
+            <div class="case-copy case-intro-copy" data-reveal>
+              <p>Vegas Pauly C had already built a large audience across TikTok and Instagram, with more than one million followers combined. What he did not have yet was an official place for fans to buy products, submit inquiries, or connect with the brand beyond social media.</p>
+              <p>I helped build that foundation from the ground up &mdash; creating the Shopify store, setting up the systems behind it, and helping turn fan demand into a working ecommerce operation.</p>
             </div>
-            <dl class="case-details" aria-label="Project details">
+            <div class="vegas-kpis" aria-label="Project impact highlights" data-reveal-group>
+              <article>
+                <span>Audience</span>
+                <strong>1M+ followers</strong>
+                <p>Supported a creator-led launch for an existing social audience.</p>
+              </article>
+              <article>
+                <span>Commerce</span>
+                <strong>First official store</strong>
+                <p>Created the first dedicated place for fans to buy merchandise and submit inquiries.</p>
+              </article>
+              <article>
+                <span>Operations</span>
+                <strong>Built from scratch</strong>
+                <p>Set up the website, product flow, support channels, and fulfillment foundation.</p>
+              </article>
+            </div>
+            <dl class="case-details vegas-hero-details" aria-label="Project details" data-reveal>
               <div>
                 <dt>Role</dt>
-                <dd>Web Developer / Ecommerce Operations</dd>
+                <dd>Developer / Ecommerce Operations</dd>
               </div>
               <div>
-                <dt>Platform</dt>
-                <dd>Shopify</dd>
-              </div>
-              <div>
-                <dt>Scope</dt>
-                <dd>Website, ecommerce setup, fulfillment, customer support, operations</dd>
-              </div>
-              <div>
-                <dt>Year</dt>
-                <dd>2024-2025</dd>
+                <dt>Tech Stack</dt>
+                <dd>Shopify / Liquid / HTML / CSS / JavaScript / GSAP / Printful</dd>
               </div>
             </dl>
           </div>
         </div>
 
-        <figure class="case-image-placeholder case-hero-image" role="img" aria-label="Placeholder VegasPaulyC homepage desktop screenshot" data-reveal>
-          <span>Placeholder image</span>
-          <strong>VegasPaulyC homepage desktop screenshot</strong>
-        </figure>
       </section>
 
-      <section class="case-section case-reading" aria-labelledby="context-title" data-reveal>
-        <p class="case-section-kicker">Context</p>
-        <h2 id="context-title">From Online Presence to Real Business</h2>
-        <div class="case-copy">
-          <p>When the project started, the brand was mostly Pauly himself: his face, his name, his catchphrases, and the personality his audience already knew from social media.</p>
-          <p>There was no existing store or formal brand system to build from. The visual direction, merchandise, product setup, and ecommerce experience all had to be created from the ground up.</p>
-          <p>The goal was not simply to launch a merch store. The goal was to create a digital home for Pauly's brand, while giving fans an easy way to buy products, request experiences, and connect with the team.</p>
+      <section class="case-section vegas-context" aria-labelledby="context-title">
+        <div class="vegas-context-intro" data-reveal-group>
+          <p class="case-section-kicker">Context</p>
+          <h2 id="context-title">Building the Brand Foundation</h2>
+          <div class="case-copy">
+            <p>At the start, VegasPaulyC lived almost entirely through content: Pauly&rsquo;s face, name, catchphrases, and personality. I helped turn that recognition into an official digital home with a store, product system, inquiry path, and operational setup that could support real customers.</p>
+          </div>
+        </div>
+        <div class="vegas-context-breakdown" data-reveal-group>
+          <article>
+            <span>01</span>
+            <div>
+              <h3>Brand Direction</h3>
+              <p>The brand was mostly Pauly himself, so the website had to be built around what fans already recognized: his personality, catchphrases, and social presence.</p>
+              <p>I helped translate that into a web experience that felt like a personal brand destination first, not just a generic merch store.</p>
+            </div>
+          </article>
+          <article>
+            <span>02</span>
+            <div>
+              <h3>Commerce Foundation</h3>
+              <p>There was no existing store, product structure, or ecommerce workflow to build from.</p>
+              <p>I helped set up the Shopify foundation, product pages, merchandise flow, and the core structure needed to sell physical products online.</p>
+            </div>
+          </article>
+          <article>
+            <span>03</span>
+            <div>
+              <h3>Fan Connection</h3>
+              <p>Before the site, fans could follow and comment, but there was no clear place to buy merch, ask questions, or reach the team directly.</p>
+              <p>I helped create those pathways through the storefront, customer support email, contact forms, and inquiry flows for future fan experiences.</p>
+            </div>
+          </article>
         </div>
       </section>
 
       <section class="case-section case-media-break" data-reveal>
         <figure class="case-image-placeholder" role="img" aria-label="Placeholder logo, merch designs, or brand direction collage">
           <span>Placeholder image</span>
-          <strong>Logo, merch designs, or brand direction collage</strong>
+          <strong>VegasPaulyC logo, merch designs, or brand direction collage</strong>
         </figure>
       </section>
 

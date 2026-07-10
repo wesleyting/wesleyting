@@ -8,6 +8,31 @@
   --tone-400: hsl(0, 0%, 100%);
   --tone-500: #4c6b8b;
 
+  --text-primary: #ffffff;
+  --text-secondary: rgba(255, 255, 255, 0.78);
+  --text-muted: rgba(255, 255, 255, 0.62);
+  --text-faint: rgba(255, 255, 255, 0.38);
+
+  --line-soft: rgba(255, 255, 255, 0.16);
+  --line-strong: rgba(255, 255, 255, 0.28);
+
+  --fs-caption: clamp(0.78rem, 0.85vw, 0.88rem);
+  --fs-meta: clamp(0.9rem, 0.95vw, 1rem);
+  --fs-body: clamp(1.05rem, 1.25vw, 1.34rem);
+  --fs-body-compact: clamp(0.95rem, 1vw, 1.1rem);
+  --fs-lead: clamp(1.35rem, 2vw, 2.25rem);
+  --fs-card-title: clamp(1.45rem, 2vw, 2.35rem);
+  --fs-stat: clamp(1.9rem, 2.8vw, 3.25rem);
+  --fs-metric: clamp(2.2rem, 4vw, 4.5rem);
+  --fs-section-title: clamp(2.5rem, 4.5vw, 5.4rem);
+  --fs-page-title: clamp(3rem, 5.9vw, 6.6rem);
+  --fs-display: clamp(3.4rem, 8vw, 9rem);
+
+  --lh-tight: 1.02;
+  --lh-title: 0.9;
+  --lh-body: 1.62;
+  --lh-compact: 1.35;
+
   --radius: 1.5rem;
   --pad-desktop: 2rem;
   --pad-mobile: 1rem;

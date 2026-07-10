@@ -4,6 +4,20 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <script>
+      if ("scrollRestoration" in history) {
+        history.scrollRestoration = "manual";
+      }
+      if (!window.location.hash) {
+        const resetProjectScroll = () => {
+          window.scrollTo(0, 0);
+          requestAnimationFrame(() => window.scrollTo(0, 0));
+          setTimeout(() => window.scrollTo(0, 0), 80);
+        };
+        resetProjectScroll();
+        window.addEventListener("DOMContentLoaded", resetProjectScroll, { once: true });
+        window.addEventListener("load", resetProjectScroll, { once: true });
+        window.addEventListener("pageshow", resetProjectScroll, { once: true });
+      }
       if (sessionStorage.getItem("page-transition-pending") === "true") {
         document.documentElement.dataset.pageTransition = "pending";
       }

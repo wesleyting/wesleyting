@@ -1,7 +1,6 @@
 import gsap from "gsap";
 import { SplitText } from "gsap/SplitText";
 import { scrambleIn, scrambleOut, scrambleVisible } from "./scramble-text.js";
-import { lenis } from "./smooth-scroll.js";
 
 gsap.registerPlugin(SplitText);
 
@@ -133,9 +132,7 @@ function openMenu() {
   menuToggleBtn.classList.add("menu-open");
 
   // disable scrolling
-  if (lenis) {
-    lenis.stop();
-  }
+  window.lenis?.stop();
 
   gsap.to(navOverlay, {
     clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
@@ -200,9 +197,7 @@ function closeMenu() {
   menuToggleBtn.classList.remove("menu-open");
 
   // enable scrolling
-  if (lenis) {
-    lenis.start();
-  }
+  window.lenis?.start();
 
   // animate nav items out
   navItems.forEach((item, index) => {
