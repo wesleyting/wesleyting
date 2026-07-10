@@ -15,6 +15,9 @@ document.addEventListener("DOMContentLoaded", () => {
     titles: document.querySelectorAll(".video-title"),
   };
 
+  // Keep the showreel still until the homepage intro has fully finished.
+  heroVideos.forEach((video) => video.pause());
+
   const playHeroVideos = () => {
     heroVideos.forEach((video) => {
       video.play().catch(() => {});
@@ -29,7 +32,12 @@ document.addEventListener("DOMContentLoaded", () => {
   gsap.set(revealTargets.word, { autoAlpha: 0, y: 28, scale: 0.985 });
   gsap.set(revealTargets.statement, { autoAlpha: 0, y: 24 });
   gsap.set(revealTargets.meta, { autoAlpha: 0, y: 16 });
-  gsap.set(revealTargets.videos, { autoAlpha: 0, scale: 0.985 });
+  gsap.set(revealTargets.videos, {
+    autoAlpha: 0,
+    y: 28,
+    scale: 0.965,
+    clipPath: "inset(7% 0 7% 0 round 1.5rem)",
+  });
   gsap.set(revealTargets.titles, { autoAlpha: 0, y: 12 });
 
   let hasRevealed = false;
@@ -48,44 +56,46 @@ document.addEventListener("DOMContentLoaded", () => {
     gsap.timeline({
       defaults: { ease: "power3.out" },
     })
-      .call(playHeroVideos, null, 0.15)
       .to(document.body, {
         "--grain-opacity": 0.055,
         "--grid-opacity": 0.65,
-        duration: 1.1,
+        duration: 1.2,
         ease: "power2.out",
       }, 0)
       .to(revealTargets.nav, {
         autoAlpha: 1,
         y: 0,
-        duration: 0.7,
-      }, 0.08)
+        duration: 0.75,
+      }, 0.06)
       .to(revealTargets.word, {
         autoAlpha: 1,
         y: 0,
         scale: 1,
-        duration: 1,
-      }, 0.18)
+        duration: 1.05,
+      }, 0.14)
       .to(revealTargets.statement, {
         autoAlpha: 1,
         y: 0,
-        duration: 0.8,
-      }, 0.42)
+        duration: 0.85,
+      }, 0.4)
       .to(revealTargets.meta, {
         autoAlpha: 1,
         y: 0,
-        duration: 0.7,
-      }, 0.58)
+        duration: 0.75,
+      }, 0.56)
+      .call(playHeroVideos, null, 0.76)
       .to(revealTargets.videos, {
         autoAlpha: 1,
+        y: 0,
         scale: 1,
-        duration: 0.9,
-      }, 0.5)
+        clipPath: "inset(0% 0 0% 0 round 1.5rem)",
+        duration: 1.1,
+      }, 0.78)
       .to(revealTargets.titles, {
         autoAlpha: 1,
         y: 0,
-        duration: 0.65,
-      }, 0.72)
+        duration: 0.7,
+      }, 1.02)
       .call(forceHeroTextVisible);
   };
 
@@ -93,15 +103,19 @@ document.addEventListener("DOMContentLoaded", () => {
     revealHomepage();
   } else {
     window.addEventListener("preloader:complete", revealHomepage, { once: true });
-    window.addEventListener("load", () => {
-      window.setTimeout(revealHomepage, 1200);
-    }, { once: true });
-  }
 
-  window.setTimeout(() => {
-    if (!hasRevealed) revealHomepage();
-    forceHeroTextVisible();
-  }, 2800);
+    // If the completion event is missed for any reason, wait for the intro
+    // element itself to be removed instead of revealing on an arbitrary timer.
+    const intro = document.querySelector(".home-intro");
+    const introObserver = new MutationObserver(() => {
+      if (intro && !document.body.contains(intro)) {
+        introObserver.disconnect();
+        revealHomepage();
+      }
+    });
+
+    introObserver.observe(document.body, { childList: true });
+  }
 
   if (window.innerWidth < 900) return;
 
