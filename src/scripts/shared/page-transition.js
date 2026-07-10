@@ -91,7 +91,18 @@ if (overlay) {
 
   document.addEventListener("click", (event) => {
     const link = event.target.closest("a");
-    if (!link || !isInternalLink(link)) return;
+    if (
+      event.defaultPrevented ||
+      event.button !== 0 ||
+      event.metaKey ||
+      event.ctrlKey ||
+      event.shiftKey ||
+      event.altKey ||
+      !link ||
+      !isInternalLink(link)
+    ) {
+      return;
+    }
 
     const href = link.getAttribute("href");
 

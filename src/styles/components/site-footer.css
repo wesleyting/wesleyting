@@ -104,7 +104,7 @@ body.footer-active .site-footer {
 }
 
 .footer-links a:hover {
-  color: #7134ff;
+  color: #a989ff;
 }
 
 .footer-text {
@@ -135,7 +135,7 @@ body.footer-active .site-footer {
   color: #fff;
 }
 
-.footer-header h1 {
+.footer-header .footer-name {
   color: #fff;
   font-size: clamp(5rem, 15vw, 15rem);
   font-weight: 500;
@@ -187,7 +187,7 @@ body.footer-active .site-footer {
     gap: 1rem;
   }
 
-  .footer-header h1 {
+  .footer-header .footer-name {
     font-size: clamp(3rem, 14vw, 5rem);
     line-height: 0.95;
   }

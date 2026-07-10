@@ -24,7 +24,7 @@ nav .menu-toggle-btn {
 }
 
 nav .logo a,
-nav .menu-toggle-btn p {
+nav .menu-toggle-btn span {
   color: var(--tone-400);
   user-select: none;
 }
@@ -36,6 +36,11 @@ nav .logo a {
 
 nav .menu-toggle-btn {
   padding: 0;
+  appearance: none;
+  color: inherit;
+  background: transparent;
+  border: 0;
+  font: inherit;
 }
 
 nav .menu-toggle-btn-wrapper {
@@ -48,7 +53,7 @@ nav .menu-toggle-btn-wrapper {
   place-items: center;
 }
 
-nav .menu-toggle-btn p {
+nav .menu-toggle-btn-wrapper > span {
   position: absolute;
   inset: 0;
   display: grid;
@@ -151,7 +156,7 @@ nav .logo a span {
 }
 
 .nav-overlay .nav-items .nav-item a {
-  font-size: 5.5vw;
+  font-size: clamp(3.75rem, 5.5vw, 6.8rem);
   line-height: 0.9;
   color: var(--tone-400);
   user-select: none;
@@ -195,7 +200,7 @@ nav .logo a span {
   }
 
   .nav-overlay .nav-items .nav-item a {
-    font-size: 15vw;
+    font-size: clamp(3.25rem, 14vw, 7rem);
   }
 
   .nav-overlay .nav-footer {
@@ -209,5 +214,12 @@ nav .logo a span {
 
   .nav-overlay .nav-footer .container {
     padding: 1.5em;
+  }
+}
+
+@media (max-height: 720px) {
+  .nav-overlay .nav-items .nav-item a {
+    font-size: clamp(2.5rem, 9.5vh, 4.5rem);
+    line-height: 0.88;
   }
 }

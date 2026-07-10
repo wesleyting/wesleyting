@@ -7,10 +7,12 @@ gsap.registerPlugin(SplitText);
 let isMenuOpen = false;
 let isAnimating = false;
 let scrambleInstances = [];
+let lastFocusedElement = null;
+const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 function initializeMenuToggleText() {
   const wrapper = document.querySelector(".menu-toggle-btn-wrapper");
-  const primary = wrapper?.querySelector("p");
+  const primary = wrapper?.querySelector(":scope > span");
 
   if (!wrapper || !primary || wrapper.querySelector(".menu-toggle-text-secondary")) {
     return;
@@ -100,6 +102,8 @@ function addHoverScrambleEffect(link, type = "nav") {
 }
 
 function addNavItemHoverEffects() {
+  if (reduceMotion) return;
+
   const isMobile = window.innerWidth < 1000;
   if (isMobile) return;
 
@@ -128,17 +132,24 @@ function openMenu() {
   const navItems = document.querySelectorAll(".nav-item");
 
   isAnimating = true;
+  lastFocusedElement = document.activeElement;
   navOverlay.style.pointerEvents = "all";
+  navOverlay.inert = false;
+  navOverlay.setAttribute("aria-hidden", "false");
   menuToggleBtn.classList.add("menu-open");
+  menuToggleBtn.setAttribute("aria-expanded", "true");
+  menuToggleBtn.setAttribute("aria-label", "Close menu");
+  document.body.classList.add("menu-is-open");
 
   // disable scrolling
   window.lenis?.stop();
 
   gsap.to(navOverlay, {
     clipPath: "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)",
-    duration: 0.3,
+    duration: reduceMotion ? 0 : 0.3,
     onComplete: () => {
       isAnimating = false;
+      navOverlay.querySelector(".nav-item a")?.focus({ preventScroll: true });
     },
   });
 
@@ -150,6 +161,8 @@ function openMenu() {
     const link = item.querySelector("a");
     if (link) {
       gsap.set(item, { opacity: 1, transform: "translateY(0%)" });
+      if (reduceMotion) return;
+
       const scrambleInstance = scrambleIn(link, index * 0.1, {
         duration: 0.15,
         charDelay: 50,
@@ -166,7 +179,7 @@ function openMenu() {
   footerItems.forEach((footerItem) => {
     const links = footerItem.querySelectorAll("a");
     links.forEach((link) => {
-      if (link) {
+      if (link && !reduceMotion) {
         const scrambleInstance = scrambleIn(
           link,
           navItems.length * 0.1 + footerLinkIndex * 0.1,
@@ -187,7 +200,7 @@ function openMenu() {
   isMenuOpen = true;
 }
 
-function closeMenu() {
+function closeMenu({ restoreFocus = true } = {}) {
   const navOverlay = document.querySelector(".nav-overlay");
   const menuToggleBtn = document.querySelector(".menu-toggle-btn");
   const navItems = document.querySelectorAll(".nav-item");
@@ -195,6 +208,9 @@ function closeMenu() {
   isAnimating = true;
   navOverlay.style.pointerEvents = "none";
   menuToggleBtn.classList.remove("menu-open");
+  menuToggleBtn.setAttribute("aria-expanded", "false");
+  menuToggleBtn.setAttribute("aria-label", "Open menu");
+  document.body.classList.remove("menu-is-open");
 
   // enable scrolling
   window.lenis?.start();
@@ -202,7 +218,7 @@ function closeMenu() {
   // animate nav items out
   navItems.forEach((item, index) => {
     const link = item.querySelector("a");
-    if (link) {
+    if (link && !reduceMotion) {
       scrambleOut(link, index * 0.1);
     }
   });
@@ -213,7 +229,7 @@ function closeMenu() {
   footerItems.forEach((footerItem) => {
     const links = footerItem.querySelectorAll("a");
     links.forEach((link) => {
-      if (link) {
+      if (link && !reduceMotion) {
         scrambleOut(link, navItems.length * 0.1 + footerLinkIndex * 0.1);
         footerLinkIndex++;
       }
@@ -222,10 +238,15 @@ function closeMenu() {
 
   gsap.to(navOverlay, {
     clipPath: "polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%)",
-    duration: 0.3,
+    duration: reduceMotion ? 0 : 0.3,
     onComplete: () => {
       gsap.set(navItems, { opacity: 0, transform: "translateY(100%)" });
+      navOverlay.setAttribute("aria-hidden", "true");
+      navOverlay.inert = true;
       isAnimating = false;
+      if (restoreFocus && lastFocusedElement instanceof HTMLElement) {
+        lastFocusedElement.focus({ preventScroll: true });
+      }
     },
   });
 
@@ -239,6 +260,10 @@ document.fonts.ready.then(() => {
   const menuToggleBtn = document.querySelector(".menu-toggle-btn");
   const navOverlay = document.querySelector(".nav-overlay");
   const navItems = document.querySelectorAll(".nav-item");
+
+  if (!menuToggleBtn || !navOverlay) return;
+
+  navOverlay.inert = true;
 
   menuToggleBtn.addEventListener("click", () => {
     if (isAnimating) {
@@ -263,6 +288,36 @@ document.fonts.ready.then(() => {
 
     if (href.startsWith("#") || href.startsWith("mailto:")) {
       closeMenu();
+    }
+  });
+
+  document.addEventListener("keydown", (event) => {
+    if (!isMenuOpen) return;
+
+    if (event.key === "Escape") {
+      event.preventDefault();
+      closeMenu();
+      return;
+    }
+
+    if (event.key !== "Tab") return;
+
+    const focusable = [
+      menuToggleBtn,
+      ...navOverlay.querySelectorAll("a[href]"),
+    ].filter((element) => !element.hasAttribute("disabled"));
+
+    if (!focusable.length) return;
+
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+
+    if (event.shiftKey && document.activeElement === first) {
+      event.preventDefault();
+      last.focus();
+    } else if (!event.shiftKey && document.activeElement === last) {
+      event.preventDefault();
+      first.focus();
     }
   });
 });

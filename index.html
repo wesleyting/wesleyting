@@ -20,7 +20,7 @@
     <meta property="og:title" content="Wesley Ting | Frontend and Ecommerce Developer">
     <meta property="og:description" content="Responsive frontend and Shopify development for business websites that need to work well.">
     <meta property="og:type" content="website">
-    <meta property="og:image" content="/home/project-duuduu.png">
+    <meta property="og:image" content="/og.png">
     <meta name="twitter:card" content="summary_large_image">
     <link rel="icon" href="/favicon/favicon.ico" sizes="any" />
     <link rel="icon" href="/favicon/favicon.svg" type="image/svg+xml" />
@@ -83,15 +83,22 @@
         <div class="logo">
           <div class="logo-container"><a href="/">Wesley Ting</a></div>
         </div>
-        <div class="menu-toggle-btn">
-          <div class="menu-toggle-btn-wrapper"><p>Menu</p></div>
-        </div>
+        <button
+          class="menu-toggle-btn"
+          type="button"
+          aria-expanded="false"
+          aria-controls="site-menu"
+          aria-label="Open menu"
+        >
+          <span class="menu-toggle-btn-wrapper"><span>Menu</span></span>
+        </button>
     </nav>
 
-    <div class="nav-overlay">
+    <div class="nav-overlay" id="site-menu" aria-hidden="true">
       <div class="nav-items">
-        <div class="nav-item active"><a href="/">Home</a></div>
+        <div class="nav-item active"><a href="/" aria-current="page">Home</a></div>
         <div class="nav-item"><a href="#selected-work">Work</a></div>
+        <div class="nav-item"><a href="/about.html">About</a></div>
         <div class="nav-item"><a href="mailto:wesleytingdev@gmail.com">Contact</a></div>
       </div>
       <div class="nav-footer">
@@ -341,6 +348,7 @@
       <div class="footer-content">
         <nav class="footer-links" aria-label="Footer navigation">
           <a href="#selected-work">Work</a>
+          <a href="/about.html">About</a>
           <a href="https://github.com/wesleyting" target="_blank" rel="noopener">GitHub</a>
           <a href="mailto:wesleytingdev@gmail.com">Contact</a>
         </nav>
@@ -354,9 +362,9 @@
         </div>
       </div>
 
-      <div class="footer-header">
-        <h1>Wesley</h1>
-        <h1>Ting</h1>
+      <div class="footer-header" aria-label="Wesley Ting">
+        <p class="footer-name">Wesley</p>
+        <p class="footer-name">Ting</p>
       </div>
     </footer>
 

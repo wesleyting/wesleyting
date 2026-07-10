@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (!footer || !revealer) return;
 
   const splitHeadingChars = () => {
-    const headings = document.querySelectorAll(".footer-header h1");
+    const headings = document.querySelectorAll(".footer-header .footer-name");
     const chars = [];
 
     headings.forEach((heading) => {
