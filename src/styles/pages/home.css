@@ -298,6 +298,10 @@ a {
     align-items: flex-start;
     gap: 0.4em;
   }
+
+  .hero-copy p:last-child {
+    display: none;
+  }
   /* 5) Make the mobile video title smaller */
   .video-container .video-title { margin-top: 0.75em; }
   .video-container .video-title p {

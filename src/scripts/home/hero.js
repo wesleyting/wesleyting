@@ -20,6 +20,7 @@ document.addEventListener("DOMContentLoaded", () => {
   let videoMayPlay = false;
   let entranceTimeline = null;
   let playbackRecoveryFrame = 0;
+  let playbackHealthTimer = 0;
   let resizeRecoveryTimer = 0;
 
   heroVideo?.pause();
@@ -72,14 +73,33 @@ document.addEventListener("DOMContentLoaded", () => {
     ScrollTrigger.refresh(true);
   };
 
+  const hardRecoverHeroPlayback = (resumeTime) => {
+    if (!heroVideo || !videoMayPlay || document.hidden) return;
+
+    heroVideo.pause();
+
+    const resumeAfterReload = () => {
+      if (!videoMayPlay || document.hidden) return;
+
+      if (Number.isFinite(resumeTime) && Number.isFinite(heroVideo.duration)) {
+        heroVideo.currentTime = Math.min(
+          resumeTime,
+          Math.max(0, heroVideo.duration - 0.05),
+        );
+      }
+
+      heroVideo.play().catch(() => {});
+    };
+
+    heroVideo.addEventListener("loadedmetadata", resumeAfterReload, {
+      once: true,
+    });
+    heroVideo.load();
+  };
+
   const finishEntrance = () => {
     gsap.set(revealTargets.navItems, { autoAlpha: 1, y: 0 });
-    gsap.set(revealTargets.word, {
-      autoAlpha: 1,
-      y: 0,
-      scale: 1,
-      clipPath: "inset(0% 0 0% 0)",
-    });
+    gsap.set(revealTargets.word, { autoAlpha: 1 });
     gsap.set(revealTargets.statement, {
       autoAlpha: 1,
       y: 0,
@@ -110,19 +130,9 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   };
 
-  gsap.set(document.body, {
-    "--grain-opacity": 0,
-    "--grid-opacity": 0,
-  });
-
   if (!reduceMotion) {
     gsap.set(revealTargets.navItems, { autoAlpha: 0, y: -26 });
-    gsap.set(revealTargets.word, {
-      autoAlpha: 0,
-      y: 24,
-      scale: 0.99,
-      clipPath: "inset(100% 0 0% 0)",
-    });
+    gsap.set(revealTargets.word, { autoAlpha: 0 });
     gsap.set(revealTargets.statement, {
       autoAlpha: 0,
       y: 26,
@@ -147,10 +157,6 @@ document.addEventListener("DOMContentLoaded", () => {
     hasRevealed = true;
 
     if (reduceMotion) {
-      gsap.set(document.body, {
-        "--grain-opacity": 0.055,
-        "--grid-opacity": 0.65,
-      });
       finishEntrance();
       return;
     }
@@ -161,16 +167,6 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     entranceTimeline
-      .to(
-        document.body,
-        {
-          "--grain-opacity": 0.055,
-          "--grid-opacity": 0.65,
-          duration: 1,
-          ease: "power2.out",
-        },
-        0,
-      )
       .to(
         revealTargets.navItems,
         {
@@ -185,13 +181,10 @@ document.addEventListener("DOMContentLoaded", () => {
         revealTargets.word,
         {
           autoAlpha: 1,
-          y: 0,
-          scale: 1,
-          clipPath: "inset(0% 0 0% 0)",
-          duration: 0.9,
-          ease: "power4.out",
+          duration: 0.85,
+          ease: "power2.out",
         },
-        0.1,
+        0.06,
       )
       .to(
         revealTargets.statement,
@@ -201,7 +194,7 @@ document.addEventListener("DOMContentLoaded", () => {
           filter: "blur(0px)",
           duration: 0.74,
         },
-        0.34,
+        0.14,
       )
       .to(
         revealTargets.metaItems,
@@ -213,12 +206,12 @@ document.addEventListener("DOMContentLoaded", () => {
           stagger: 0.08,
           ease: "power2.out",
         },
-        0.54,
+        0.32,
       )
       .call(() => {
         videoMayPlay = true;
         syncHeroPlayback();
-      }, null, 0.7)
+      }, null, 0.5)
       .to(
         revealTargets.video,
         {
@@ -228,7 +221,7 @@ document.addEventListener("DOMContentLoaded", () => {
           clipPath: "inset(0% 0 0% 0 round 1.5rem)",
           duration: 0.78,
         },
-        0.78,
+        0.56,
       )
       .to(
         revealTargets.titleItems,
@@ -239,7 +232,7 @@ document.addEventListener("DOMContentLoaded", () => {
           stagger: 0.06,
           ease: "power2.out",
         },
-        0.96,
+        0.74,
       );
   };
 
@@ -265,9 +258,22 @@ document.addEventListener("DOMContentLoaded", () => {
 
   const queueResizeRecovery = () => {
     window.clearTimeout(resizeRecoveryTimer);
+    window.clearTimeout(playbackHealthTimer);
     resizeRecoveryTimer = window.setTimeout(() => {
       refreshPageGeometry();
+      const playbackCheckpoint = heroVideo?.currentTime ?? 0;
       syncHeroPlayback({ restart: true });
+
+      playbackHealthTimer = window.setTimeout(() => {
+        if (!heroVideo || !videoMayPlay || document.hidden) return;
+
+        const playbackAdvanced =
+          Math.abs(heroVideo.currentTime - playbackCheckpoint) > 0.08;
+
+        if (!playbackAdvanced) {
+          hardRecoverHeroPlayback(playbackCheckpoint);
+        }
+      }, 900);
     }, 180);
   };
 
@@ -280,6 +286,7 @@ document.addEventListener("DOMContentLoaded", () => {
   });
   window.addEventListener("pagehide", () => {
     window.clearTimeout(resizeRecoveryTimer);
+    window.clearTimeout(playbackHealthTimer);
     cancelAnimationFrame(playbackRecoveryFrame);
     heroVideo?.pause();
   });
