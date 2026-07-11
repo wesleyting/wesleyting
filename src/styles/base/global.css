@@ -72,15 +72,6 @@ body.intro-active {
   overflow: hidden;
 }
 
-body.intro-active,
-body.intro-active *,
-body.transition-active,
-body.transition-active *,
-html[data-page-transition="pending"],
-html[data-page-transition="pending"] * {
-  cursor: none !important;
-}
-
 .cursor-label {
   position: fixed;
   top: 0;

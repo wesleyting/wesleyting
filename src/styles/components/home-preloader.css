@@ -6,11 +6,6 @@
   place-items: center;
   background-color: var(--tone-100);
   pointer-events: all;
-  cursor: none;
-}
-
-.home-intro * {
-  cursor: none;
 }
 
 .home-intro-logo {
