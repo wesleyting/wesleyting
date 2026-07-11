@@ -112,34 +112,21 @@ a {
   margin: 0 auto;
 }
 
-.video-container-desktop {
+.video-container {
   position: relative;
   z-index: 42;
-  /* Change -105% to a fixed pixel value or 0 if possible, 
-     but if you need the effect, keep it and we will fix it in JS */
-  transform: translateY(-105%) scale(0.25); 
   display: flex;
   flex-direction: column;
   gap: 2em;
   will-change: transform;
-  /* Add this to prevent layout jumping */
-  margin-bottom: 0; 
+  margin-bottom: 0;
 }
 
-.video-container-desktop .video-title p {
+.video-container .video-title p {
   position: relative;
   z-index: 43;
   font-size: 78px;
   font-weight: 500;
-}
-
-.video-container-mobile {
-  position: relative;
-  z-index: 20;
-  display: none;
-  width: 100%;
-  max-width: 800px;
-  margin: 0 auto;
 }
 
 .video-preview {
@@ -247,14 +234,14 @@ a {
     font-size: 19vw;
   }
 
-  .video-container-desktop {
-    display: none;
-  }
-
-  .video-container-mobile {
+  .video-container {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
     display: flex;
     flex-direction: column-reverse;
     gap: 1em;
+    transform: none;
   }
 }
 
@@ -312,8 +299,8 @@ a {
     gap: 0.4em;
   }
   /* 5) Make the mobile video title smaller */
-  .video-container-mobile .video-title { margin-top: 0.75em; }
-  .video-container-mobile .video-title p {
+  .video-container .video-title { margin-top: 0.75em; }
+  .video-container .video-title p {
     font-size: 22px !important;
   }
 

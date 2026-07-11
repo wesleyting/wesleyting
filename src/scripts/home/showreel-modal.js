@@ -32,6 +32,9 @@ document.addEventListener("DOMContentLoaded", () => {
     document.body.classList.add("showreel-open");
     window.lenis?.stop();
     heroVideos.forEach((heroVideo) => heroVideo.pause());
+    window.dispatchEvent(new CustomEvent("showreel:statechange", {
+      detail: { open: true },
+    }));
     modal.classList.add("is-open");
 
     gsap.timeline()
@@ -66,7 +69,9 @@ document.addEventListener("DOMContentLoaded", () => {
         modal.classList.remove("is-open");
         document.body.classList.remove("showreel-open");
         window.lenis?.start();
-        heroVideos.forEach((heroVideo) => heroVideo.play().catch(() => {}));
+        window.dispatchEvent(new CustomEvent("showreel:statechange", {
+          detail: { open: false },
+        }));
       },
     })
       .to(dialog, {

@@ -4,6 +4,16 @@ document.addEventListener("DOMContentLoaded", () => {
   const intro = document.querySelector(".home-intro");
   if (!intro) return;
 
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    intro.remove();
+    document.body.classList.remove("intro-active");
+    window.__homepageReady = true;
+    requestAnimationFrame(() => {
+      window.dispatchEvent(new Event("preloader:complete"));
+    });
+    return;
+  }
+
   if (window.__arrivedViaTransition) {
     intro.remove();
     requestAnimationFrame(() => {
@@ -32,7 +42,6 @@ document.addEventListener("DOMContentLoaded", () => {
   gsap.timeline({
     onComplete: () => {
       intro.remove();
-      document.body.classList.remove("intro-active");
       window.__homepageReady = true;
       window.dispatchEvent(new Event("preloader:complete"));
     },
