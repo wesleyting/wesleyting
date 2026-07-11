@@ -61,6 +61,10 @@ document.addEventListener("DOMContentLoaded", () => {
       ease: "power2.out",
       stagger: 0.05,
     })
+    .call(() => {
+      intro.classList.add("is-complete");
+      document.body.classList.remove("intro-active");
+    })
     .to(intro, {
       autoAlpha: 0,
       duration: 0.6,
