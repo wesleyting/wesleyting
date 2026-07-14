@@ -2,6 +2,7 @@ import gsap from "gsap";
 
 const TRANSITION_KEY = "page-transition-pending";
 const overlay = document.querySelector(".transition-overlay");
+const DEPARTURE_COVER_SELECTOR = "[data-page-transition-departure]";
 let isNavigating = false;
 
 function resetOverlay() {
@@ -9,9 +10,14 @@ function resetOverlay() {
   gsap.set(overlay, { yPercent: 100 });
 }
 
+function removeDepartureCovers() {
+  document.querySelectorAll(DEPARTURE_COVER_SELECTOR).forEach((cover) => cover.remove());
+}
+
 function coverCurrentPage() {
   document.body.classList.add("transition-active");
   const departureCover = document.createElement("div");
+  departureCover.dataset.pageTransitionDeparture = "";
 
   Object.assign(departureCover.style, {
     position: "fixed",
@@ -127,6 +133,7 @@ if (overlay) {
     if (!event.persisted) return;
 
     isNavigating = false;
+    removeDepartureCovers();
     document.body.classList.remove("transition-active");
     sessionStorage.removeItem(TRANSITION_KEY);
     delete document.documentElement.dataset.pageTransition;

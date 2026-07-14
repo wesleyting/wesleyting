@@ -66,3 +66,19 @@ test("the shared menu opens and closes with the keyboard", async ({ page }) => {
 
   expect(browserErrors).toEqual([]);
 });
+
+test("browser back restores the home page after a transition", async ({ page }) => {
+  const browserErrors = collectBrowserErrors(page);
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/", { waitUntil: "domcontentloaded" });
+
+  await page.locator("#project-card-1").click();
+  await page.waitForURL("**/projects/duuduu-mattress.html");
+  await expect(page.locator("body")).not.toHaveClass(/transition-active/);
+
+  await page.goBack({ waitUntil: "domcontentloaded" });
+  await expect(page).toHaveURL(/\/$/);
+  await expect(page.locator("[data-page-transition-departure]")).toHaveCount(0);
+  await expect(page.locator("body")).not.toHaveClass(/transition-active/);
+  expect(browserErrors).toEqual([]);
+});
