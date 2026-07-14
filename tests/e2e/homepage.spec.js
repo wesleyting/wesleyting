@@ -19,11 +19,17 @@ function collectBrowserErrors(page) {
   return errors;
 }
 
-async function installEntranceMonitor(page) {
-  await page.addInitScript(() => {
+async function installEntranceMonitor(page, { skipIntro = false } = {}) {
+  await page.addInitScript(({ shouldSkipIntro }) => {
+    if (shouldSkipIntro) {
+      sessionStorage.setItem("page-transition-pending", "true");
+    }
+
     window.__portfolioTest = {
       events: [],
       heroPlayCalls: [],
+      heroLoadCalls: [],
+      heroSeekingEvents: [],
     };
 
     window.addEventListener("preloader:complete", () => {
@@ -51,7 +57,31 @@ async function installEntranceMonitor(page) {
 
       return originalPlay.apply(this, args);
     };
-  });
+
+    const originalLoad = HTMLMediaElement.prototype.load;
+    HTMLMediaElement.prototype.load = function (...args) {
+      if (this.classList?.contains("hero-video")) {
+        window.__portfolioTest.heroLoadCalls.push({
+          time: performance.now(),
+        });
+      }
+
+      return originalLoad.apply(this, args);
+    };
+
+    document.addEventListener(
+      "seeking",
+      (event) => {
+        if (event.target?.classList?.contains("hero-video")) {
+          window.__portfolioTest.heroSeekingEvents.push({
+            time: performance.now(),
+            currentTime: event.target.currentTime,
+          });
+        }
+      },
+      true,
+    );
+  }, { shouldSkipIntro: skipIntro });
 }
 
 async function waitForHomepageReveal(page) {
@@ -70,14 +100,34 @@ async function waitForHomepageReveal(page) {
 
 async function expectHeroVideoToAdvance(page, minimumAdvance = 0.12) {
   const heroVideo = page.locator(".hero-video");
-  const startingTime = await heroVideo.evaluate((video) => video.currentTime);
+  const startingState = await heroVideo.evaluate((video) => ({
+    currentTime: video.currentTime,
+    duration: video.duration,
+    frames: video.getVideoPlaybackQuality?.().totalVideoFrames ?? null,
+  }));
 
   await expect
     .poll(
-      () => heroVideo.evaluate((video) => video.currentTime),
+      () =>
+        heroVideo.evaluate(
+          (video, { start, minimum }) => {
+            const currentFrames =
+              video.getVideoPlaybackQuality?.().totalVideoFrames ?? null;
+            const framesAdvanced =
+              start.frames !== null &&
+              currentFrames !== null &&
+              currentFrames >= start.frames + 3;
+            const timeAdvanced = video.currentTime >= start.currentTime + minimum;
+            const loopedNaturally =
+              start.duration - start.currentTime < 1 && video.currentTime < 1;
+
+            return framesAdvanced || timeAdvanced || loopedNaturally;
+          },
+          { start: startingState, minimum: minimumAdvance },
+        ),
       { timeout: 4_000 },
     )
-    .toBeGreaterThan(startingTime + minimumAdvance);
+    .toBe(true);
 }
 
 test("the loader finishes before the hero video and reveal begin", async ({
@@ -154,6 +204,12 @@ test("the hero video survives mobile to desktop to mobile resizing", async ({
   await expect(scrollHint).toBeHidden();
   await expectHeroVideoToAdvance(page);
 
+  const mediaCallsBeforeResize = await page.evaluate(() => ({
+    play: window.__portfolioTest.heroPlayCalls.length,
+    load: window.__portfolioTest.heroLoadCalls.length,
+    seeking: window.__portfolioTest.heroSeekingEvents.length,
+  }));
+
   await page.setViewportSize(desktopViewport);
   await expect(scrollHint).toBeVisible();
   await expect
@@ -194,6 +250,137 @@ test("the hero video survives mobile to desktop to mobile resizing", async ({
   expect(mobileVideoBox.width / mobileVideoBox.height).toBeLessThan(1.85);
 
   await expectHeroVideoToAdvance(page);
+  expect(
+    await page.evaluate(() => ({
+      play: window.__portfolioTest.heroPlayCalls.length,
+      load: window.__portfolioTest.heroLoadCalls.length,
+      seeking: window.__portfolioTest.heroSeekingEvents.length,
+    })),
+  ).toEqual(mediaCallsBeforeResize);
+  expect(browserErrors).toEqual([]);
+});
+
+test("the hero video plays continuously through a complete loop", async ({
+  page,
+}) => {
+  test.setTimeout(40_000);
+  const browserErrors = collectBrowserErrors(page);
+  await installEntranceMonitor(page, { skipIntro: true });
+
+  await page.goto("/", { waitUntil: "domcontentloaded" });
+  await waitForHomepageReveal(page);
+
+  const heroVideo = page.locator(".hero-video");
+  let previous = await heroVideo.evaluate((video) => ({
+    currentTime: video.currentTime,
+    duration: video.duration,
+    paused: video.paused,
+    frames: video.getVideoPlaybackQuality?.().totalVideoFrames ?? null,
+    error: video.error?.message ?? null,
+  }));
+
+  expect(previous.duration).toBeGreaterThan(20);
+  expect(previous.paused).toBe(false);
+
+  let loops = 0;
+  let stagnantSamples = 0;
+  let longestStagnantRun = 0;
+  const sampleCount = Math.ceil(previous.duration) + 3;
+
+  for (let sample = 0; sample < sampleCount; sample += 1) {
+    await page.waitForTimeout(1_000);
+
+    const current = await heroVideo.evaluate((video) => ({
+      currentTime: video.currentTime,
+      paused: video.paused,
+      frames: video.getVideoPlaybackQuality?.().totalVideoFrames ?? null,
+      error: video.error?.message ?? null,
+    }));
+    const looped = current.currentTime < previous.currentTime - 0.5;
+    const timeAdvanced =
+      looped || current.currentTime > previous.currentTime + 0.25;
+    const framesAdvanced =
+      current.frames === null ||
+      previous.frames === null ||
+      current.frames > previous.frames + 5;
+
+    if (looped) loops += 1;
+    stagnantSamples = timeAdvanced && framesAdvanced ? 0 : stagnantSamples + 1;
+    longestStagnantRun = Math.max(longestStagnantRun, stagnantSamples);
+
+    expect(current.paused).toBe(false);
+    expect(current.error).toBeNull();
+    previous = current;
+  }
+
+  expect(loops).toBeGreaterThanOrEqual(1);
+  expect(longestStagnantRun).toBeLessThanOrEqual(1);
+  expect(browserErrors).toEqual([]);
+});
+
+test("the showreel modal pauses and then resumes the hero video", async ({
+  page,
+}) => {
+  const browserErrors = collectBrowserErrors(page);
+  await installEntranceMonitor(page, { skipIntro: true });
+
+  await page.goto("/", { waitUntil: "domcontentloaded" });
+  await waitForHomepageReveal(page);
+  await expectHeroVideoToAdvance(page);
+
+  const heroVideo = page.locator(".hero-video");
+  await page.locator(".video-preview").click();
+  await expect(page.locator("body")).toHaveClass(/showreel-open/);
+  await expect
+    .poll(() => heroVideo.evaluate((video) => video.paused))
+    .toBe(true);
+
+  const pausedAt = await heroVideo.evaluate((video) => video.currentTime);
+  await page.waitForTimeout(600);
+  const stillPausedAt = await heroVideo.evaluate((video) => video.currentTime);
+  expect(Math.abs(stillPausedAt - pausedAt)).toBeLessThan(0.05);
+
+  await page.getByRole("button", { name: "Close showreel" }).click();
+  await expect(page.locator("body")).not.toHaveClass(/showreel-open/);
+  await expectHeroVideoToAdvance(page);
+
+  expect(browserErrors).toEqual([]);
+});
+
+test("the hero pauses when hidden and resumes when visible", async ({ page }) => {
+  const browserErrors = collectBrowserErrors(page);
+  await installEntranceMonitor(page, { skipIntro: true });
+
+  await page.goto("/", { waitUntil: "domcontentloaded" });
+  await waitForHomepageReveal(page);
+  await expectHeroVideoToAdvance(page);
+
+  const heroVideo = page.locator(".hero-video");
+  await page.evaluate(() => {
+    Object.defineProperty(document, "hidden", {
+      configurable: true,
+      value: true,
+    });
+    document.dispatchEvent(new Event("visibilitychange"));
+  });
+  await expect
+    .poll(() => heroVideo.evaluate((video) => video.paused))
+    .toBe(true);
+
+  const pausedAt = await heroVideo.evaluate((video) => video.currentTime);
+  await page.waitForTimeout(600);
+  const stillPausedAt = await heroVideo.evaluate((video) => video.currentTime);
+  expect(Math.abs(stillPausedAt - pausedAt)).toBeLessThan(0.05);
+
+  await page.evaluate(() => {
+    Object.defineProperty(document, "hidden", {
+      configurable: true,
+      value: false,
+    });
+    document.dispatchEvent(new Event("visibilitychange"));
+  });
+  await expectHeroVideoToAdvance(page);
+
   expect(browserErrors).toEqual([]);
 });
 
@@ -205,4 +392,12 @@ test("mobile keeps the location but hides the scroll prompt", async ({ page }) =
 
   await expect(page.getByText("Based in Vancouver, BC.")).toBeVisible();
   await expect(page.getByText("Scroll to explore")).toBeHidden();
+
+  const heroVideo = page.locator(".hero-video");
+  await expect
+    .poll(() => heroVideo.evaluate((video) => video.paused))
+    .toBe(true);
+  expect(
+    await heroVideo.evaluate((video) => video.currentTime),
+  ).toBeLessThan(0.1);
 });

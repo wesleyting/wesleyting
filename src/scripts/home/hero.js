@@ -19,13 +19,11 @@ document.addEventListener("DOMContentLoaded", () => {
   let hasRevealed = false;
   let videoMayPlay = false;
   let entranceTimeline = null;
-  let playbackRecoveryFrame = 0;
-  let playbackHealthTimer = 0;
-  let resizeRecoveryTimer = 0;
+  let resizeRefreshTimer = 0;
 
   heroVideo?.pause();
 
-  const syncHeroPlayback = ({ restart = false } = {}) => {
+  const syncHeroPlayback = () => {
     if (!heroVideo) return;
 
     const shouldPlay =
@@ -34,67 +32,19 @@ document.addEventListener("DOMContentLoaded", () => {
       !document.hidden &&
       !document.body.classList.contains("showreel-open");
 
-    cancelAnimationFrame(playbackRecoveryFrame);
-
     if (!shouldPlay) {
-      heroVideo.pause();
+      if (!heroVideo.paused) heroVideo.pause();
       return;
     }
 
-    if (!restart) {
+    if (heroVideo.paused || heroVideo.ended) {
       heroVideo.play().catch(() => {});
-      return;
     }
-
-    const resumeTime = heroVideo.currentTime;
-    heroVideo.pause();
-
-    playbackRecoveryFrame = requestAnimationFrame(() => {
-      const stillShouldPlay =
-        videoMayPlay &&
-        !document.hidden &&
-        !document.body.classList.contains("showreel-open");
-
-      if (!stillShouldPlay) return;
-
-      if (
-        Number.isFinite(resumeTime) &&
-        heroVideo.readyState >= HTMLMediaElement.HAVE_METADATA
-      ) {
-        heroVideo.currentTime = resumeTime;
-      }
-
-      heroVideo.play().catch(() => {});
-    });
   };
 
   const refreshPageGeometry = () => {
     window.lenis?.resize?.();
     ScrollTrigger.refresh(true);
-  };
-
-  const hardRecoverHeroPlayback = (resumeTime) => {
-    if (!heroVideo || !videoMayPlay || document.hidden) return;
-
-    heroVideo.pause();
-
-    const resumeAfterReload = () => {
-      if (!videoMayPlay || document.hidden) return;
-
-      if (Number.isFinite(resumeTime) && Number.isFinite(heroVideo.duration)) {
-        heroVideo.currentTime = Math.min(
-          resumeTime,
-          Math.max(0, heroVideo.duration - 0.05),
-        );
-      }
-
-      heroVideo.play().catch(() => {});
-    };
-
-    heroVideo.addEventListener("loadedmetadata", resumeAfterReload, {
-      once: true,
-    });
-    heroVideo.load();
   };
 
   const finishEntrance = () => {
@@ -256,43 +206,21 @@ document.addEventListener("DOMContentLoaded", () => {
     introObserver.observe(document.body, { childList: true });
   }
 
-  const queueResizeRecovery = () => {
-    window.clearTimeout(resizeRecoveryTimer);
-    window.clearTimeout(playbackHealthTimer);
-    resizeRecoveryTimer = window.setTimeout(() => {
+  const queueResizeRefresh = () => {
+    window.clearTimeout(resizeRefreshTimer);
+    resizeRefreshTimer = window.setTimeout(() => {
       refreshPageGeometry();
-      const playbackCheckpoint = heroVideo?.currentTime ?? 0;
-      syncHeroPlayback({ restart: true });
-
-      playbackHealthTimer = window.setTimeout(() => {
-        if (!heroVideo || !videoMayPlay || document.hidden) return;
-
-        const playbackAdvanced =
-          Math.abs(heroVideo.currentTime - playbackCheckpoint) > 0.08;
-
-        if (!playbackAdvanced) {
-          hardRecoverHeroPlayback(playbackCheckpoint);
-        }
-      }, 900);
     }, 180);
   };
 
-  window.addEventListener("resize", queueResizeRecovery);
-  document.addEventListener("visibilitychange", () => {
-    syncHeroPlayback({ restart: !document.hidden });
-  });
-  window.addEventListener("pageshow", () => {
-    syncHeroPlayback({ restart: true });
-  });
+  window.addEventListener("resize", queueResizeRefresh);
+  document.addEventListener("visibilitychange", syncHeroPlayback);
+  window.addEventListener("pageshow", syncHeroPlayback);
   window.addEventListener("pagehide", () => {
-    window.clearTimeout(resizeRecoveryTimer);
-    window.clearTimeout(playbackHealthTimer);
-    cancelAnimationFrame(playbackRecoveryFrame);
+    window.clearTimeout(resizeRefreshTimer);
     heroVideo?.pause();
   });
-  window.addEventListener("showreel:statechange", (event) => {
-    syncHeroPlayback({ restart: event.detail?.open === false });
-  });
+  window.addEventListener("showreel:statechange", syncHeroPlayback);
 
   const desktopMotion = gsap.matchMedia();
 

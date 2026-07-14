@@ -2,7 +2,6 @@ import gsap from "gsap";
 
 document.addEventListener("DOMContentLoaded", () => {
   const previews = document.querySelectorAll(".video-preview[data-cursor-label]");
-  const heroVideos = document.querySelectorAll(".hero-video");
 
   if (!previews.length) return;
 
@@ -14,9 +13,7 @@ document.addEventListener("DOMContentLoaded", () => {
   modal.innerHTML = `
     <div class="showreel-modal-dialog">
       <button class="showreel-modal-close" type="button" aria-label="Close showreel">&times;</button>
-      <video class="showreel-modal-video" controls playsinline preload="metadata">
-        <source src="/home/video.mp4" type="video/mp4" />
-      </video>
+      <video class="showreel-modal-video" controls playsinline preload="none"></video>
     </div>
   `;
   document.body.appendChild(modal);
@@ -31,7 +28,6 @@ document.addEventListener("DOMContentLoaded", () => {
     isOpen = true;
     document.body.classList.add("showreel-open");
     window.lenis?.stop();
-    heroVideos.forEach((heroVideo) => heroVideo.pause());
     window.dispatchEvent(new CustomEvent("showreel:statechange", {
       detail: { open: true },
     }));
@@ -55,6 +51,7 @@ document.addEventListener("DOMContentLoaded", () => {
         0.05,
       );
 
+    if (!video.src) video.src = "/home/video.mp4";
     video.play().catch(() => {});
     closeButton.focus({ preventScroll: true });
   };
