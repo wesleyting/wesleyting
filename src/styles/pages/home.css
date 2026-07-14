@@ -689,13 +689,13 @@ img {
 
   .project-card {
     width: calc(100% - 2rem);
-    min-height: 82svh;
+    min-height: 74svh;
     height: auto;
     padding: 1.55rem 1.25rem 1.55rem;
     display: grid;
     grid-template-rows: auto 1fr auto;
     align-content: stretch;
-    gap: clamp(1rem, 2.4svh, 1.45rem);
+    gap: clamp(0.8rem, 2svh, 1.1rem);
     overflow: hidden;
   }
 
@@ -781,19 +781,22 @@ img {
     grid-row: 3;
     align-self: end;
     width: calc(100% + 6rem);
+    height: auto;
     min-height: 0;
+    align-items: flex-start;
     gap: clamp(0.65rem, 2.5vw, 0.9rem);
     overflow: hidden;
   }
 
   .project-card-shot {
-    flex: 0 0 clamp(138px, 31.5vw, 190px);
+    flex: 0 0 clamp(220px, 70vw, 285px);
+    aspect-ratio: 3913 / 3094;
     border-radius: 6px;
   }
 
   .project-card-shot img {
     object-fit: contain;
-    background-color: #20222b;
+    background-color: transparent;
   }
 
   .project-card-shot:nth-child(n + 4) {
