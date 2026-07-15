@@ -82,3 +82,21 @@ test("browser back restores the home page after a transition", async ({ page }) 
   await expect(page.locator("body")).not.toHaveClass(/transition-active/);
   expect(browserErrors).toEqual([]);
 });
+
+test("project screenshots open in the image viewer", async ({ page }) => {
+  const browserErrors = collectBrowserErrors(page);
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/projects/vegaspaulyc.html", { waitUntil: "domcontentloaded" });
+
+  const lightbox = page.locator(".project-lightbox");
+  await expect(lightbox).toHaveCount(1);
+  await page.locator(".commerce-card--product .commerce-card-content").dispatchEvent("click");
+  await expect(lightbox).toHaveClass(/is-open/);
+  await expect(lightbox.locator(".project-lightbox-image")).toHaveAttribute("src", /product-page-variants\.png/);
+
+  await page.keyboard.press("ArrowRight");
+  await expect(lightbox.locator(".project-lightbox-image")).toHaveAttribute("src", /printful-shopify-sync\.png/);
+  await page.keyboard.press("Escape");
+  await expect(lightbox).not.toHaveClass(/is-open/);
+  expect(browserErrors).toEqual([]);
+});
