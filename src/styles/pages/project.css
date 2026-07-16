@@ -240,6 +240,21 @@
   letter-spacing: 0;
 }
 
+.vegas-hero-details a {
+  color: inherit;
+  font: inherit;
+  text-decoration-line: underline;
+  text-decoration-color: #7134ff;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+  transition: color 0.2s ease;
+}
+
+.vegas-hero-details a:hover,
+.vegas-hero-details a:focus-visible {
+  color: var(--case-secondary);
+}
+
 .vegas-kpis {
   display: grid;
   grid-column: 1 / -1;
