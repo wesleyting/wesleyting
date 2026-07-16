@@ -404,11 +404,17 @@ img {
   will-change: clip-path;
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1200px), (max-height: 850px) {
   .animate-text {
-    width: 100%;
-    font-size: clamp(2rem, 8vw, 3.5rem);
-    line-height: 1.16;
+    width: min(100%, 1120px);
+    font-size: clamp(1.5rem, 4.5vw, 2.5rem);
+    line-height: 1.18;
+  }
+}
+
+@media (max-width: 600px) {
+  .animate-text {
+    font-size: clamp(1.7rem, 6.5vw, 1.9rem);
   }
 }
 
@@ -628,15 +634,49 @@ img {
 }
 
 .project-card-media {
+  --project-gallery-gap: clamp(0.9rem, 1.5vw, 1.35rem);
   position: absolute;
   left: clamp(500px, 45vw, 760px);
   right: -11vw;
   bottom: clamp(2.4rem, 3.8vw, 4.35rem);
   height: clamp(215px, 30vh, 325px);
   display: flex;
-  gap: clamp(0.9rem, 1.5vw, 1.35rem);
-  overflow: visible;
+  gap: var(--project-gallery-gap);
+  overflow: hidden;
   opacity: 0.92;
+  contain: paint;
+}
+
+.project-card-marquee {
+  width: max-content;
+  height: 100%;
+  display: flex;
+  flex: 0 0 auto;
+  animation: project-card-gallery-scroll var(--project-gallery-duration, 30s)
+    linear infinite;
+  animation-delay: var(--project-gallery-delay, 0s);
+  animation-play-state: running;
+  backface-visibility: hidden;
+}
+
+.project-card-marquee-group {
+  height: 100%;
+  padding-right: var(--project-gallery-gap);
+  display: flex;
+  flex: 0 0 auto;
+  gap: var(--project-gallery-gap);
+}
+
+@media (min-width: 1000.01px) {
+  .project-card-media[data-marquee-ready="true"] {
+    border-left: 1px solid rgba(243, 243, 239, 0.2);
+  }
+}
+
+@keyframes project-card-gallery-scroll {
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
 }
 
 .project-card-shot {
@@ -780,15 +820,23 @@ img {
   }
 
   .project-card-media {
+    --project-gallery-gap: clamp(0.65rem, 2.5vw, 0.9rem);
     position: static;
     grid-row: 3;
     align-self: end;
-    width: calc(100% + 6rem);
+    width: calc(100% + 2.5rem);
     height: auto;
+    margin-left: -1.25rem;
     min-height: 0;
     align-items: flex-start;
-    gap: clamp(0.65rem, 2.5vw, 0.9rem);
+    gap: var(--project-gallery-gap);
     overflow: hidden;
+    border-left: 0;
+  }
+
+  .project-card-marquee,
+  .project-card-marquee-group {
+    height: auto;
   }
 
   .project-card-shot {
@@ -806,4 +854,15 @@ img {
     display: none;
   }
 
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-card-marquee {
+    animation: none;
+    transform: none;
+  }
+
+  .project-card-marquee-group--duplicate {
+    display: none;
+  }
 }

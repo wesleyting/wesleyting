@@ -9,6 +9,46 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (!cards.length) return;
 
+  cards.forEach((card, index) => {
+    const media = card.querySelector(".project-card-media");
+    const shots = media
+      ? Array.from(media.children).filter((child) =>
+          child.classList.contains("project-card-shot"),
+        )
+      : [];
+
+    if (
+      !media ||
+      shots.length < 2 ||
+      media.dataset.marqueeReady === "true"
+    ) {
+      return;
+    }
+
+    const track = document.createElement("div");
+    const group = document.createElement("div");
+
+    track.className = "project-card-marquee";
+    group.className = "project-card-marquee-group";
+
+    shots.forEach((shot) => group.append(shot));
+
+    const duplicateGroup = group.cloneNode(true);
+    duplicateGroup.classList.add("project-card-marquee-group--duplicate");
+    duplicateGroup.setAttribute("aria-hidden", "true");
+    duplicateGroup.querySelectorAll("img").forEach((image) => {
+      image.alt = "";
+    });
+
+    track.style.setProperty(
+      "--project-gallery-delay",
+      `${index * -5}s`,
+    );
+    track.append(group, duplicateGroup);
+    media.append(track);
+    media.dataset.marqueeReady = "true";
+  });
+
   if (intro) {
     gsap.fromTo(
       intro,
@@ -42,6 +82,7 @@ document.addEventListener("DOMContentLoaded", () => {
       Math.floor(progress / segmentSize),
       totalCards - 1,
     );
+
     const segmentProgress =
       activeIndex === totalCards - 1
         ? 0

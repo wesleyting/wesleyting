@@ -401,3 +401,46 @@ test("mobile keeps the location but hides the scroll prompt", async ({ page }) =
     await heroVideo.evaluate((video) => video.currentTime),
   ).toBeLessThan(0.1);
 });
+
+test("footer text reflows after crossing the responsive breakpoint", async ({
+  page,
+}) => {
+  const browserErrors = collectBrowserErrors(page);
+  await page.setViewportSize(desktopViewport);
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/", { waitUntil: "domcontentloaded" });
+  await page.evaluate(() => document.fonts.ready);
+
+  const footerText = page.locator(".footer-text");
+  const originalText = await footerText.evaluate((element) =>
+    element.textContent.replace(/\s+/g, " ").trim(),
+  );
+
+  const footerLinesFit = () =>
+    footerText.evaluate((element) => {
+      const bounds = element.getBoundingClientRect();
+      const masks = [...element.querySelectorAll(".line-mask")];
+
+      return (
+        masks.length > 0 &&
+        masks.every((mask) => {
+          const lineBounds = mask.getBoundingClientRect();
+          return (
+            lineBounds.left >= bounds.left - 1 &&
+            lineBounds.right <= bounds.right + 1
+          );
+        })
+      );
+    });
+
+  await expect.poll(footerLinesFit).toBe(true);
+
+  await page.setViewportSize(mobileViewport);
+  await expect.poll(footerLinesFit).toBe(true);
+  await expect(footerText).toContainText(originalText);
+
+  await page.setViewportSize(desktopViewport);
+  await expect.poll(footerLinesFit).toBe(true);
+  await expect(footerText).toContainText(originalText);
+  expect(browserErrors).toEqual([]);
+});

@@ -9,7 +9,6 @@ document.addEventListener("DOMContentLoaded", () => {
   const revealer = document.querySelector(".footer-revealer");
   const nav = document.querySelector(".nav");
   const imageWrappers = [...document.querySelectorAll(".footer-image")];
-  const isMobile = window.matchMedia("(max-width: 1000px)").matches;
 
   if (!footer || !revealer) return;
 
@@ -30,26 +29,26 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const splitContentLines = () => {
-    if (isMobile) return [];
+    const elements = footer.querySelectorAll(
+      ".footer-links a, .footer-text p, .footer-email",
+    );
 
-    const elements = document.querySelectorAll(".footer-links a, .footer-text p");
-    const lines = [];
-
-    elements.forEach((element) => {
-      const split = new SplitText(element, {
-        type: "lines",
-        mask: "lines",
-        linesClass: "line",
-      });
-      lines.push(...split.lines);
+    return new SplitText(elements, {
+      type: "lines",
+      mask: "lines",
+      linesClass: "line",
+      autoSplit: true,
+      onSplit: (split) => {
+        gsap.set(split.lines, {
+          yPercent: document.body.classList.contains("footer-active") ? 0 : 100,
+        });
+      },
     });
-
-    gsap.set(lines, { yPercent: 100 });
-    return lines;
   };
 
   const headingChars = splitHeadingChars();
-  const contentLines = splitContentLines();
+  const contentSplit = splitContentLines();
+  const getContentLines = () => contentSplit.lines;
   const charStagger = { each: 0.04, from: "center" };
 
   const reveal = { y: 28, scale: 0.88, opacity: 0 };
@@ -72,7 +71,7 @@ document.addEventListener("DOMContentLoaded", () => {
       stagger: charStagger,
       overwrite: true,
     });
-    gsap.to(contentLines, {
+    gsap.to(getContentLines(), {
       yPercent: 0,
       duration: 1,
       ease: "power3.out",
@@ -99,7 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
       stagger: { each: 0.01, from: "center" },
       overwrite: true,
     });
-    gsap.to(contentLines, {
+    gsap.to(getContentLines(), {
       yPercent: 100,
       duration: 0.4,
       ease: "power2.in",
