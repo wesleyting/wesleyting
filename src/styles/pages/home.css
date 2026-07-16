@@ -74,19 +74,22 @@ a {
 .hero h2 {
   position: relative;
   z-index: 30;
-  max-width: 1120px;
+  max-width: min(21em, 1280px);
   color: rgba(255, 255, 255, 0.94);
+  font-size: clamp(3.25rem, 3.35vw, 3.75rem);
   font-weight: 560;
-  text-wrap: balance;
+  line-height: 1.08;
+  text-wrap: pretty;
 }
 
 .hero h2 span {
   color: #ffffff;
   font-weight: inherit;
   text-decoration-line: underline;
-  text-decoration-color: var(--tone-500);
+  text-decoration-color: #7134ff;
   text-decoration-thickness: 0.08em;
   text-underline-offset: 0.12em;
+  white-space: nowrap;
 }
 
 .hero-copy {
@@ -286,9 +289,9 @@ a {
 
   /* 3) H2 smaller */
   .hero h2 {
-    font-size: 38px;
-    line-height: 1.25;
-    max-width: 40ch;
+    max-width: 100%;
+    font-size: clamp(2.45rem, 9.8vw, 2.7rem);
+    line-height: 1.15;
   }
 
   /* 4) Bottom meta: show only location, hide “Scroll to explore” */
