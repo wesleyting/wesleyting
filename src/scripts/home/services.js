@@ -33,7 +33,9 @@ document.addEventListener("DOMContentLoaded", () => {
       end: () => `+=${window.innerHeight * 4.25}`,
       pin: true,
       pinSpacing: true,
-      scrub: 0.85,
+      // Lenis already smooths the page scroll. A timed scrub here adds a
+      // second easing layer that keeps catching up as the pin releases.
+      scrub: true,
       anticipatePin: 1,
       invalidateOnRefresh: true,
     },

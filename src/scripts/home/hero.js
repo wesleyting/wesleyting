@@ -265,6 +265,7 @@ document.addEventListener("DOMContentLoaded", () => {
       pointerX: 0,
       currentX: 0,
     };
+    let finalStateRendered = false;
 
     const updateResponsiveValues = () => {
       const nextValues = getResponsiveValues();
@@ -315,10 +316,15 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     const renderDesktopMotion = () => {
+      if (state.progress >= 1 && finalStateRendered) return;
+
       const scaledMovement = (1 - state.scale) * state.movementMultiplier;
       const targetX = state.scale < 0.95 ? state.pointerX * scaledMovement : 0;
 
-      state.currentX = gsap.utils.interpolate(state.currentX, targetX, 0.05);
+      state.currentX =
+        state.progress >= 1
+          ? 0
+          : gsap.utils.interpolate(state.currentX, targetX, 0.05);
 
       videoContainer.style.transform =
         `translate3d(${state.currentX}px, ${state.currentTranslateY}%, 0) ` +
@@ -327,6 +333,8 @@ document.addEventListener("DOMContentLoaded", () => {
       titleElements.forEach((element) => {
         element.style.fontSize = `${state.fontSize}px`;
       });
+
+      finalStateRendered = state.progress >= 1;
     };
 
     gsap.ticker.add(renderDesktopMotion);
