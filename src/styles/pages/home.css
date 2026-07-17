@@ -669,7 +669,23 @@ img {
 
 @media (min-width: 1000.01px) {
   .project-card-media[data-marquee-ready="true"] {
-    border-left: 1px solid rgba(243, 243, 239, 0.2);
+    border-left: 0;
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent 0,
+      rgba(0, 0, 0, 0.72) 12px,
+      #000 40px,
+      #000 100%
+    );
+    mask-image: linear-gradient(
+      to right,
+      transparent 0,
+      rgba(0, 0, 0, 0.72) 12px,
+      #000 40px,
+      #000 100%
+    );
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
   }
 }
 
