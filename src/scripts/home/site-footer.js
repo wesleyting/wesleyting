@@ -324,46 +324,59 @@ document.addEventListener("DOMContentLoaded", () => {
     hands.forEach((hand) => hoverAsciiImage(hand, event.clientX, event.clientY));
   });
 
-  ScrollTrigger.create({
-    trigger: revealer,
-    start: "top 50%",
-    onEnter: animateIn,
-  });
-
-  ScrollTrigger.create({
-    trigger: revealer,
-    start: "top 85%",
-    onLeaveBack: animateOut,
-  });
-
-  if (nav) {
+  const setupFooterScrollTriggers = () => {
     ScrollTrigger.create({
       trigger: revealer,
-      start: "top 80%",
-      onEnter: () => {
-        gsap.to(nav, {
-          autoAlpha: 0,
-          y: -18,
-          duration: 0.35,
-          ease: "power2.out",
-          overwrite: true,
-          onComplete: () => {
-            nav.style.pointerEvents = "none";
-          },
-        });
-      },
-      onLeaveBack: () => {
-        nav.style.pointerEvents = "";
-        gsap.to(nav, {
-          autoAlpha: 1,
-          y: 0,
-          duration: 0.35,
-          ease: "power2.out",
-          overwrite: true,
-        });
-      },
+      start: "top 50%",
+      refreshPriority: -10,
+      onEnter: animateIn,
     });
-  }
+
+    ScrollTrigger.create({
+      trigger: revealer,
+      start: "top 85%",
+      refreshPriority: -10,
+      onLeaveBack: animateOut,
+    });
+
+    if (nav) {
+      ScrollTrigger.create({
+        trigger: revealer,
+        start: "top 80%",
+        refreshPriority: -10,
+        onEnter: () => {
+          gsap.to(nav, {
+            autoAlpha: 0,
+            y: -18,
+            duration: 0.35,
+            ease: "power2.out",
+            overwrite: true,
+            onComplete: () => {
+              nav.style.pointerEvents = "none";
+            },
+          });
+        },
+        onLeaveBack: () => {
+          nav.style.pointerEvents = "";
+          gsap.to(nav, {
+            autoAlpha: 1,
+            y: 0,
+            duration: 0.35,
+            ease: "power2.out",
+            overwrite: true,
+          });
+        },
+      });
+    }
+
+    ScrollTrigger.sort();
+    ScrollTrigger.refresh();
+  };
+
+  // Vite can evaluate this shared footer module before homepage-specific
+  // modules in production. Waiting one frame lets upstream pinned sections
+  // register first so the footer measures its true position.
+  requestAnimationFrame(setupFooterScrollTriggers);
 
   window.addEventListener("preloader:complete", () => {
     requestAnimationFrame(() => ScrollTrigger.refresh(true));

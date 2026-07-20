@@ -38,6 +38,7 @@ document.addEventListener("DOMContentLoaded", () => {
       scrub: true,
       anticipatePin: 1,
       invalidateOnRefresh: true,
+      refreshPriority: 10,
     },
   });
 
