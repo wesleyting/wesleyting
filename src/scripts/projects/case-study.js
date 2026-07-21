@@ -97,12 +97,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (launchRoute && launchRouteItems.length) {
     if (reduceMotion) {
-      launchRouteItems.forEach((item) => {
-        item.style.setProperty("--segment-progress", "1");
-        item.classList.add("is-route-active");
-      });
+      launchRoute.style.setProperty("--route-progress", "1");
+      launchRouteItems.forEach((item) => item.classList.add("is-route-active"));
     } else {
       gsap.set(launchRouteItems, { autoAlpha: 0.52 });
+
+      const routeDuration = 1.45;
+      const activationPoints = [0.12, 0.4, 0.68, 0.9];
 
       const routeTimeline = gsap.timeline({
         scrollTrigger: {
@@ -112,37 +113,26 @@ document.addEventListener("DOMContentLoaded", () => {
         },
       });
 
-      routeTimeline
-        .set(launchRouteItems[0], { autoAlpha: 1 }, 0)
-        .call(
-          () => launchRouteItems[0].classList.add("is-route-active"),
-          [],
-          0,
-        );
+      routeTimeline.to(
+        launchRoute,
+        {
+          "--route-progress": 1,
+          duration: routeDuration,
+          ease: "power1.inOut",
+        },
+        0,
+      );
 
-      launchRouteItems.slice(0, -1).forEach((item, index) => {
-        const segmentStart = index * 0.42;
-        const nextItem = launchRouteItems[index + 1];
-
+      launchRouteItems.forEach((item, index) => {
         routeTimeline.to(
           item,
-          {
-            "--segment-progress": 1,
-            duration: 0.42,
-            ease: "power1.inOut",
-          },
-          segmentStart,
-        );
-
-        routeTimeline.to(
-          nextItem,
           {
             autoAlpha: 1,
             duration: 0.28,
             ease: "power2.out",
-            onStart: () => nextItem.classList.add("is-route-active"),
+            onStart: () => item.classList.add("is-route-active"),
           },
-          segmentStart + 0.34,
+          routeDuration * activationPoints[index],
         );
       });
     }
