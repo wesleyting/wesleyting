@@ -8,53 +8,55 @@ document.addEventListener("DOMContentLoaded", () => {
   const revealItems = gsap.utils.toArray("[data-reveal]");
   const revealGroups = gsap.utils.toArray("[data-reveal-group]");
 
-  revealItems.forEach((item) => {
-    gsap.from(item, {
-      autoAlpha: 0,
-      y: 26,
-      duration: 0.75,
-      ease: "power2.out",
-      scrollTrigger: {
-        trigger: item,
-        start: "top 86%",
-        once: true,
-      },
+  if (!reduceMotion) {
+    revealItems.forEach((item) => {
+      gsap.from(item, {
+        autoAlpha: 0,
+        y: 26,
+        duration: 0.75,
+        ease: "power2.out",
+        scrollTrigger: {
+          trigger: item,
+          start: "top 86%",
+          once: true,
+        },
+      });
     });
-  });
 
-  revealGroups.forEach((group) => {
-    const children = gsap.utils.toArray(group.children);
-    if (!children.length) return;
+    revealGroups.forEach((group) => {
+      const children = gsap.utils.toArray(group.children);
+      if (!children.length) return;
 
-    gsap.from(children, {
-      autoAlpha: 0,
-      y: 24,
-      duration: 0.7,
-      ease: "power2.out",
-      stagger: 0.08,
-      scrollTrigger: {
-        trigger: group,
-        start: "top 86%",
-        once: true,
-      },
+      gsap.from(children, {
+        autoAlpha: 0,
+        y: 24,
+        duration: 0.7,
+        ease: "power2.out",
+        stagger: 0.08,
+        scrollTrigger: {
+          trigger: group,
+          start: "top 86%",
+          once: true,
+        },
+      });
     });
-  });
+  }
+
+  const renderCounter = (counter, value) => {
+    const decimals = Number.parseInt(counter.dataset.countDecimals ?? "0", 10);
+    const prefix = counter.dataset.countPrefix ?? "";
+    const suffix = counter.dataset.countSuffix ?? "";
+    const fixedValue = value.toFixed(decimals);
+    const formattedValue = counter.dataset.countTrimZero === "true"
+      ? fixedValue.replace(/\.0+$/, "")
+      : fixedValue;
+    counter.textContent = `${prefix}${formattedValue}${suffix}`;
+  };
 
   const kpiGrid = document.querySelector(".vegas-kpis");
   const kpiCounters = gsap.utils.toArray(".vegas-kpi-count");
 
   if (kpiGrid && kpiCounters.length) {
-    const renderCounter = (counter, value) => {
-      const decimals = Number.parseInt(counter.dataset.countDecimals ?? "0", 10);
-      const prefix = counter.dataset.countPrefix ?? "";
-      const suffix = counter.dataset.countSuffix ?? "";
-      const fixedValue = value.toFixed(decimals);
-      const formattedValue = counter.dataset.countTrimZero === "true"
-        ? fixedValue.replace(/\.0+$/, "")
-        : fixedValue;
-      counter.textContent = `${prefix}${formattedValue}${suffix}`;
-    };
-
     if (reduceMotion) {
       kpiCounters.forEach((counter) => {
         renderCounter(counter, Number.parseFloat(counter.dataset.countTo));
@@ -83,6 +85,139 @@ document.addEventListener("DOMContentLoaded", () => {
             onComplete: () => renderCounter(counter, target),
           },
           index * 0.08,
+        );
+      });
+    }
+  }
+
+  const launchRoute = document.querySelector("[data-launch-route]");
+  const launchRouteItems = launchRoute
+    ? [...launchRoute.children].filter((child) => child.matches("div"))
+    : [];
+
+  if (launchRoute && launchRouteItems.length) {
+    if (reduceMotion) {
+      launchRouteItems.forEach((item) => {
+        item.style.setProperty("--segment-progress", "1");
+        item.classList.add("is-route-active");
+      });
+    } else {
+      gsap.set(launchRouteItems, { autoAlpha: 0.52 });
+
+      const routeTimeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: launchRoute,
+          start: "top 80%",
+          once: true,
+        },
+      });
+
+      routeTimeline
+        .set(launchRouteItems[0], { autoAlpha: 1 }, 0)
+        .call(
+          () => launchRouteItems[0].classList.add("is-route-active"),
+          [],
+          0,
+        );
+
+      launchRouteItems.slice(0, -1).forEach((item, index) => {
+        const segmentStart = index * 0.42;
+        const nextItem = launchRouteItems[index + 1];
+
+        routeTimeline.to(
+          item,
+          {
+            "--segment-progress": 1,
+            duration: 0.42,
+            ease: "power1.inOut",
+          },
+          segmentStart,
+        );
+
+        routeTimeline.to(
+          nextItem,
+          {
+            autoAlpha: 1,
+            duration: 0.28,
+            ease: "power2.out",
+            onStart: () => nextItem.classList.add("is-route-active"),
+          },
+          segmentStart + 0.34,
+        );
+      });
+    }
+  }
+
+  const outcomeSummary = document.querySelector("[data-outcome-summary]");
+  const outcomeTitle = document.querySelector("[data-outcome-title]");
+  const outcomeCopy = document.querySelector("[data-outcome-copy]");
+  const outcomeCounters = gsap.utils.toArray(".outcome-count");
+
+  if (outcomeSummary && outcomeTitle && outcomeCopy) {
+    if (reduceMotion) {
+      outcomeSummary.style.setProperty("--outcome-accent-progress", "1");
+      outcomeCounters.forEach((counter) => {
+        renderCounter(counter, Number.parseFloat(counter.dataset.countTo));
+      });
+    } else {
+      gsap.set(outcomeTitle, { autoAlpha: 0, x: -28 });
+      gsap.set(outcomeCopy, { autoAlpha: 0, y: 22 });
+
+      outcomeCounters.forEach((counter) => renderCounter(counter, 0));
+
+      const outcomeTimeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: outcomeSummary,
+          start: "top 78%",
+          once: true,
+        },
+      });
+
+      outcomeTimeline
+        .to(
+          outcomeSummary,
+          {
+            "--outcome-accent-progress": 1,
+            duration: 0.65,
+            ease: "power2.out",
+          },
+          0,
+        )
+        .to(
+          outcomeTitle,
+          {
+            autoAlpha: 1,
+            x: 0,
+            duration: 0.78,
+            ease: "power3.out",
+          },
+          0.08,
+        )
+        .to(
+          outcomeCopy,
+          {
+            autoAlpha: 1,
+            y: 0,
+            duration: 0.72,
+            ease: "power2.out",
+          },
+          0.2,
+        );
+
+      outcomeCounters.forEach((counter, index) => {
+        const target = Number.parseFloat(counter.dataset.countTo);
+        const count = { value: 0 };
+
+        outcomeTimeline.to(
+          count,
+          {
+            value: target,
+            duration: 1.1,
+            ease: "power2.out",
+            onUpdate: () => renderCounter(counter, count.value),
+            onComplete: () => renderCounter(counter, target),
+          },
+          0.38 + index * 0.08,
         );
       });
     }

@@ -404,11 +404,11 @@
   grid-template-columns: repeat(4, minmax(0, 1fr));
   margin: clamp(4.5rem, 7vw, 6.5rem) 0 0;
   padding: 0;
-  border-top: 1px solid var(--case-line-strong);
   border-bottom: 1px solid var(--case-line);
 }
 
 .launch-route > div {
+  --segment-progress: 0;
   position: relative;
   min-height: clamp(145px, 13vw, 190px);
   padding: clamp(3rem, 4vw, 3.75rem) clamp(1rem, 2.5vw, 2.5rem) clamp(1.5rem, 2vw, 2rem) 0;
@@ -417,11 +417,35 @@
   gap: 0.7rem;
 }
 
+.launch-route > div:not(:last-child)::before,
+.launch-route > div:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 24px;
+  width: 100%;
+  pointer-events: none;
+}
+
+.launch-route > div:not(:last-child)::after {
+  z-index: 0;
+  border-top: 1px dashed var(--case-line-strong);
+}
+
+.launch-route > div:not(:last-child)::before {
+  z-index: 1;
+  height: 2px;
+  background: linear-gradient(90deg, #7134ff, #a989ff);
+  transform: scaleX(var(--segment-progress));
+  transform-origin: left center;
+  will-change: transform;
+}
+
 .launch-route-icon {
   position: absolute;
   top: -24px;
   left: 0;
-  z-index: 1;
+  z-index: 2;
   width: 48px;
   height: 48px;
   display: grid;
@@ -430,6 +454,20 @@
   border: 1px solid var(--case-line-strong);
   border-radius: 50%;
   background-color: var(--case-bg);
+  transition:
+    background-color 0.28s ease,
+    border-color 0.28s ease,
+    box-shadow 0.28s ease,
+    transform 0.28s ease;
+}
+
+.launch-route > div.is-route-active .launch-route-icon {
+  border-color: #7134ff;
+  background-color: #7134ff;
+  box-shadow:
+    0 0 0 4px rgba(113, 52, 255, 0.14),
+    0 0 22px rgba(113, 52, 255, 0.32);
+  transform: scale(1.045);
 }
 
 .launch-route-icon--shopify img {
@@ -493,8 +531,9 @@
 
 .launch-globe {
   position: relative;
-  width: 23px;
-  height: 23px;
+  width: 25px;
+  height: 25px;
+  overflow: hidden;
   border: 2px solid currentColor;
   border-radius: 50%;
 }
@@ -502,22 +541,25 @@
 .launch-globe::before {
   content: "";
   position: absolute;
-  inset: 3px 7px;
-  border-right: 1.5px solid currentColor;
-  border-left: 1.5px solid currentColor;
-  border-radius: 50%;
+  top: 3px;
+  left: 3px;
+  width: 10px;
+  height: 7px;
+  border-radius: 65% 35% 58% 42%;
+  background-color: currentColor;
+  transform: rotate(-18deg);
 }
 
 .launch-globe::after {
   content: "";
   position: absolute;
-  top: 6px;
   right: 2px;
-  bottom: 6px;
-  left: 2px;
-  border-top: 1.5px solid currentColor;
-  border-bottom: 1.5px solid currentColor;
-  border-radius: 50%;
+  bottom: 2px;
+  width: 9px;
+  height: 11px;
+  border-radius: 45% 55% 62% 38%;
+  background-color: currentColor;
+  transform: rotate(18deg);
 }
 
 .launch-route dt {
@@ -691,6 +733,7 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
+  .launch-route-icon,
   .vegas-context-breakdown article,
   .vegas-context-breakdown.has-scroll-focus article h3,
   .vegas-context-breakdown.has-scroll-focus article p,
@@ -1246,6 +1289,7 @@
 }
 
 .outcome-summary-statement {
+  --outcome-accent-progress: 0;
   position: relative;
   display: grid;
   grid-template-columns: minmax(280px, 0.38fr) minmax(0, 0.62fr);
@@ -1263,6 +1307,9 @@
   width: clamp(64px, 9vw, 136px);
   height: 2px;
   background-color: #7134ff;
+  transform: scaleX(var(--outcome-accent-progress));
+  transform-origin: left center;
+  will-change: transform;
 }
 
 .outcome-summary-copy {
@@ -1310,6 +1357,13 @@
   font-size: clamp(1.6rem, 2.6vw, 2.8rem);
   font-weight: 560;
   line-height: 1;
+}
+
+.outcome-count {
+  display: inline-block;
+  min-width: 3ch;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
 }
 
 .outcome-proof dd {
@@ -1599,7 +1653,26 @@
     padding-left: 1.5rem;
     border-top: 0;
     border-bottom: 0;
-    border-left: 1px solid var(--case-line-strong);
+    border-left: 0;
+  }
+
+  .launch-route > div:not(:last-child)::before,
+  .launch-route > div:not(:last-child)::after {
+    top: 17px;
+    left: calc(-1.5rem - 1px);
+    width: 2px;
+    height: 100%;
+  }
+
+  .launch-route > div:not(:last-child)::after {
+    border-top: 0;
+    border-left: 1px dashed var(--case-line-strong);
+  }
+
+  .launch-route > div:not(:last-child)::before {
+    background: linear-gradient(180deg, #7134ff, #a989ff);
+    transform: scaleY(var(--segment-progress));
+    transform-origin: center top;
   }
 
   .launch-route > div {
