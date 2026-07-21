@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-native-scroll>
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -34,7 +34,7 @@
     <link rel="stylesheet" href="/src/styles/components/site-menu.css" />
     <link rel="stylesheet" href="/src/styles/pages/project.css" />
   </head>
-  <body class="project-page vegas-case" data-native-scroll>
+  <body class="project-page vegas-case" data-scroll-profile="case-study">
     <div class="transition" aria-hidden="true">
       <div class="transition-overlay"></div>
     </div>
@@ -78,19 +78,28 @@
             </div>
             <div class="vegas-kpis" aria-label="Project highlights" data-reveal-group>
               <article>
-                <span>Audience</span>
-                <strong>1M+ followers</strong>
+                <span class="vegas-kpi-label">Audience</span>
+                <strong>
+                  <span class="sr-only">1M+ followers</span>
+                  <span class="vegas-kpi-display" aria-hidden="true"><span class="vegas-kpi-count" data-count-to="1" data-count-decimals="1" data-count-trim-zero="true" data-count-suffix="M+">1M+</span> followers</span>
+                </strong>
                 <p>Built the brand&rsquo;s first owned sales channel for an audience spanning TikTok and Instagram.</p>
               </article>
               <article>
-                <span>Commerce</span>
-                <strong>$9.1K USD</strong>
+                <span class="vegas-kpi-label">Commerce</span>
+                <strong>
+                  <span class="sr-only">$9.1K USD</span>
+                  <span class="vegas-kpi-display" aria-hidden="true"><span class="vegas-kpi-count" data-count-to="9.1" data-count-decimals="1" data-count-prefix="$" data-count-suffix="K">$9.1K</span> USD</span>
+                </strong>
                 <p>Total sales processed across 202 orders through the brand&rsquo;s first official storefront.</p>
               </article>
               <article>
-                <span>Reach</span>
-                <strong>5 countries</strong>
-                <p>Coordinated customer orders and fulfilment across five countries.</p>
+                <span class="vegas-kpi-label">Reach</span>
+                <strong>
+                  <span class="sr-only">5 countries</span>
+                  <span class="vegas-kpi-display" aria-hidden="true"><span class="vegas-kpi-count" data-count-to="5">5</span> countries</span>
+                </strong>
+                <p>Orders reached 36 U.S. states and four international markets.</p>
               </article>
             </div>
             <dl class="case-details vegas-hero-details" aria-label="Project details" data-reveal>
@@ -120,22 +129,22 @@
             <p>VegasPaulyC was already recognizable online. The website gave the brand a permanent home beyond social media.</p>
           </div>
         </div>
-        <div class="vegas-context-breakdown" data-reveal-group>
-          <article>
+        <div class="vegas-context-breakdown">
+          <article data-reveal>
             <span>01</span>
             <div>
               <h3>Brand Direction</h3>
               <p>Translated Pauly&rsquo;s personality, catchphrases, and casino culture into a storefront his audience would immediately recognize.</p>
             </div>
           </article>
-          <article>
+          <article data-reveal>
             <span>02</span>
             <div>
               <h3>Commerce Setup</h3>
               <p>Created the Shopify structure for products, payments, and order management.</p>
             </div>
           </article>
-          <article>
+          <article data-reveal>
             <span>03</span>
             <div>
               <h3>Fan Connection</h3>
@@ -146,33 +155,45 @@
       </section>
 
       <section class="case-section case-media-break" data-reveal>
-        <figure class="case-image-placeholder case-image-asset">
+        <figure class="case-image-placeholder case-image-asset" data-no-hover-zoom>
           <img src="/projects/vegaspaulyc/vegaspaulyc-brand-merch-collage.png" alt="VegasPaulyC logo, merch designs, and brand direction collage" />
         </figure>
       </section>
 
-      <section class="case-section case-split role-summary" aria-labelledby="role-title" data-reveal>
-        <div>
-          <p class="case-section-kicker">My Role</p>
-          <h2 id="role-title">More Than a Website Build</h2>
+      <section class="case-section launch-story" aria-labelledby="launch-title">
+        <p class="case-section-kicker" data-reveal>Launch Operations</p>
+        <div class="launch-story-intro">
+          <h2 id="launch-title" data-reveal>From Product to Customer</h2>
+          <div class="launch-story-copy" data-reveal>
+            <p class="launch-story-lead">The launch began before the product reached the warehouse.</p>
+            <p>The custom sound button was moving from a supplier in China to a fulfilment partner in Florida while the preorder was already live. I structured the Shopify launch around that timeline, setting clear expectations and keeping customers informed through international delivery.</p>
+          </div>
         </div>
-        <div class="role-summary-copy">
-          <div class="case-copy">
-            <p>This project required more than a typical developer role.</p>
-            <p>I was responsible for connecting the storefront, products, customer support, suppliers, and fulfillment workflow into one working system. When something needed to be set up, fixed, coordinated, or clarified, I was usually the person figuring out how to move it forward.</p>
-            <p>The goal was not just to launch a website, but to build a setup stable enough for the business to keep running without constant manual attention.</p>
+        <dl class="launch-route" aria-label="Sound-button product journey" data-reveal-group>
+          <div>
+            <span class="launch-route-icon launch-route-icon--china" aria-hidden="true"><span class="launch-flag launch-flag--china"></span></span>
+            <dt><span>01</span> Production</dt>
+            <dd>China</dd>
           </div>
-          <div class="ownership-strip" aria-label="Ownership areas">
-            <p>Ownership Areas</p>
-            <ul>
-              <li>Storefront</li>
-              <li>Products</li>
-              <li>Support</li>
-              <li>Suppliers</li>
-              <li>Fulfillment</li>
-              <li>Tools</li>
-            </ul>
+          <div>
+            <span class="launch-route-icon launch-route-icon--shopify" aria-hidden="true"><img src="/icons/shopify.svg" alt="" /></span>
+            <dt><span>02</span> Preorder</dt>
+            <dd>Shopify</dd>
           </div>
+          <div>
+            <span class="launch-route-icon launch-route-icon--florida" aria-hidden="true"><span class="launch-flag launch-flag--usa"></span></span>
+            <dt><span>03</span> Fulfilment</dt>
+            <dd>Florida</dd>
+          </div>
+          <div>
+            <span class="launch-route-icon launch-route-icon--globe" aria-hidden="true"><span class="launch-globe"></span></span>
+            <dt><span>04</span> Delivery</dt>
+            <dd>5 countries</dd>
+          </div>
+        </dl>
+        <div class="launch-reach" data-reveal>
+          <span>Customer Reach</span>
+          <p>United States (36 states) / Canada / Australia / United Kingdom / Switzerland</p>
         </div>
       </section>
 
@@ -265,51 +286,61 @@
         </div>
       </section>
 
-      <section class="case-section case-reading" aria-labelledby="launch-title" data-reveal>
-        <p class="case-section-kicker">Launch</p>
-        <h2 id="launch-title">From Product to Launch</h2>
-        <div class="case-copy">
-          <p>We launched custom sound buttons while production, international shipping, and warehouse timing were still in motion. The product moved from China to a fulfilment partner in Florida before reaching customers internationally.</p>
-          <p>I built the preorder page and set clear expectations around timing, then coordinated updates and fulfilment preparation as inventory moved from supplier to warehouse.</p>
-        </div>
-      </section>
-
-      <section class="case-section launch-outcomes" aria-labelledby="results-title">
-        <div class="case-section-heading" data-reveal>
-          <p class="case-section-kicker">Outcome</p>
-          <h2 id="results-title">A Store Ready to Sell</h2>
-        </div>
-        <div class="result-card-grid" data-reveal-group>
-          <article>
-            <span class="outcome-index">01</span>
-            <p>Creator-led storefront and product setup for an audience of 1M+ followers.</p>
-          </article>
-          <article>
-            <span class="outcome-index">02</span>
-            <p>Preorder communication and fulfilment planning coordinated from launch to delivery.</p>
-          </article>
-          <article>
-            <span class="outcome-index">03</span>
-            <p>Orders supported across multiple countries, with a direct path for customer support.</p>
-          </article>
+      <section class="case-section outcome-summary" aria-labelledby="results-title">
+        <p class="case-section-kicker" data-reveal>Outcome</p>
+        <div class="outcome-summary-statement" data-reveal>
+          <h2 id="results-title">From Audience to Operation</h2>
+          <div class="outcome-summary-copy">
+            <p>VegasPaulyC now has an owned sales channel built to support future launches as the business continues to grow.</p>
+            <div class="outcome-summary-footer">
+              <dl class="outcome-proof" aria-label="Additional project results">
+                <div>
+                  <dt>309</dt>
+                  <dd>Units sold</dd>
+                </div>
+                <div>
+                  <dt>196</dt>
+                  <dd>Customers</dd>
+                </div>
+              </dl>
+              <a class="outcome-summary-link" href="https://vegaspaulyc.com/" target="_blank" rel="noopener">Visit Live Store &nearr;</a>
+            </div>
+          </div>
         </div>
       </section>
 
       <section class="case-section next-project" aria-labelledby="next-title" data-reveal>
-        <p class="case-section-kicker">Next Project</p>
         <a class="next-project-card" href="/projects/duuduu-mattress.html" data-cursor-label="View Next Project">
-          <div>
-            <h2 id="next-title">DuuDuu Mattress</h2>
-            <p>A Shopify-focused case study template exploring storefront structure, UI clarity, and ecommerce presentation.</p>
+          <div class="next-project-copy">
+            <div class="next-project-meta">
+              <span>Next Project</span>
+              <span>Shopify Growth Partnership</span>
+            </div>
+            <div class="next-project-intro">
+              <h2 id="next-title">DuuDuu Mattress</h2>
+              <p>I lead DuuDuu&rsquo;s ongoing Shopify growth, combining full-stack development, technical SEO, and ecommerce marketing to turn commercial priorities into a stronger customer experience.</p>
+            </div>
+            <span class="next-project-cta">View Case Study &nearr;</span>
           </div>
-          <span>View DuuDuu Case Study &nearr;</span>
+          <figure class="next-project-media" aria-hidden="true">
+            <img src="/home/project-duuduu-gallery-01.webp" width="1000" height="791" loading="lazy" decoding="async" alt="" />
+          </figure>
         </a>
       </section>
     </main>
 
+    <footer class="project-footer">
+      <div class="project-footer-inner">
+        <a href="/">Wesley Ting</a>
+        <a class="project-footer-email" href="mailto:wesleytingdev@gmail.com">wesleytingdev@gmail.com</a>
+        <a href="/#selected-work">Back to Work</a>
+      </div>
+    </footer>
+
     <script type="module" src="/src/scripts/shared/page-transition.js"></script>
     <script type="module" src="/src/scripts/shared/site-menu.js"></script>
     <script type="module" src="/src/scripts/shared/cursor-label.js"></script>
+    <script type="module" src="/src/scripts/shared/smooth-scroll.js"></script>
     <script type="module" src="/src/scripts/projects/case-study.js"></script>
   </body>
 </html>

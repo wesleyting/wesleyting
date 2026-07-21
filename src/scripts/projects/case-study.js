@@ -4,6 +4,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 gsap.registerPlugin(ScrollTrigger);
 
 document.addEventListener("DOMContentLoaded", () => {
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const revealItems = gsap.utils.toArray("[data-reveal]");
   const revealGroups = gsap.utils.toArray("[data-reveal-group]");
 
@@ -38,6 +39,90 @@ document.addEventListener("DOMContentLoaded", () => {
       },
     });
   });
+
+  const kpiGrid = document.querySelector(".vegas-kpis");
+  const kpiCounters = gsap.utils.toArray(".vegas-kpi-count");
+
+  if (kpiGrid && kpiCounters.length) {
+    const renderCounter = (counter, value) => {
+      const decimals = Number.parseInt(counter.dataset.countDecimals ?? "0", 10);
+      const prefix = counter.dataset.countPrefix ?? "";
+      const suffix = counter.dataset.countSuffix ?? "";
+      const fixedValue = value.toFixed(decimals);
+      const formattedValue = counter.dataset.countTrimZero === "true"
+        ? fixedValue.replace(/\.0+$/, "")
+        : fixedValue;
+      counter.textContent = `${prefix}${formattedValue}${suffix}`;
+    };
+
+    if (reduceMotion) {
+      kpiCounters.forEach((counter) => {
+        renderCounter(counter, Number.parseFloat(counter.dataset.countTo));
+      });
+    } else {
+      const countTimeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: kpiGrid,
+          start: "top 78%",
+          once: true,
+        },
+      });
+
+      kpiCounters.forEach((counter, index) => {
+        const target = Number.parseFloat(counter.dataset.countTo);
+        const count = { value: 0 };
+
+        renderCounter(counter, 0);
+        countTimeline.to(
+          count,
+          {
+            value: target,
+            duration: 1.15,
+            ease: "power2.out",
+            onUpdate: () => renderCounter(counter, count.value),
+            onComplete: () => renderCounter(counter, target),
+          },
+          index * 0.08,
+        );
+      });
+    }
+  }
+
+  const contextBreakdown = document.querySelector(".vegas-context-breakdown");
+  const contextItems = contextBreakdown
+    ? gsap.utils.toArray("article", contextBreakdown)
+    : [];
+
+  if (contextBreakdown && contextItems.length) {
+    const contextMedia = gsap.matchMedia();
+
+    contextMedia.add("(min-width: 1100.01px)", () => {
+      const setActiveItem = (activeItem) => {
+        contextItems.forEach((item) => {
+          item.classList.toggle("is-active", item === activeItem);
+        });
+      };
+
+      contextBreakdown.classList.add("has-scroll-focus");
+      setActiveItem(contextItems[0]);
+
+      const contextTriggers = contextItems.map((item) =>
+        ScrollTrigger.create({
+          trigger: item,
+          start: "top 55%",
+          end: "bottom 45%",
+          onEnter: () => setActiveItem(item),
+          onEnterBack: () => setActiveItem(item),
+        }),
+      );
+
+      return () => {
+        contextTriggers.forEach((trigger) => trigger.kill());
+        contextBreakdown.classList.remove("has-scroll-focus");
+        contextItems.forEach((item) => item.classList.remove("is-active"));
+      };
+    });
+  }
 
   const lightboxImages = [
     ...document.querySelectorAll(".case-image-asset img, .commerce-card-media img"),
