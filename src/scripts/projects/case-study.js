@@ -98,7 +98,10 @@ document.addEventListener("DOMContentLoaded", () => {
   if (launchRoute && launchRouteItems.length) {
     if (reduceMotion) {
       launchRoute.style.setProperty("--route-progress", "1");
-      launchRouteItems.forEach((item) => item.classList.add("is-route-active"));
+      launchRouteItems.forEach((item) => {
+        item.style.setProperty("--segment-progress", "1");
+        item.classList.add("is-route-active");
+      });
     } else {
       gsap.set(launchRouteItems, { autoAlpha: 0.52 });
 
@@ -123,6 +126,18 @@ document.addEventListener("DOMContentLoaded", () => {
         0,
       );
 
+      launchRouteItems.slice(0, -1).forEach((item, index) => {
+        routeTimeline.to(
+          item,
+          {
+            "--segment-progress": 1,
+            duration: 0.42,
+            ease: "power1.inOut",
+          },
+          index * 0.42,
+        );
+      });
+
       launchRouteItems.forEach((item, index) => {
         routeTimeline.to(
           item,
@@ -145,7 +160,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   if (outcomeSummary && outcomeTitle && outcomeCopy) {
     if (reduceMotion) {
-      outcomeSummary.style.setProperty("--outcome-accent-progress", "1");
       outcomeCounters.forEach((counter) => {
         renderCounter(counter, Number.parseFloat(counter.dataset.countTo));
       });
@@ -165,15 +179,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
       outcomeTimeline
         .to(
-          outcomeSummary,
-          {
-            "--outcome-accent-progress": 1,
-            duration: 0.65,
-            ease: "power2.out",
-          },
-          0,
-        )
-        .to(
           outcomeTitle,
           {
             autoAlpha: 1,
@@ -181,7 +186,7 @@ document.addEventListener("DOMContentLoaded", () => {
             duration: 0.78,
             ease: "power3.out",
           },
-          0.08,
+          0,
         )
         .to(
           outcomeCopy,
@@ -191,7 +196,7 @@ document.addEventListener("DOMContentLoaded", () => {
             duration: 0.72,
             ease: "power2.out",
           },
-          0.2,
+          0.14,
         );
 
       outcomeCounters.forEach((counter, index) => {
@@ -207,7 +212,7 @@ document.addEventListener("DOMContentLoaded", () => {
             onUpdate: () => renderCounter(counter, count.value),
             onComplete: () => renderCounter(counter, target),
           },
-          0.38 + index * 0.08,
+          0.32 + index * 0.08,
         );
       });
     }
