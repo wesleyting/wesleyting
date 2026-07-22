@@ -849,11 +849,11 @@
 }
 
 .commerce-system-section {
-  padding-top: clamp(6.5rem, 10vw, 10rem);
+  padding-top: clamp(8rem, 12vw, 12rem);
 }
 
 .commerce-system-heading {
-  margin-bottom: clamp(1.75rem, 3vw, 2.75rem);
+  margin-bottom: clamp(2.25rem, 3.5vw, 3.5rem);
   display: grid;
   place-items: center;
   text-align: center;
@@ -1348,11 +1348,11 @@
 }
 
 .next-project-card {
-  min-height: clamp(440px, 36vw, 590px);
-  margin-top: 1.25rem;
+  min-height: clamp(280px, 22vw, 340px);
+  margin-top: 1rem;
   padding: 0;
   display: grid;
-  grid-template-columns: minmax(360px, 0.44fr) minmax(0, 0.56fr);
+  grid-template-columns: minmax(320px, 0.4fr) minmax(0, 0.6fr);
   overflow: hidden;
   color: var(--case-text);
   background-color: var(--case-panel-soft);
@@ -1368,10 +1368,10 @@
 
 .next-project-copy {
   min-width: 0;
-  padding: clamp(1.5rem, 3.5vw, 3.25rem);
+  padding: clamp(1.35rem, 2.1vw, 2rem);
   display: grid;
   grid-template-rows: auto 1fr auto;
-  gap: clamp(2rem, 4vw, 3.5rem);
+  gap: clamp(1.1rem, 1.8vw, 1.6rem);
 }
 
 .next-project-meta {
@@ -1392,13 +1392,13 @@
 .next-project-intro {
   align-self: center;
   display: grid;
-  gap: clamp(1.25rem, 2vw, 1.75rem);
+  gap: clamp(0.7rem, 1vw, 1rem);
 }
 
 .next-project-card h2 {
   max-width: 10ch;
   color: var(--case-text);
-  font-size: clamp(3.25rem, 6.5vw, 7.5rem);
+  font-size: clamp(2.5rem, 4.1vw, 4.5rem);
   font-weight: 540;
   line-height: 0.92;
 }
@@ -1605,7 +1605,7 @@
   }
 
   .commerce-system-section {
-    padding-top: 7rem;
+    padding-top: 8.5rem;
   }
 
   .vegas-context-breakdown article {
@@ -1730,27 +1730,40 @@
   }
 
   .next-project-copy {
-    min-height: 390px;
-    padding: 1.5rem;
+    min-height: 0;
+    padding: 1.15rem;
+    grid-template-rows: auto auto auto;
+    gap: 1.2rem;
   }
 
   .next-project-meta {
-    flex-direction: column;
-    gap: 0.45rem;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 0.5rem 1rem;
   }
 
   .next-project-meta span:last-child {
-    text-align: left;
+    margin-left: auto;
+    text-align: right;
+  }
+
+  .next-project-intro {
+    align-self: start;
+  }
+
+  .next-project-card h2 {
+    font-size: clamp(2.45rem, 11vw, 3.5rem);
   }
 
   .next-project-media {
-    aspect-ratio: 1000 / 791;
+    aspect-ratio: 16 / 7;
     border-top: 1px solid var(--case-line);
     border-left: 0;
   }
 
   .next-project-media img {
-    object-fit: contain;
+    object-fit: cover;
+    object-position: center 46%;
   }
 
   .project-footer {
