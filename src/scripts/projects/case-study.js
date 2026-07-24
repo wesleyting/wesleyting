@@ -53,8 +53,8 @@ document.addEventListener("DOMContentLoaded", () => {
     counter.textContent = `${prefix}${formattedValue}${suffix}`;
   };
 
-  const kpiGrid = document.querySelector(".vegas-kpis");
-  const kpiCounters = gsap.utils.toArray(".vegas-kpi-count");
+  const kpiGrid = document.querySelector(".case-kpis");
+  const kpiCounters = gsap.utils.toArray(".case-kpi-count");
 
   if (kpiGrid && kpiCounters.length) {
     if (reduceMotion) {
@@ -65,7 +65,7 @@ document.addEventListener("DOMContentLoaded", () => {
       const countTimeline = gsap.timeline({
         scrollTrigger: {
           trigger: kpiGrid,
-          start: "top 78%",
+          start: "top 86%",
           once: true,
         },
       });
@@ -218,7 +218,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  const contextBreakdown = document.querySelector(".vegas-context-breakdown");
+  const contextBreakdown = document.querySelector(".case-context-breakdown");
   const contextItems = contextBreakdown
     ? gsap.utils.toArray("article", contextBreakdown)
     : [];

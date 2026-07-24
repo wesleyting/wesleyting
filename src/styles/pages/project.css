@@ -1,3 +1,5 @@
+/* Shared case-study foundation. Project stylesheets should only set brand
+   tokens, media treatment, and styles for genuinely unique story modules. */
 .project-page {
   --case-bg: #000;
   --case-panel: #080808;
@@ -8,6 +10,12 @@
   --case-secondary: var(--text-secondary);
   --case-muted: var(--text-muted);
   --case-faint: var(--text-faint);
+  --case-accent: #7134ff;
+  --case-accent-soft: rgba(113, 52, 255, 0.09);
+  --case-accent-faint: rgba(113, 52, 255, 0.02);
+  --case-accent-contrast: #a989ff;
+  --case-layout-gap: clamp(2.5rem, 7vw, 8rem);
+  --case-section-space: clamp(6rem, 12vw, 12rem);
   background-color: var(--case-bg);
 }
 
@@ -137,27 +145,25 @@
   min-height: clamp(420px, 64vw, 840px);
 }
 
-.vegas-case main {
+.case-study-page main {
   padding-top: clamp(4.7rem, 7vw, 5.75rem);
 }
 
-.vegas-case .case-hero {
+.case-study-page .case-hero {
   padding-top: clamp(0.75rem, 2svh, 1.75rem);
 }
 
-.vegas-hero-banner {
+.case-hero-banner {
   position: relative;
   width: 100%;
-  max-height: 380px;
-  aspect-ratio: 16 / 5;
   margin-bottom: clamp(1.75rem, 3.5vw, 3.25rem);
   overflow: hidden;
   background-color: var(--case-panel);
-  border: 1px solid var(--case-line);
-  border-radius: 8px;
+  border: 0;
+  border-radius: 0;
 }
 
-.vegas-hero-banner img {
+.case-hero-banner img {
   display: block;
   width: 100%;
   height: 100%;
@@ -165,7 +171,7 @@
   object-position: center;
 }
 
-.vegas-case .case-hero-inner {
+.case-study-page .case-hero-inner {
   display: grid;
   grid-template-columns: minmax(0, 1fr) minmax(280px, 390px);
   column-gap: clamp(2.25rem, 5vw, 6rem);
@@ -173,25 +179,24 @@
   align-items: start;
 }
 
-.vegas-case .case-hero-grid {
+.case-study-page .case-hero-grid {
   display: contents;
 }
 
-.vegas-year,
-.vegas-title,
-.vegas-subtitle,
-.vegas-case .case-intro-copy,
-.vegas-kpis {
+.case-study-page .case-year,
+.case-study-page .case-title,
+.case-study-page .case-subtitle,
+.case-study-page .case-intro-copy {
   grid-column: 1;
 }
 
-.vegas-year {
+.case-study-page .case-year {
   color: var(--case-text);
   font-size: var(--fs-meta);
   line-height: 1.1;
 }
 
-.vegas-title {
+.case-study-page .case-title {
   max-width: 12ch;
   color: var(--case-text);
   font-size: var(--fs-page-title);
@@ -200,7 +205,7 @@
   letter-spacing: 0;
 }
 
-.vegas-subtitle {
+.case-study-page .case-subtitle {
   max-width: 760px;
   margin-top: clamp(0.25rem, 0.8vw, 0.7rem);
   color: var(--case-secondary);
@@ -209,19 +214,19 @@
   line-height: 1.1;
 }
 
-.vegas-case .case-intro-copy {
+.case-study-page .case-intro-copy {
   max-width: 760px;
   gap: clamp(1.05rem, 1.7vw, 1.45rem);
   padding-top: clamp(0.6rem, 1.25vw, 1rem);
 }
 
-.vegas-case .case-intro-copy p {
+.case-study-page .case-intro-copy p {
   color: var(--case-text);
   font-size: var(--fs-body);
   line-height: var(--lh-body);
 }
 
-.vegas-hero-details {
+.case-hero-details {
   grid-column: 2;
   grid-row: 1 / span 4;
   gap: 0;
@@ -229,65 +234,70 @@
   border-top: 1px solid var(--case-line);
 }
 
-.vegas-hero-details div {
+.case-hero-details div {
   padding: 0.95rem 0;
   border-bottom: 1px solid var(--case-line);
 }
 
-.vegas-hero-details dt {
+.case-hero-details dt {
   color: var(--case-secondary);
   font-size: var(--fs-meta);
   letter-spacing: 0;
 }
 
-.vegas-hero-details a {
+.case-hero-details a {
   color: inherit;
   font: inherit;
   text-decoration-line: underline;
-  text-decoration-color: #7134ff;
+  text-decoration-color: var(--case-accent);
   text-decoration-thickness: 1px;
   text-underline-offset: 0.2em;
   transition: color 0.2s ease;
 }
 
-.vegas-hero-details a:hover,
-.vegas-hero-details a:focus-visible {
+.case-hero-details a:hover,
+.case-hero-details a:focus-visible {
   color: var(--case-secondary);
 }
 
-.vegas-kpis {
+.case-kpis {
   display: grid;
   grid-column: 1 / -1;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  margin-top: clamp(2.75rem, 5.25vw, 4.5rem);
+  margin-top: clamp(3rem, 5.5vw, 5rem);
   border-top: 1px solid var(--case-line);
   border-right: 1px solid var(--case-line);
   border-bottom: 1px solid var(--case-line);
   border-left: 1px solid var(--case-line);
 }
 
-.vegas-kpis article {
-  min-height: 184px;
-  padding: clamp(1.25rem, 2.4vw, 2rem);
+.case-kpis article {
+  min-height: clamp(210px, 17vw, 244px);
+  padding: clamp(1.5rem, 2.5vw, 2.25rem);
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  gap: clamp(1.1rem, 2vw, 1.65rem);
+  gap: clamp(1.35rem, 2.25vw, 2rem);
   border-right: 1px solid var(--case-line);
 }
 
-.vegas-kpis article:last-child {
+.case-kpis article:last-child {
   border-right: 0;
 }
 
-.vegas-kpi-label {
+.case-kpis article > * {
+  position: relative;
+  z-index: 1;
+}
+
+.case-kpi-label {
   color: var(--case-secondary);
   font-size: var(--fs-meta);
   font-weight: 650;
   text-transform: uppercase;
 }
 
-.vegas-kpis strong {
+.case-kpis strong {
   color: var(--case-text);
   font-family: "Outfit";
   font-size: var(--fs-stat);
@@ -295,16 +305,17 @@
   line-height: 0.98;
 }
 
-.vegas-kpi-display {
+.case-kpi-display {
   color: inherit;
   font: inherit;
 }
 
-.vegas-kpi-count {
+.case-kpi-count {
   font-variant-numeric: tabular-nums;
 }
 
-.vegas-kpis p {
+.case-kpis p {
+  max-width: 42ch;
   color: var(--case-text);
   font-size: var(--fs-body);
   font-weight: 430;
@@ -312,7 +323,7 @@
 }
 
 .case-section {
-  padding: clamp(6rem, 12vw, 12rem) 0 0;
+  padding: var(--case-section-space) 0 0;
 }
 
 .case-reading {
@@ -601,21 +612,21 @@
   line-height: var(--lh-body);
 }
 
-.vegas-context {
+.case-context {
   display: grid;
-  grid-template-columns: minmax(260px, 0.42fr) minmax(0, 0.58fr);
-  gap: clamp(2rem, 7vw, 8rem);
+  grid-template-columns: minmax(260px, 0.4fr) minmax(0, 0.6fr);
+  gap: var(--case-layout-gap);
   align-items: start;
 }
 
-.vegas-context-intro {
+.case-context-intro {
   display: grid;
   gap: clamp(1.2rem, 2vw, 1.8rem);
   position: sticky;
   top: 7.25rem;
 }
 
-.vegas-context-intro h2 {
+.case-context-intro h2 {
   max-width: 14ch;
   color: var(--case-text);
   font-size: var(--fs-section-title);
@@ -623,20 +634,20 @@
   line-height: var(--lh-tight);
 }
 
-.vegas-context-intro .case-copy {
+.case-context-intro .case-copy {
   max-width: 540px;
 }
 
-.vegas-context-intro .case-copy p,
-.vegas-context-breakdown p {
+.case-context-intro .case-copy p,
+.case-context-breakdown p {
   color: var(--case-text);
 }
 
-.vegas-context-breakdown {
+.case-context-breakdown {
   border-top: 1px solid var(--case-line);
 }
 
-.vegas-context-breakdown article {
+.case-context-breakdown article {
   display: grid;
   grid-template-columns: 56px minmax(0, 1fr);
   gap: clamp(1.2rem, 3vw, 3rem);
@@ -644,26 +655,27 @@
   border-bottom: 1px solid var(--case-line);
 }
 
-.vegas-context-breakdown span {
+.case-context-breakdown span {
   color: var(--case-muted);
   font-size: var(--fs-caption);
   font-weight: 650;
   line-height: 1.2;
 }
 
-.vegas-context-breakdown div {
+.case-context-breakdown div {
   display: grid;
   gap: clamp(1rem, 1.8vw, 1.5rem);
 }
 
-.vegas-context-breakdown h3 {
+.case-context-breakdown h3 {
   color: var(--case-text);
   font-size: var(--fs-card-title);
   font-weight: 540;
   line-height: 1;
 }
 
-.vegas-context-breakdown p {
+.case-context-breakdown p {
+  max-width: 46ch;
   color: var(--case-text);
   font-size: var(--fs-body);
   font-weight: 430;
@@ -671,46 +683,46 @@
 }
 
 @media (min-width: 1100.01px) {
-  .vegas-context-breakdown article {
+  .case-context-breakdown article {
     min-height: clamp(250px, 34svh, 350px);
     align-content: center;
     padding-right: clamp(0.75rem, 1.5vw, 1.25rem);
     padding-left: clamp(1rem, 2vw, 1.5rem);
     transition:
-      background-color 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-      border-color 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-      box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+      background 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+      border-color 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.55s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
-  .vegas-context-breakdown.has-scroll-focus article h3,
-  .vegas-context-breakdown.has-scroll-focus article p,
-  .vegas-context-breakdown.has-scroll-focus article > span {
-    transition: color 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  .case-context-breakdown.has-scroll-focus article h3,
+  .case-context-breakdown.has-scroll-focus article p,
+  .case-context-breakdown.has-scroll-focus article > span {
+    transition: color 0.55s cubic-bezier(0.22, 1, 0.36, 1);
   }
 
-  .vegas-context-breakdown.has-scroll-focus article:not(.is-active) h3,
-  .vegas-context-breakdown.has-scroll-focus article:not(.is-active) p,
-  .vegas-context-breakdown.has-scroll-focus article:not(.is-active) > span {
+  .case-context-breakdown.has-scroll-focus article:not(.is-active) h3,
+  .case-context-breakdown.has-scroll-focus article:not(.is-active) p,
+  .case-context-breakdown.has-scroll-focus article:not(.is-active) > span {
     color: var(--case-muted);
   }
 
-  .vegas-context-breakdown.has-scroll-focus article.is-active {
+  .case-context-breakdown.has-scroll-focus article.is-active {
     border-bottom-color: var(--case-line-strong);
-    background: linear-gradient(90deg, rgba(113, 52, 255, 0.09), rgba(113, 52, 255, 0.02) 72%, transparent);
-    box-shadow: inset 3px 0 0 #7134ff;
+    background: linear-gradient(90deg, var(--case-accent-soft), var(--case-accent-faint) 72%, transparent);
+    box-shadow: inset 3px 0 0 var(--case-accent);
   }
 
-  .vegas-context-breakdown.has-scroll-focus article.is-active > span {
-    color: #a989ff;
+  .case-context-breakdown.has-scroll-focus article.is-active > span {
+    color: var(--case-accent-contrast);
   }
 }
 
 @media (prefers-reduced-motion: reduce) {
   .launch-route-icon,
-  .vegas-context-breakdown article,
-  .vegas-context-breakdown.has-scroll-focus article h3,
-  .vegas-context-breakdown.has-scroll-focus article p,
-  .vegas-context-breakdown.has-scroll-focus article > span {
+  .case-context-breakdown article,
+  .case-context-breakdown.has-scroll-focus article h3,
+  .case-context-breakdown.has-scroll-focus article p,
+  .case-context-breakdown.has-scroll-focus article > span {
     transition: none;
   }
 }
@@ -781,10 +793,43 @@
 
 .case-section-heading {
   display: grid;
-  grid-template-columns: minmax(180px, 0.32fr) minmax(0, 0.68fr);
-  gap: clamp(2rem, 7vw, 9rem);
+  grid-template-columns: minmax(260px, 0.4fr) minmax(0, 0.6fr);
+  gap: var(--case-layout-gap);
   align-items: start;
   margin-bottom: clamp(2.5rem, 5vw, 5rem);
+}
+
+.case-section-heading > .case-section-kicker {
+  grid-column: 1 / -1;
+}
+
+.case-section-heading > p:last-child {
+  max-width: 50ch;
+  justify-self: end;
+  color: var(--case-secondary);
+  font-size: var(--fs-body);
+  font-weight: 430;
+  line-height: var(--lh-body);
+}
+
+.case-section-copy {
+  display: grid;
+  gap: clamp(1.2rem, 2vw, 1.8rem);
+}
+
+.case-section-copy h2 {
+  color: var(--case-text);
+  font-size: var(--fs-section-title);
+  font-weight: 540;
+  line-height: var(--lh-tight);
+}
+
+.case-section-copy > p:last-child {
+  max-width: 50ch;
+  color: var(--case-secondary);
+  font-size: var(--fs-body);
+  font-weight: 430;
+  line-height: var(--lh-body);
 }
 
 .feature-grid {
@@ -1337,7 +1382,7 @@
   flex: 0 0 auto;
   padding-bottom: 0.22rem;
   color: var(--case-text);
-  border-bottom: 2px solid #7134ff;
+  border-bottom: 2px solid var(--case-accent);
   font-size: var(--fs-body-compact);
   font-weight: 560;
   line-height: 1.2;
@@ -1412,7 +1457,7 @@
   width: fit-content;
   padding-bottom: 0.2rem;
   color: var(--case-text);
-  border-bottom: 2px solid #7134ff;
+  border-bottom: 2px solid var(--case-accent);
   transition: transform 0.25s ease;
 }
 
@@ -1472,7 +1517,7 @@
 
 .project-footer-email {
   padding-bottom: 0.12rem;
-  border-bottom: 1px solid #7134ff;
+  border-bottom: 1px solid var(--case-accent);
 }
 
 [data-reveal],
@@ -1484,7 +1529,7 @@
   .case-hero-grid,
   .case-reading,
   .launch-story-intro,
-  .vegas-context,
+  .case-context,
   .case-split,
   .case-solution,
   .case-section-heading,
@@ -1496,17 +1541,27 @@
     width: 100%;
   }
 
-  .vegas-context-intro {
+  .case-context-intro {
     position: static;
   }
 
-  .vegas-context {
-    gap: 3rem;
+  .case-context {
+    gap: 3.5rem;
   }
 
-  .vegas-context-intro h2,
-  .vegas-context-intro .case-copy {
+  .case-context-intro h2,
+  .case-context-intro .case-copy {
     max-width: 100%;
+  }
+
+  .case-context-breakdown article {
+    min-height: 0;
+    padding: 2.4rem 1rem;
+  }
+
+  .case-section-heading > p:last-child {
+    max-width: 100%;
+    justify-self: start;
   }
 
   .case-reading > h2,
@@ -1543,11 +1598,11 @@
     padding-top: 6svh;
   }
 
-  .vegas-case main {
+  .case-study-page main {
     padding-top: 4.75rem;
   }
 
-  .vegas-case .case-hero {
+  .case-study-page .case-hero {
     padding-top: 0.75rem;
   }
 
@@ -1555,16 +1610,15 @@
     font-size: clamp(4rem, 18vw, 7rem);
   }
 
-  .vegas-hero-banner {
-    aspect-ratio: 16 / 7;
+  .case-hero-banner {
     margin-bottom: 1.5rem;
   }
 
-  .vegas-title {
+  .case-study-page .case-title {
     font-size: clamp(3rem, 13vw, 5.25rem);
   }
 
-  .vegas-subtitle {
+  .case-study-page .case-subtitle {
     max-width: 100%;
     font-size: clamp(1.3rem, 6vw, 2.1rem);
   }
@@ -1573,30 +1627,30 @@
     flex-direction: column;
   }
 
-  .vegas-case .case-hero-inner {
+  .case-study-page .case-hero-inner {
     grid-template-columns: 1fr;
     row-gap: 0.8rem;
   }
 
-  .vegas-hero-details {
+  .case-hero-details {
     grid-column: 1;
     grid-row: auto;
     margin-top: 0.5rem;
   }
 
-  .vegas-kpis {
+  .case-kpis {
     grid-template-columns: 1fr;
-    margin-top: 2.1rem;
+    margin-top: 2.5rem;
   }
 
-  .vegas-kpis article {
+  .case-kpis article {
     min-height: 0;
-    padding: 1.35rem 1.15rem;
+    padding: 1.6rem 1.25rem;
     border-right: 0;
     border-bottom: 1px solid var(--case-line);
   }
 
-  .vegas-kpis article:last-child {
+  .case-kpis article:last-child {
     border-bottom: 0;
   }
 
@@ -1608,8 +1662,9 @@
     padding-top: 8.5rem;
   }
 
-  .vegas-context-breakdown article {
-    padding: 2.15rem 0;
+  .case-context-breakdown article {
+    grid-template-columns: 42px minmax(0, 1fr);
+    padding: 2.25rem 0;
   }
 
   .launch-story-intro {
