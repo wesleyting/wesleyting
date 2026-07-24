@@ -728,6 +728,93 @@ img {
   border-color: #ffffff;
 }
 
+.project-card--upcoming {
+  cursor: default;
+}
+
+.project-card--upcoming:hover {
+  border-color: rgba(243, 243, 239, 0.68);
+}
+
+.project-card-status {
+  color: #f0b35a !important;
+}
+
+.brownie-shot {
+  position: relative;
+  padding: clamp(1.25rem, 2vw, 2rem);
+  display: grid;
+  place-items: center;
+  isolation: isolate;
+}
+
+.brownie-shot::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  opacity: 0.42;
+  background:
+    linear-gradient(135deg, transparent 0 48%, currentColor 48% 50%, transparent 50%),
+    radial-gradient(circle at 78% 18%, currentColor 0 2px, transparent 3px);
+  background-size: 100% 100%, 20px 20px;
+  pointer-events: none;
+}
+
+.brownie-shot-copy {
+  display: grid;
+  justify-items: center;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.brownie-shot-copy small {
+  margin-bottom: clamp(1rem, 1.6vw, 1.5rem);
+  font-size: clamp(0.55rem, 0.65vw, 0.72rem);
+  font-weight: 800;
+  letter-spacing: 0.16em;
+}
+
+.brownie-shot-copy strong {
+  font-family: "Outfit", sans-serif;
+  font-size: clamp(3.1rem, 5vw, 5.5rem);
+  font-weight: 850;
+  line-height: 0.78;
+  letter-spacing: -0.055em;
+}
+
+.brownie-shot-copy span {
+  margin-top: 0.5rem;
+  font-size: clamp(1rem, 1.7vw, 1.8rem);
+  font-weight: 760;
+  letter-spacing: 0.12em;
+}
+
+.brownie-shot--all-in {
+  color: #2d170d;
+  background:
+    radial-gradient(circle at 20% 18%, rgba(255, 255, 255, 0.48), transparent 25%),
+    linear-gradient(145deg, #f1c268, #e97832);
+  border-color: rgba(255, 220, 157, 0.5);
+}
+
+.brownie-shot--shared {
+  color: #f3ddbc;
+  background:
+    radial-gradient(circle at 80% 18%, rgba(236, 170, 79, 0.24), transparent 24%),
+    linear-gradient(145deg, #4c2718, #180d09);
+  border-color: rgba(218, 165, 103, 0.38);
+}
+
+.brownie-shot--bmf {
+  color: #e7a047;
+  background:
+    linear-gradient(45deg, rgba(225, 139, 52, 0.12) 25%, transparent 25% 75%, rgba(225, 139, 52, 0.12) 75%),
+    linear-gradient(145deg, #171717, #050505);
+  background-size: 28px 28px, 100% 100%;
+  border-color: rgba(231, 160, 71, 0.42);
+}
+
 .project-card-shot:nth-child(n + 4) {
   display: none;
 }

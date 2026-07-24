@@ -42,6 +42,24 @@ for (const pageDetails of pages) {
   });
 }
 
+test("the homepage features projects in the intended order", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/", { waitUntil: "domcontentloaded" });
+
+  const cards = page.locator(".sticky-cards .project-card");
+  await expect(cards).toHaveCount(4);
+  await expect(cards.locator("h3")).toHaveText([
+    "VegasPaulyC",
+    "DuuDuu Mattress",
+    "All-In Brownie",
+    "Token Studio",
+  ]);
+  await expect(cards.nth(0)).toHaveAttribute("href", "/projects/vegaspaulyc.html");
+  await expect(cards.nth(1)).toHaveAttribute("href", "/projects/duuduu-mattress.html");
+  await expect(cards.nth(2)).not.toHaveAttribute("href", /.+/);
+  await expect(cards.nth(3)).toHaveAttribute("href", "/projects/token-studio.html");
+});
+
 test("the shared menu opens and closes with the keyboard", async ({ page }) => {
   const browserErrors = collectBrowserErrors(page);
   await page.emulateMedia({ reducedMotion: "reduce" });
@@ -73,7 +91,7 @@ test("browser back restores the home page after a transition", async ({ page }) 
   await page.goto("/", { waitUntil: "domcontentloaded" });
 
   await page.locator("#project-card-1").click();
-  await page.waitForURL("**/projects/duuduu-mattress.html");
+  await page.waitForURL("**/projects/vegaspaulyc.html");
   await expect(page.locator("body")).not.toHaveClass(/transition-active/);
 
   await page.goBack({ waitUntil: "domcontentloaded" });
