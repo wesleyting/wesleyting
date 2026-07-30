@@ -57,7 +57,23 @@ test("the homepage features projects in the intended order", async ({ page }) =>
   await expect(cards.nth(0)).toHaveAttribute("href", "/projects/vegaspaulyc.html");
   await expect(cards.nth(1)).toHaveAttribute("href", "/projects/duuduu-mattress.html");
   await expect(cards.nth(2)).not.toHaveAttribute("href", /.+/);
-  await expect(cards.nth(3)).toHaveAttribute("href", "/projects/token-studio.html");
+  const tokenStudioCard = cards.nth(3);
+  await expect(tokenStudioCard).toHaveAttribute("href", "https://tokenstoy.com/");
+  await expect(tokenStudioCard).toHaveAttribute("target", "_blank");
+  await expect(tokenStudioCard).toHaveAttribute("rel", /noopener/);
+  await expect(tokenStudioCard).toHaveAttribute("data-cursor-label", "View Website");
+  await expect(tokenStudioCard.locator(".project-card-cta")).toContainText("View website");
+  const sourceGallery = tokenStudioCard.locator(
+    ".project-card-marquee-group:not(.project-card-marquee-group--duplicate)",
+  );
+  await expect(sourceGallery.locator(".project-card-shot")).toHaveCount(3);
+  expect(await sourceGallery.locator(".project-card-shot img").evaluateAll((images) =>
+    images.map((image) => image.getAttribute("src")),
+  )).toEqual([
+    "/home/token-studio-cabin-character.webp",
+    "/home/token-studio-space-character.webp",
+    "/home/token-studio-brand-mark.webp",
+  ]);
 });
 
 test("the shared menu opens and closes with the keyboard", async ({ page }) => {

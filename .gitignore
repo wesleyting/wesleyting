@@ -28,3 +28,6 @@ playwright/.cache/
 *.njsproj
 *.sln
 *.sw?
+
+# Local high-resolution source artwork (optimized derivatives are committed)
+.asset-sources/
