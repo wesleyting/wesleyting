@@ -1,6 +1,7 @@
 import { expect, test } from "@playwright/test";
 
 const mobileViewport = { width: 390, height: 844 };
+const tabletViewport = { width: 820, height: 1180 };
 const desktopViewport = { width: 1440, height: 900 };
 
 function collectBrowserErrors(page) {
@@ -400,6 +401,63 @@ test("mobile keeps the location but hides the scroll prompt", async ({ page }) =
   expect(
     await heroVideo.evaluate((video) => video.currentTime),
   ).toBeLessThan(0.1);
+});
+
+test("project card spacing stays balanced on mobile and tablet", async ({
+  page,
+}) => {
+  const browserErrors = collectBrowserErrors(page);
+  await page.emulateMedia({ reducedMotion: "reduce" });
+
+  const measureCardSpacing = async (viewport) => {
+    await page.setViewportSize(viewport);
+    await page.goto("/", { waitUntil: "domcontentloaded" });
+    await page.evaluate(() => document.fonts.ready);
+    await page.addStyleTag({
+      content: "#project-card-1 { transform: none !important; }",
+    });
+
+    return page.locator("#project-card-1").evaluate((card) => {
+      const role = card
+        .querySelector(".project-card-role")
+        .getBoundingClientRect();
+      const badges = card
+        .querySelector(".project-card-pills")
+        .getBoundingClientRect();
+      const technologies = card
+        .querySelector(".project-card-tech")
+        .getBoundingClientRect();
+      const gallery = card
+        .querySelector(".project-card-media")
+        .getBoundingClientRect();
+
+      return {
+        roleToBadges: badges.top - role.bottom,
+        badgesToTechnologies: technologies.top - badges.bottom,
+        technologiesToGallery: gallery.top - technologies.bottom,
+      };
+    });
+  };
+
+  const mobileSpacing = await measureCardSpacing(mobileViewport);
+  const tabletSpacing = await measureCardSpacing(tabletViewport);
+
+  for (const spacing of [mobileSpacing, tabletSpacing]) {
+    expect(spacing.roleToBadges).toBeGreaterThanOrEqual(16);
+    expect(spacing.roleToBadges).toBeLessThanOrEqual(40);
+    expect(spacing.badgesToTechnologies).toBeGreaterThanOrEqual(12);
+    expect(spacing.badgesToTechnologies).toBeLessThanOrEqual(32);
+    expect(spacing.technologiesToGallery).toBeGreaterThanOrEqual(24);
+    expect(spacing.technologiesToGallery).toBeLessThanOrEqual(48);
+    expect(
+      spacing.roleToBadges - spacing.technologiesToGallery,
+    ).toBeLessThanOrEqual(8);
+  }
+
+  expect(
+    Math.abs(mobileSpacing.roleToBadges - tabletSpacing.roleToBadges),
+  ).toBeLessThanOrEqual(16);
+  expect(browserErrors).toEqual([]);
 });
 
 test("footer text reflows after crossing the responsive breakpoint", async ({

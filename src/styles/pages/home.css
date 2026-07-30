@@ -839,25 +839,25 @@ img {
 
   .project-card {
     width: calc(100% - 2rem);
-    min-height: 74svh;
+    min-height: min(74svh, 700px);
     height: auto;
     padding: 1.55rem 1.25rem 1.55rem;
     display: grid;
-    grid-template-rows: auto 1fr auto;
-    align-content: stretch;
-    gap: clamp(0.8rem, 2svh, 1.1rem);
+    grid-template-rows: auto auto;
+    align-content: start;
+    gap: clamp(1.5rem, 3svh, 2rem);
     overflow: hidden;
   }
 
   .project-card-copy {
     position: relative;
-    grid-row: 1 / 3;
+    grid-row: 1;
     min-height: 0;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    gap: clamp(1.45rem, 4.4svh, 2.85rem);
-    height: 100%;
+    justify-content: flex-start;
+    gap: clamp(1.15rem, 2.2svh, 1.5rem);
+    height: auto;
   }
 
   .project-card-topline {
@@ -929,8 +929,8 @@ img {
   .project-card-media {
     --project-gallery-gap: clamp(0.65rem, 2.5vw, 0.9rem);
     position: static;
-    grid-row: 3;
-    align-self: end;
+    grid-row: 2;
+    align-self: start;
     width: calc(100% + 2.5rem);
     height: auto;
     margin-left: -1.25rem;
@@ -947,7 +947,7 @@ img {
   }
 
   .project-card-shot {
-    flex: 0 0 clamp(220px, 70vw, 285px);
+    flex: 0 0 clamp(220px, 70vw, 420px);
     aspect-ratio: 3913 / 3094;
     border-radius: 6px;
   }
