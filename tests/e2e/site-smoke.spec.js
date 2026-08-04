@@ -42,6 +42,38 @@ for (const pageDetails of pages) {
   });
 }
 
+test("the DuuDuu hero presents the project scope and live store", async ({
+  page,
+}) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/projects/duuduu-mattress.html", {
+    waitUntil: "domcontentloaded",
+  });
+
+  await expect(page.locator(".case-subtitle")).toHaveText(
+    "Building the storefront, search, and campaign systems behind DuuDuu’s ecommerce growth.",
+  );
+
+  const details = page.locator(".case-hero-details");
+  await expect(details.locator("dt")).toHaveText([
+    "Role",
+    "Tech Stack",
+    "Live Store",
+  ]);
+  await expect(details.locator("dd")).toHaveText([
+    "Shopify Developer / Ecommerce Growth",
+    "Shopify / Liquid / CSS / JavaScript",
+    "Visit duuduu.com.au ↗",
+  ]);
+
+  const liveStore = details.getByRole("link", {
+    name: "Visit duuduu.com.au ↗",
+  });
+  await expect(liveStore).toHaveAttribute("href", "https://duuduu.com.au/");
+  await expect(liveStore).toHaveAttribute("target", "_blank");
+  await expect(liveStore).toHaveAttribute("rel", /noopener/);
+});
+
 test("the homepage features projects in the intended order", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/", { waitUntil: "domcontentloaded" });
