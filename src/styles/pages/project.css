@@ -191,9 +191,23 @@
 }
 
 .case-study-page .case-year {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.55rem;
   color: var(--case-text);
   font-size: var(--fs-meta);
   line-height: 1.1;
+}
+
+.case-study-page .case-location {
+  color: var(--case-muted);
+}
+
+.case-study-page .case-location::before {
+  content: "\2022";
+  margin-right: 0.55rem;
+  color: var(--case-faint);
 }
 
 .case-study-page .case-title {

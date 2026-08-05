@@ -24,6 +24,8 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     revealGroups.forEach((group) => {
+      if (group.matches(".case-kpis") && group.querySelector(".case-kpi-count")) return;
+
       const children = gsap.utils.toArray(group.children);
       if (!children.length) return;
 
@@ -54,14 +56,21 @@ document.addEventListener("DOMContentLoaded", () => {
   };
 
   const kpiGrid = document.querySelector(".case-kpis");
+  const kpiCards = kpiGrid ? gsap.utils.toArray(kpiGrid.children) : [];
   const kpiCounters = gsap.utils.toArray(".case-kpi-count");
 
-  if (kpiGrid && kpiCounters.length) {
+  if (kpiGrid && kpiCards.length && kpiCounters.length) {
     if (reduceMotion) {
       kpiCounters.forEach((counter) => {
         renderCounter(counter, Number.parseFloat(counter.dataset.countTo));
       });
     } else {
+      gsap.set(kpiCards, { autoAlpha: 0, y: 24 });
+
+      kpiCounters.forEach((counter) => {
+        renderCounter(counter, 0);
+      });
+
       const countTimeline = gsap.timeline({
         scrollTrigger: {
           trigger: kpiGrid,
@@ -70,11 +79,22 @@ document.addEventListener("DOMContentLoaded", () => {
         },
       });
 
+      countTimeline.to(
+        kpiCards,
+        {
+          autoAlpha: 1,
+          y: 0,
+          duration: 0.7,
+          ease: "power2.out",
+          stagger: 0.08,
+        },
+        0,
+      );
+
       kpiCounters.forEach((counter, index) => {
         const target = Number.parseFloat(counter.dataset.countTo);
         const count = { value: 0 };
 
-        renderCounter(counter, 0);
         countTimeline.to(
           count,
           {

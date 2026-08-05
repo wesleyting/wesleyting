@@ -72,6 +72,72 @@ test("the DuuDuu hero presents the project scope and live store", async ({
   await expect(liveStore).toHaveAttribute("href", "https://duuduu.com.au/");
   await expect(liveStore).toHaveAttribute("target", "_blank");
   await expect(liveStore).toHaveAttribute("rel", /noopener/);
+
+  const proof = page.locator(".duuduu-proof-grid");
+  await expect(proof.locator("article")).toHaveCount(3);
+  await expect(proof.locator("h3")).toHaveText([
+    "Search Growth",
+    "Customer Trust",
+    "Campaign Performance",
+  ]);
+  await expect(proof).toContainText("+316%");
+  await expect(proof).toContainText("5 out of 5");
+  await expect(proof).toContainText("56 current customer reviews.");
+  await expect(proof).toContainText("+60%");
+  await expect(proof).toContainText("ProductReview.com.au");
+  await expect(proof.locator(".case-kpi-count")).toHaveText(["316", "5.0", "60"]);
+
+  const role = page.locator(".duuduu-role");
+  const roleStatement = role.getByRole("heading", { level: 2 });
+  await expect(roleStatement).toContainText("campaigns and landing pages");
+  await expect(role.locator(".duuduu-role-media img")).toHaveAttribute(
+    "src",
+    "/projects/duuduu/duuduu-mattress-room.png",
+  );
+
+  const work = page.locator(".duuduu-work");
+  await expect(work.getByRole("heading", { level: 2 })).toHaveText(
+    "Built, Launched, and Measured",
+  );
+  await expect(work.locator("h3")).toHaveText([
+    "Storefront Experience",
+    "Product Storytelling",
+    "Search + Structure",
+    "Campaign Delivery",
+    "Brand + Comfort Content",
+  ]);
+  await expect(work.locator("video source").nth(0)).toHaveAttribute(
+    "src",
+    "/projects/duuduu/duuduu-landing-page-walkthrough.mp4",
+  );
+  await expect(work.locator("video source").nth(1)).toHaveAttribute(
+    "src",
+    "/projects/duuduu/duuduu-brand-comfort.mp4",
+  );
+  await expect(work.locator("img").nth(0)).toHaveAttribute("src", "/projects/duuduu/duuduu-product-page.png");
+  await expect(work.locator("img").nth(1)).toHaveAttribute("src", "/projects/duuduu/duuduu-search-pageviews.png");
+  await expect(work.locator("img").nth(2)).toHaveAttribute("src", "/projects/duuduu/duuduu-campaign-collage.webp");
+});
+
+test("case study headers identify the client location", async ({ page }) => {
+  const projects = [
+    {
+      path: "/projects/vegaspaulyc.html",
+      year: "2024–Present",
+      location: "Las Vegas, USA",
+    },
+    {
+      path: "/projects/duuduu-mattress.html",
+      year: "2025–Present",
+      location: "Australia",
+    },
+  ];
+
+  for (const project of projects) {
+    await page.goto(project.path, { waitUntil: "domcontentloaded" });
+    await expect(page.locator(".case-year")).toContainText(project.year);
+    await expect(page.locator(".case-location")).toHaveText(project.location);
+  }
 });
 
 test("the homepage features projects in the intended order", async ({ page }) => {

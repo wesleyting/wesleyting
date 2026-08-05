@@ -16,11 +16,6 @@ const sharedStyleTargets = {
   title: [".case-title", ["fontSize", "fontWeight", "lineHeight", "maxWidth"]],
   subtitle: [".case-subtitle", ["fontSize", "fontWeight", "lineHeight", "maxWidth"]],
   details: [".case-hero-details", ["gridColumn", "gridRow", "paddingTop", "borderTopWidth"]],
-  kpis: [".case-kpis", ["gridTemplateColumns", "marginTop", "borderTopWidth", "borderBottomWidth"]],
-  kpiCard: [".case-kpis article", ["minHeight", "paddingTop", "paddingRight", "paddingBottom", "paddingLeft"]],
-  context: [".case-context", ["gridTemplateColumns", "columnGap", "rowGap"]],
-  contextIntro: [".case-context-intro", ["position", "top", "rowGap"]],
-  contextCard: [".case-context-breakdown article", ["minHeight", "paddingTop", "paddingRight", "paddingBottom", "paddingLeft"]],
 };
 
 async function collectSharedStyles(page, path, viewport) {
