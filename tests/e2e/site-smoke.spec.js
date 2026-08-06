@@ -95,9 +95,20 @@ test("the DuuDuu hero presents the project scope and live store", async ({
     "/projects/duuduu/duuduu-mattress-room.png",
   );
 
+  const foundation = page.locator(".duuduu-foundation");
+  await expect(foundation.getByRole("heading", { level: 2 })).toHaveText(
+    "Built for a Considered Purchase",
+  );
+  await expect(foundation.locator("h3")).toHaveText([
+    "Buyer Confidence",
+    "Campaign Agility",
+    "Search + Learning",
+  ]);
+  await expect(page.locator(".duuduu-brand-break, .duuduu-loop-section")).toHaveCount(0);
+
   const work = page.locator(".duuduu-work");
   await expect(work.getByRole("heading", { level: 2 })).toHaveText(
-    "Built, Launched, and Measured",
+    "The Work Behind the Growth",
   );
   await expect(work.locator("h3")).toHaveText([
     "Storefront Experience",
@@ -117,6 +128,17 @@ test("the DuuDuu hero presents the project scope and live store", async ({
   await expect(work.locator("img").nth(0)).toHaveAttribute("src", "/projects/duuduu/duuduu-product-page.png");
   await expect(work.locator("img").nth(1)).toHaveAttribute("src", "/projects/duuduu/duuduu-search-pageviews.png");
   await expect(work.locator("img").nth(2)).toHaveAttribute("src", "/projects/duuduu/duuduu-campaign-collage.webp");
+
+  const outcome = page.locator(".duuduu-outcome");
+  await expect(outcome.getByRole("heading", { level: 2 })).toHaveText(
+    "A Store Built to Keep Improving",
+  );
+  await expect(outcome.locator(".outcome-count")).toHaveText(["+316%", "5/5"]);
+  await expect(outcome).toContainText("56 customer reviews");
+  await expect(outcome.getByRole("link", { name: /Visit Live Store/ })).toHaveAttribute(
+    "href",
+    "https://duuduu.com.au/",
+  );
 });
 
 test("case study headers identify the client location", async ({ page }) => {
@@ -153,6 +175,10 @@ test("the homepage features projects in the intended order", async ({ page }) =>
     "Token Studio",
   ]);
   await expect(cards.nth(0)).toHaveAttribute("href", "/projects/vegaspaulyc.html");
+  await expect(cards.nth(0).locator(".project-card-shot img").first()).toHaveAttribute(
+    "src",
+    "/home/project-vegaspaulyc-gallery-01.webp",
+  );
   await expect(cards.nth(1)).toHaveAttribute("href", "/projects/duuduu-mattress.html");
   await expect(cards.nth(2)).not.toHaveAttribute("href", /.+/);
   const tokenStudioCard = cards.nth(3);

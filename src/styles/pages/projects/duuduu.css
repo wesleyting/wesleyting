@@ -1,8 +1,6 @@
 .duuduu-case {
   --duuduu-indigo: #3512c9;
-  --duuduu-indigo-soft: rgba(53, 18, 201, 0.15);
   --duuduu-yellow: #ffd70a;
-  --duuduu-sky: #79b9ee;
   --duuduu-cloud: #f4f2ed;
   --case-accent: var(--duuduu-indigo);
   --case-accent-soft: rgba(53, 18, 201, 0.14);
@@ -171,138 +169,8 @@
   font-style: normal;
 }
 
-.duuduu-brand-break {
-  display: grid;
-  grid-template-columns: minmax(240px, 0.32fr) minmax(0, 0.68fr);
-  gap: clamp(2.5rem, 7vw, 8rem);
-  align-items: center;
-  padding-top: clamp(7rem, 12vw, 12rem);
-}
-
-.duuduu-brand-image {
-  aspect-ratio: 1000 / 791;
-  overflow: hidden;
-  background-color: #b8b5ae;
-  border: 1px solid var(--case-line);
-  border-radius: 8px;
-}
-
-.duuduu-brand-image img {
-  display: block;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.duuduu-loop-section {
-  padding-top: clamp(8rem, 14vw, 14rem);
-}
-
-.duuduu-loop {
-  --loop-progress: 0;
-  --loop-padding-top: clamp(3.5rem, 5vw, 4.5rem);
-  position: relative;
-  margin-top: clamp(5.5rem, 8vw, 8rem);
-  padding: var(--loop-padding-top) 1.5rem clamp(2rem, 3vw, 2.75rem);
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 1rem;
-  list-style: none;
-  background-color: rgba(8, 8, 8, 0.86);
-  border: 1px solid var(--case-line-strong);
-  border-radius: 28px;
-}
-
-.duuduu-loop::before,
-.duuduu-loop::after {
-  content: "";
-  position: absolute;
-  top: -1px;
-  left: 0;
-  width: 100%;
-  pointer-events: none;
-}
-
-.duuduu-loop::before {
-  border-top: 1px dashed var(--case-line-strong);
-}
-
-.duuduu-loop::after {
-  height: 3px;
-  background: linear-gradient(90deg, var(--duuduu-indigo), var(--duuduu-sky), var(--duuduu-yellow));
-  transform: scaleX(var(--loop-progress));
-  transform-origin: left center;
-  will-change: transform;
-}
-
-.duuduu-loop li {
-  --segment-progress: 0;
-  position: relative;
-  min-width: 0;
-  display: grid;
-  justify-items: center;
-  gap: 0.65rem;
-  text-align: center;
-}
-
-.duuduu-loop-node {
-  position: absolute;
-  top: calc(0px - var(--loop-padding-top) - 24px);
-  left: 50%;
-  z-index: 2;
-  width: 48px;
-  height: 48px;
-  display: grid;
-  place-items: center;
-  color: var(--case-secondary);
-  background-color: var(--case-bg);
-  border: 1px solid var(--case-line-strong);
-  border-radius: 50%;
-  font-size: var(--fs-caption);
-  font-weight: 700;
-  transform: translateX(-50%);
-  transition:
-    color 0.3s ease,
-    background-color 0.3s ease,
-    border-color 0.3s ease,
-    box-shadow 0.3s ease,
-    transform 0.3s ease;
-}
-
-.duuduu-loop li.is-active .duuduu-loop-node {
-  color: #130b00;
-  background-color: var(--duuduu-yellow);
-  border-color: var(--duuduu-yellow);
-  box-shadow:
-    0 0 0 4px rgba(255, 215, 10, 0.12),
-    0 0 22px rgba(53, 18, 201, 0.28);
-  transform: translateX(-50%) scale(1.045);
-}
-
-.duuduu-loop h3 {
-  color: var(--case-text);
-  font-size: var(--fs-card-title);
-  font-weight: 540;
-  line-height: 1;
-}
-
-.duuduu-loop p {
-  max-width: 22ch;
-  color: var(--case-secondary);
-  font-size: var(--fs-body-compact);
-  line-height: var(--lh-body);
-}
-
-.duuduu-work-heading {
-  gap: 1.15rem;
-}
-
-.duuduu-work-heading p {
-  max-width: 54ch;
-  color: var(--case-secondary);
-  font-size: var(--fs-body);
-  line-height: var(--lh-body);
-  text-align: center;
+.duuduu-work-heading h2 {
+  max-width: 26ch;
 }
 
 .duuduu-work .commerce-card-index {
@@ -396,45 +264,6 @@
   outline-offset: 3px;
 }
 
-.duuduu-outcome-statement {
-  overflow: hidden;
-}
-
-.duuduu-outcome-statement::after {
-  content: "";
-  position: absolute;
-  right: -8rem;
-  bottom: -11rem;
-  width: 22rem;
-  height: 22rem;
-  opacity: 0.12;
-  background-color: var(--duuduu-indigo);
-  border-radius: 50%;
-  pointer-events: none;
-}
-
-.duuduu-outcome-statement > * {
-  position: relative;
-  z-index: 1;
-}
-
-.duuduu-outcome-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.7rem;
-  list-style: none;
-}
-
-.duuduu-outcome-tags li {
-  padding: 0.65rem 0.9rem;
-  color: var(--case-secondary);
-  border: 1px solid var(--case-line-strong);
-  border-radius: 999px;
-  font-size: var(--fs-caption);
-  font-weight: 650;
-  text-transform: uppercase;
-}
-
 @media (hover: hover) and (pointer: fine) {
   .duuduu-work-video-toggle {
     transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
@@ -448,7 +277,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .duuduu-loop-node,
   .duuduu-work-media img,
   .duuduu-work-video-toggle {
     transition: none;
@@ -482,12 +310,6 @@
     text-align: center;
   }
 
-  .duuduu-brand-break {
-    grid-template-columns: 1fr;
-    gap: 2.75rem;
-    padding-top: 7rem;
-  }
-
   .duuduu-proof-grid {
     margin-top: 2.5rem;
   }
@@ -517,69 +339,6 @@
   .duuduu-role-copy h2 {
     font-size: clamp(2.15rem, 6vw, 3.5rem);
     line-height: 1.03;
-  }
-
-  .duuduu-loop-section {
-    padding-top: 8.5rem;
-  }
-
-  .duuduu-loop {
-    margin-top: 5rem;
-    padding: 0 0 0 4.25rem;
-    grid-template-columns: 1fr;
-    gap: 0;
-    background-color: transparent;
-    border: 0;
-    border-radius: 0;
-  }
-
-  .duuduu-loop::before,
-  .duuduu-loop::after {
-    display: none;
-  }
-
-  .duuduu-loop li {
-    min-height: 0;
-    padding: 0 0 3.25rem;
-    justify-items: start;
-    gap: 0.55rem;
-    text-align: left;
-  }
-
-  .duuduu-loop li:not(:last-child)::before,
-  .duuduu-loop li:not(:last-child)::after {
-    content: "";
-    position: absolute;
-    top: 24px;
-    left: calc(24px - 4.25rem - 1px);
-    width: 2px;
-    height: 100%;
-    pointer-events: none;
-  }
-
-  .duuduu-loop li:not(:last-child)::before {
-    border-left: 1px dashed var(--case-line-strong);
-  }
-
-  .duuduu-loop li:not(:last-child)::after {
-    background: linear-gradient(180deg, var(--duuduu-indigo), var(--duuduu-sky), var(--duuduu-yellow));
-    transform: scaleY(var(--segment-progress));
-    transform-origin: center top;
-    will-change: transform;
-  }
-
-  .duuduu-loop li:last-child {
-    padding-bottom: 0;
-  }
-
-  .duuduu-loop-node {
-    top: 0;
-    left: -4.25rem;
-    transform: none;
-  }
-
-  .duuduu-loop li.is-active .duuduu-loop-node {
-    transform: scale(1.045);
   }
 
   .duuduu-work-card--storefront,

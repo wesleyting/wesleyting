@@ -1483,7 +1483,7 @@
   min-width: 0;
   overflow: hidden;
   border-left: 1px solid var(--case-line);
-  background-color: #b8b5ae;
+  background-color: var(--case-line);
 }
 
 .next-project-media img {
@@ -1492,6 +1492,11 @@
   display: block;
   object-fit: cover;
   object-position: center;
+}
+
+.next-project-media--vegas img {
+  width: calc(100% + 2px);
+  max-width: none;
 }
 
 .project-footer {
