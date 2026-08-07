@@ -3,6 +3,7 @@ import { expect, test } from "@playwright/test";
 const caseStudyPages = [
   "/projects/vegaspaulyc.html",
   "/projects/duuduu-mattress.html",
+  "/projects/all-in-brownie.html",
 ];
 
 const viewports = [
@@ -44,7 +45,7 @@ for (const viewport of viewports) {
       (route) => route.abort(),
     );
 
-    const [vegasStyles, duuduuStyles] = await Promise.all(
+    const [baselineStyles, ...comparisonStyles] = await Promise.all(
       caseStudyPages.map(async (path) => {
         const isolatedPage = await page.context().newPage();
         const styles = await collectSharedStyles(
@@ -57,6 +58,8 @@ for (const viewport of viewports) {
       }),
     );
 
-    expect(duuduuStyles).toEqual(vegasStyles);
+    comparisonStyles.forEach((styles) => {
+      expect(styles).toEqual(baselineStyles);
+    });
   });
 }

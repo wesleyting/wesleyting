@@ -3,11 +3,32 @@ import { expect, test } from "@playwright/test";
 const pages = [
   { path: "/", title: /Wesley Ting \| Frontend and Ecommerce Developer/ },
   { path: "/about.html", title: /About Wesley Ting/ },
+  { path: "/contact.html", title: /Contact Wesley Ting/ },
+  { path: "/projects/all-in-brownie.html", title: /All-In Brownie/ },
   { path: "/projects/duuduu-mattress.html", title: /DuuDuu Mattress/ },
   { path: "/projects/vegaspaulyc.html", title: /VegasPaulyC/ },
   { path: "/projects/token-studio.html", title: /Token Studio/ },
   { path: "/projects/clearbooks-tech.html", title: /Clearbooks Tech/ },
 ];
+
+test("the contact page presents a concise Netlify-ready inquiry form", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/contact.html", { waitUntil: "domcontentloaded" });
+
+  await expect(page.getByRole("heading", { level: 1 })).toContainText("Tell me what");
+  await expect(page.getByRole("heading", { level: 1 })).toContainText("building.");
+
+  const form = page.locator('form[name="contact"]');
+  await expect(form).toHaveAttribute("method", "POST");
+  await expect(form).toHaveAttribute("data-netlify", "true");
+  await expect(form).toHaveAttribute("data-netlify-honeypot", "bot-field");
+  await expect(form.locator('input[name="form-name"]')).toHaveValue("contact");
+  await expect(form.locator("[required]")).toHaveCount(4);
+  await expect(page.getByRole("link", { name: "wesleytingdev@gmail.com" })).toHaveAttribute(
+    "href",
+    "mailto:wesleytingdev@gmail.com",
+  );
+});
 
 function collectBrowserErrors(page) {
   const errors = [];
@@ -194,6 +215,44 @@ test("case study headers identify the client location", async ({ page }) => {
   }
 });
 
+test("the All-In Brownie case study exposes the launch system and media template", async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  await page.goto("/projects/all-in-brownie.html", { waitUntil: "domcontentloaded" });
+
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText("All-In Brownie");
+  await expect(page.locator(".case-subtitle")).toHaveText(
+    "A playful ecommerce launch built around a community naming giveaway.",
+  );
+
+  const details = page.locator(".case-hero-details");
+  await expect(details.locator("dt")).toHaveText(["Role", "Tech Stack", "Scope"]);
+  await expect(details).toContainText("Frontend Developer / Ecommerce Integration");
+  await expect(details).toContainText("Next.js / GSAP / Shopify");
+
+  const foundation = page.locator(".all-in-foundation");
+  await expect(foundation.locator("h3")).toHaveText([
+    "Responsive Experience",
+    "Form + Data Validation",
+    "Consent Management",
+  ]);
+
+  await expect(page.locator(".all-in-entry-route > div")).toHaveCount(4);
+  const metrics = page.locator(".all-in-kpis");
+  await expect(metrics).toContainText("$24.6K");
+  await expect(metrics).toContainText("677 units");
+  await expect(metrics).toContainText("31.9K sessions");
+  await expect(page.locator(".all-in-analytics-frame")).toContainText("$24,582.59");
+  await expect(page.locator(".all-in-extension")).toContainText("BMF Brownie");
+  await expect(page.locator(".all-in-outcome .outcome-count")).toHaveText(["377", "308"]);
+
+  const carousel = page.locator("[data-story-carousel]");
+  await expect(carousel.locator("[data-story-slide]")).toHaveCount(5);
+  await expect(carousel.locator('[data-story-slide][aria-current="true"]')).toHaveCount(1);
+  await expect(carousel.locator("[data-story-status]")).toHaveText("03 / 05");
+  await carousel.locator("[data-story-next]").click();
+  await expect(carousel.locator("[data-story-status]")).toHaveText("04 / 05");
+});
+
 test("the homepage features projects in the intended order", async ({ page }) => {
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.goto("/", { waitUntil: "domcontentloaded" });
@@ -202,8 +261,8 @@ test("the homepage features projects in the intended order", async ({ page }) =>
   await expect(cards).toHaveCount(4);
   await expect(cards.locator("h3")).toHaveText([
     "VegasPaulyC",
-    "DuuDuu Mattress",
     "All-In Brownie",
+    "DuuDuu Mattress",
     "Token Studio",
   ]);
   await expect(cards.nth(0)).toHaveAttribute("href", "/projects/vegaspaulyc.html");
@@ -211,13 +270,44 @@ test("the homepage features projects in the intended order", async ({ page }) =>
     "src",
     "/home/project-vegaspaulyc-gallery-01.webp",
   );
-  await expect(cards.nth(1)).toHaveAttribute("href", "/projects/duuduu-mattress.html");
-  await expect(cards.nth(2)).not.toHaveAttribute("href", /.+/);
+  const allInCard = cards.nth(1);
+  await expect(allInCard).toHaveAttribute("href", "/projects/all-in-brownie.html");
+  await expect(allInCard).toHaveAttribute("data-cursor-label", "View Case Study");
+  await expect(allInCard).toContainText("rooted in poker circles");
+  await expect(allInCard.locator(".project-card-pills li")).toHaveText([
+    "Competition Site",
+    "Global Market",
+    "Multi-Brand",
+  ]);
+  await expect(allInCard).toContainText("Next.js");
+  await expect(allInCard).toContainText("Shopify");
+  const allInSourceGallery = allInCard.locator(
+    ".project-card-marquee-group:not(.project-card-marquee-group--duplicate)",
+  );
+  await expect(allInSourceGallery.locator(".project-card-shot")).toHaveCount(3);
+  expect(await allInSourceGallery.locator(".project-card-shot img").evaluateAll((images) =>
+    images.map((image) => image.getAttribute("src")),
+  )).toEqual([
+    "/projects/all-in-brownie/frankie-c-brownie-promotion.webp",
+    "/projects/all-in-brownie/all-in-brownie-product-stack.webp",
+    "/projects/all-in-brownie/bmf-brownie-package-design.webp",
+  ]);
+  await expect(cards.nth(2)).toHaveAttribute("href", "/projects/duuduu-mattress.html");
   const tokenStudioCard = cards.nth(3);
   await expect(tokenStudioCard).toHaveAttribute("href", "https://tokenstoy.com/");
   await expect(tokenStudioCard).toHaveAttribute("target", "_blank");
   await expect(tokenStudioCard).toHaveAttribute("rel", /noopener/);
   await expect(tokenStudioCard).toHaveAttribute("data-cursor-label", "View Website");
+  await expect(tokenStudioCard).toContainText("four locations across Western Canada");
+  await expect(tokenStudioCard).toContainText("Instagram");
+  await expect(tokenStudioCard).toContainText("Facebook");
+  await expect(tokenStudioCard.locator(".project-card-pills li")).toHaveText([
+    "Ecommerce",
+    "Digital Marketing",
+    "Retail UX",
+  ]);
+  await expect(tokenStudioCard.locator('img[src="/icons/instagram.svg"]')).toHaveCount(1);
+  await expect(tokenStudioCard.locator('img[src="/icons/facebook.svg"]')).toHaveCount(1);
   await expect(tokenStudioCard.locator(".project-card-cta")).toContainText("View website");
   const sourceGallery = tokenStudioCard.locator(
     ".project-card-marquee-group:not(.project-card-marquee-group--duplicate)",

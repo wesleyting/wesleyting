@@ -39,6 +39,8 @@ export default defineConfig({
       input: {
         main: resolve(__dirname, "index.html"),
         about: resolve(__dirname, "about.html"),
+        contact: resolve(__dirname, "contact.html"),
+        "projects/all-in-brownie": resolve(__dirname, "projects/all-in-brownie.html"),
         "projects/duuduu-mattress": resolve(__dirname, "projects/duuduu-mattress.html"),
         "projects/vegaspaulyc": resolve(__dirname, "projects/vegaspaulyc.html"),
         "projects/token-studio": resolve(__dirname, "projects/token-studio.html"),

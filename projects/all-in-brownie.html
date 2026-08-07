@@ -1,0 +1,415 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <script>
+      if ("scrollRestoration" in history) {
+        history.scrollRestoration = "manual";
+      }
+      if (!window.location.hash) {
+        const resetProjectScroll = () => {
+          window.scrollTo(0, 0);
+          requestAnimationFrame(() => window.scrollTo(0, 0));
+          setTimeout(() => window.scrollTo(0, 0), 80);
+        };
+        resetProjectScroll();
+        window.addEventListener("DOMContentLoaded", resetProjectScroll, { once: true });
+        window.addEventListener("load", resetProjectScroll, { once: true });
+        window.addEventListener("pageshow", resetProjectScroll, { once: true });
+      }
+      if (sessionStorage.getItem("page-transition-pending") === "true") {
+        document.documentElement.dataset.pageTransition = "pending";
+      }
+    </script>
+    <title>All-In Brownie | Wesley Ting</title>
+    <meta name="description" content="All-In Brownie interactive launch, giveaway system, and ecommerce case study by Wesley Ting." />
+    <link rel="icon" href="/favicon/favicon.ico" sizes="any" />
+    <link rel="icon" href="/favicon/favicon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/favicon/favicon-96x96.png" type="image/png" sizes="96x96" />
+    <link rel="apple-touch-icon" href="/favicon/apple-touch-icon.png" />
+    <link rel="manifest" href="/favicon/site.webmanifest" />
+    <link rel="stylesheet" href="/src/styles/base/global.css" />
+    <link rel="stylesheet" href="/src/styles/components/page-transition.css" />
+    <link rel="stylesheet" href="/src/styles/components/site-menu.css" />
+    <link rel="stylesheet" href="/src/styles/pages/project.css" />
+    <link rel="stylesheet" href="/src/styles/pages/projects/all-in-brownie.css" />
+  </head>
+  <body class="project-page case-study-page all-in-case" data-scroll-profile="case-study">
+    <a class="skip-link" href="#main">Skip to content</a>
+
+    <div class="transition" aria-hidden="true">
+      <div class="transition-overlay"></div>
+    </div>
+
+    <nav class="nav">
+      <div class="logo"><div class="logo-container"><a href="/">Wesley Ting</a></div></div>
+      <button class="menu-toggle-btn" type="button" aria-expanded="false" aria-controls="site-menu" aria-label="Open menu"><span class="menu-toggle-btn-wrapper"><span>Menu</span></span></button>
+    </nav>
+
+    <div class="nav-overlay" id="site-menu" aria-hidden="true">
+      <div class="nav-items">
+        <div class="nav-item"><a href="/">Home</a></div>
+        <div class="nav-item active"><a href="/#selected-work" aria-current="location">Work</a></div>
+        <div class="nav-item"><a href="/about.html">About</a></div>
+        <div class="nav-item"><a href="/contact.html">Contact</a></div>
+      </div>
+      <div class="nav-footer">
+        <div class="container">
+          <div class="nav-footer-item">
+            <a href="https://github.com/wesleyting" target="_blank" rel="noopener">GitHub</a>
+            <a href="https://x.com/wesleytingdev" target="_blank" rel="noopener">X</a>
+          </div>
+          <div class="nav-footer-item"><a href="/contact.html">[ &nbsp;Get In Touch&nbsp; ]</a></div>
+        </div>
+      </div>
+    </div>
+
+    <main id="main">
+      <section class="case-hero" aria-labelledby="project-title">
+        <figure class="case-hero-banner all-in-hero-banner" data-reveal>
+          <img src="/projects/all-in-brownie/all-in-brownie-hero-banner.webp" width="1116" height="298" alt="All-In Brownie launch banner with the packaged brownie and campaign branding" />
+        </figure>
+
+        <div class="case-hero-inner" data-reveal-group>
+          <p class="case-eyebrow case-year"><span>Community Ecommerce Launch</span><span class="case-location">All-In / BMF</span></p>
+          <h1 class="case-title" id="project-title">All-In Brownie</h1>
+          <p class="case-subtitle">A playful ecommerce launch built around a community naming giveaway.</p>
+          <div class="case-hero-grid">
+            <div class="case-copy case-intro-copy" data-reveal>
+              <p>All-In Brownie started inside the poker community with an open call to name the product. I built the responsive launch experience, submission and consent flow, and storefront path around it. The project later grew to include a second identity under the same product umbrella.</p>
+            </div>
+            <div class="case-kpis all-in-kpis" aria-label="Project highlights" data-reveal-group>
+              <article>
+                <span class="case-kpi-label">Total Sales</span>
+                <strong>
+                  <span class="sr-only">24,582 dollars and 59 cents in total sales</span>
+                  <span class="case-kpi-display" aria-hidden="true"><span class="case-kpi-count" data-count-to="24.6" data-count-decimals="1" data-count-prefix="$" data-count-suffix="K">$24.6K</span></span>
+                </strong>
+                <p>Recorded across the two-month Shopify reporting window.</p>
+              </article>
+              <article>
+                <span class="case-kpi-label">Order Volume</span>
+                <strong>
+                  <span class="sr-only">677 units sold</span>
+                  <span class="case-kpi-display" aria-hidden="true"><span class="case-kpi-count" data-count-to="677">677</span> units</span>
+                </strong>
+                <p>Sold across 377 orders during the reported period.</p>
+              </article>
+              <article>
+                <span class="case-kpi-label">Store Reach</span>
+                <strong>
+                  <span class="sr-only">31,955 online store sessions</span>
+                  <span class="case-kpi-display" aria-hidden="true"><span class="case-kpi-count" data-count-to="31.9" data-count-decimals="1" data-count-suffix="K">31.9K</span> sessions</span>
+                </strong>
+                <p>The online store reached 308 customers across the period.</p>
+              </article>
+            </div>
+            <dl class="case-details case-hero-details" aria-label="Project details" data-reveal>
+              <div>
+                <dt>Role</dt>
+                <dd>Frontend Developer / Ecommerce Integration</dd>
+              </div>
+              <div>
+                <dt>Tech Stack</dt>
+                <dd>Next.js / GSAP / Shopify</dd>
+              </div>
+              <div>
+                <dt>Scope</dt>
+                <dd>Launch Site / Giveaway System / Commerce</dd>
+              </div>
+            </dl>
+          </div>
+        </div>
+      </section>
+
+      <section class="case-section case-context all-in-foundation" aria-labelledby="foundation-title">
+        <div class="case-context-intro" data-reveal-group>
+          <p class="case-section-kicker">System Foundation</p>
+          <h2 id="foundation-title">Built for More Than a Landing Page</h2>
+          <div class="case-copy">
+            <p>The giveaway needed an energetic front end and a dependable system behind it. Every entry had to be usable, reviewable, and connected to clear consent expectations.</p>
+          </div>
+        </div>
+        <div class="case-context-breakdown">
+          <article data-reveal>
+            <span>01</span>
+            <div>
+              <h3>Responsive Experience</h3>
+              <p>Built the Next.js interface to carry the campaign from social traffic into a focused mobile and desktop entry flow.</p>
+            </div>
+          </article>
+          <article data-reveal>
+            <span>02</span>
+            <div>
+              <h3>Form + Data Validation</h3>
+              <p>Structured the submission fields, validation states, and entry rules so the team received cleaner information to review.</p>
+            </div>
+          </article>
+          <article data-reveal>
+            <span>03</span>
+            <div>
+              <h3>Consent Management</h3>
+              <p>Placed eligibility, privacy, and consent requirements inside the entry journey instead of treating them as an afterthought.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="case-section all-in-product-break" aria-label="All-In Brownie product direction" data-reveal>
+        <figure class="case-image-placeholder case-image-asset">
+          <img src="/projects/all-in-brownie/all-in-brownie-product-stack.webp" width="2400" height="1898" loading="lazy" decoding="async" alt="Stacked All-In Brownies on the blue and cream campaign artwork" />
+        </figure>
+      </section>
+
+      <section class="case-section launch-story all-in-entry-system" aria-labelledby="entry-system-title">
+        <p class="case-section-kicker" data-reveal>Giveaway System</p>
+        <div class="launch-story-intro">
+          <h2 id="entry-system-title" data-reveal>One Campaign, Four Connected Steps</h2>
+          <div class="launch-story-copy" data-reveal>
+            <p class="launch-story-lead">The $10,000 naming giveaway turned attention into participation.</p>
+            <p>The experience had to invite people in, prevent incomplete entries, capture the required acknowledgements, and leave the team with an organized review process. Each step was designed as part of the same system.</p>
+          </div>
+        </div>
+        <dl class="launch-route all-in-entry-route" aria-label="Naming giveaway entry workflow" data-launch-route>
+          <div>
+            <span class="launch-route-icon all-in-route-icon" aria-hidden="true">01</span>
+            <dt><span>01</span> Invite</dt>
+            <dd>Campaign Page</dd>
+          </div>
+          <div>
+            <span class="launch-route-icon all-in-route-icon" aria-hidden="true">02</span>
+            <dt><span>02</span> Validate</dt>
+            <dd>Entry Rules</dd>
+          </div>
+          <div>
+            <span class="launch-route-icon all-in-route-icon" aria-hidden="true">03</span>
+            <dt><span>03</span> Record</dt>
+            <dd>Consent Data</dd>
+          </div>
+          <div>
+            <span class="launch-route-icon all-in-route-icon" aria-hidden="true">04</span>
+            <dt><span>04</span> Review</dt>
+            <dd>Admin Workflow</dd>
+          </div>
+        </dl>
+      </section>
+
+      <section class="case-section commerce-system-section all-in-work" aria-labelledby="work-title">
+        <div class="commerce-system-heading" data-reveal>
+          <h2 id="work-title">The Launch in Practice</h2>
+        </div>
+        <div class="commerce-system-grid all-in-work-grid" data-reveal-group>
+          <article class="commerce-card commerce-card--featured commerce-card--storefront all-in-work-card all-in-work-card--campaign">
+            <figure class="commerce-card-media">
+              <img src="/projects/all-in-brownie/frankie-c-brownie-promotion.webp" width="1957" height="1547" loading="lazy" decoding="async" alt="Frankie C holding an All-In Brownie on campaign artwork" />
+            </figure>
+            <div class="commerce-card-content">
+              <span class="commerce-card-index">01</span>
+              <div>
+                <h3>Campaign Launch</h3>
+                <p>A recognizable face, a clear prize, and one focused action.</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="commerce-card commerce-card--product all-in-work-card all-in-work-card--product">
+            <figure class="commerce-card-media">
+              <img src="/projects/all-in-brownie/all-in-brownie-product-stack.webp" width="2400" height="1898" loading="lazy" decoding="async" alt="All-In Brownie product stack and launch art" />
+            </figure>
+            <div class="commerce-card-content">
+              <span class="commerce-card-index">02</span>
+              <div>
+                <h3>Product Story</h3>
+                <p>The brownie stayed central across campaign and commerce.</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="commerce-card commerce-card--operations all-in-work-card all-in-work-card--slot">
+            <div class="all-in-media-slot all-in-media-slot--site" role="img" aria-label="Reserved space for an All-In Brownie website screenshot">
+              <span>Website capture</span>
+              <strong>Storefront</strong>
+              <small>Screenshot slot</small>
+            </div>
+            <div class="commerce-card-content">
+              <span class="commerce-card-index">03</span>
+              <div>
+                <h3>Commerce Path</h3>
+                <p>A direct handoff from campaign interest into Shopify.</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="commerce-card commerce-card--merch all-in-work-card all-in-work-card--bmf">
+            <figure class="commerce-card-media">
+              <img src="/projects/all-in-brownie/bmf-brownie-package-design.webp" width="2400" height="1898" loading="lazy" decoding="async" alt="BMF Brownie cowboy and skull package artwork" />
+            </figure>
+            <div class="commerce-card-content">
+              <span class="commerce-card-index">04</span>
+              <div>
+                <h3>BMF Packaging</h3>
+                <p>A second identity built on the same product.</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="commerce-card commerce-card--featured commerce-card--preorder all-in-work-card all-in-work-card--slot">
+            <div class="all-in-media-slot all-in-media-slot--analytics" role="img" aria-label="Reserved space for the Shopify analytics proof image">
+              <span>Verified performance</span>
+              <strong>$24.6K</strong>
+              <small>31,955 sessions &middot; 377 orders</small>
+            </div>
+            <div class="commerce-card-content">
+              <span class="commerce-card-index">05</span>
+              <div>
+                <h3>Commerce Analytics</h3>
+                <p>Reserved for the supporting Shopify capture.</p>
+              </div>
+            </div>
+          </article>
+
+          <article class="commerce-card commerce-card--support all-in-work-card all-in-work-card--slot">
+            <div class="all-in-media-slot all-in-media-slot--stories" role="img" aria-label="Reserved space for launch story media">
+              <span>Social archive</span>
+              <strong>9:16</strong>
+              <small>Story media slot</small>
+            </div>
+            <div class="commerce-card-content">
+              <span class="commerce-card-index">06</span>
+              <div>
+                <h3>Launch Stories</h3>
+                <p>Founder posts and campaign response in context.</p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="case-section case-solution all-in-proof" aria-labelledby="proof-title">
+        <div class="case-solution-copy" data-reveal>
+          <p class="case-section-kicker">Storefront Performance</p>
+          <h2 id="proof-title">Proof, Not Decoration</h2>
+          <div class="case-copy">
+            <p>The final case study will pair the sales result with its Shopify analytics capture. The slot is sized for readable interface text, date context, and any redactions needed before publishing.</p>
+          </div>
+        </div>
+        <div class="case-solution-image all-in-analytics-frame" data-reveal aria-label="Shopify analytics image placeholder">
+          <div class="all-in-analytics-heading">
+            <span>Shopify Analytics</span>
+            <span>2-month view</span>
+          </div>
+          <div class="all-in-analytics-metric">
+            <strong>$24.6K</strong>
+            <span>Total sales recorded &middot; exact $24,582.59</span>
+          </div>
+          <div class="all-in-analytics-chart" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+          <p>Replace this panel with the verified analytics screenshot.</p>
+        </div>
+      </section>
+
+      <section class="case-section all-in-stories" aria-labelledby="stories-title">
+        <div class="all-in-stories-heading" data-reveal>
+          <p class="case-section-kicker">Community Response</p>
+          <h2 id="stories-title">Stories From the Launch</h2>
+          <p>The carousel is ready for the founder&rsquo;s Instagram stories. The active story stays centered, while the previous and next posts remain clickable at either side.</p>
+        </div>
+
+        <div class="all-in-story-carousel" data-story-carousel role="region" aria-label="All-In Brownie launch stories" data-reveal>
+          <div class="all-in-story-stage">
+            <button class="all-in-story-slide is-far-before" type="button" data-story-slide aria-label="View story 1: Campaign introduction">
+              <span class="all-in-story-placeholder all-in-story-placeholder--red"><small>Story 01</small><strong>Campaign<br />Introduction</strong><em>9:16 media slot</em></span>
+            </button>
+            <button class="all-in-story-slide is-before" type="button" data-story-slide aria-label="View story 2: Naming giveaway">
+              <span class="all-in-story-placeholder all-in-story-placeholder--blue"><small>Story 02</small><strong>Naming<br />Giveaway</strong><em>9:16 media slot</em></span>
+            </button>
+            <button class="all-in-story-slide is-active" type="button" data-story-slide aria-label="View story 3: Product reveal" aria-current="true">
+              <span class="all-in-story-placeholder all-in-story-placeholder--lime"><small>Story 03</small><strong>Product<br />Reveal</strong><em>9:16 media slot</em></span>
+            </button>
+            <button class="all-in-story-slide is-after" type="button" data-story-slide aria-label="View story 4: Community reaction">
+              <span class="all-in-story-placeholder all-in-story-placeholder--cream"><small>Story 04</small><strong>Community<br />Reaction</strong><em>9:16 media slot</em></span>
+            </button>
+            <button class="all-in-story-slide is-far-after" type="button" data-story-slide aria-label="View story 5: BMF extension">
+              <span class="all-in-story-placeholder all-in-story-placeholder--yellow"><small>Story 05</small><strong>BMF<br />Extension</strong><em>9:16 media slot</em></span>
+            </button>
+          </div>
+          <div class="all-in-story-controls">
+            <button type="button" data-story-previous aria-label="View previous story">&larr; Previous</button>
+            <span data-story-status aria-live="polite">03 / 05</span>
+            <button type="button" data-story-next aria-label="View next story">Next &rarr;</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="case-section case-solution all-in-extension" aria-labelledby="extension-title">
+        <div class="case-solution-copy" data-reveal>
+          <p class="case-section-kicker">Brand Extension</p>
+          <h2 id="extension-title">One Product, Another Identity</h2>
+          <div class="case-copy">
+            <p>The same core brownie later extended into BMF Brownie with packaging connected to Cowboy Cerrone. The digital system had to leave room for a distinct voice without rebuilding the commerce foundation.</p>
+          </div>
+        </div>
+        <figure class="case-solution-image case-image-placeholder case-image-asset all-in-bmf-image" data-reveal>
+          <img src="/projects/all-in-brownie/bmf-brownie-package-design.webp" width="2400" height="1898" loading="lazy" decoding="async" alt="BMF Brownie packaging direction with cowboy and skull artwork" />
+        </figure>
+      </section>
+
+      <section class="case-section outcome-summary all-in-outcome" aria-labelledby="outcome-title">
+        <p class="case-section-kicker" data-reveal>Outcome</p>
+        <div class="outcome-summary-statement" data-outcome-summary>
+          <h2 id="outcome-title" data-outcome-title>From Giveaway to Ecommerce Brand</h2>
+          <div class="outcome-summary-copy" data-outcome-copy>
+            <p>A participatory launch became a working ecommerce brand, recording 377 orders, 677 units sold, and more than 31,000 store sessions across the reported period.</p>
+            <div class="outcome-summary-footer">
+              <dl class="outcome-proof" aria-label="Additional project results">
+                <div>
+                  <dt><span class="sr-only">377</span><span class="outcome-count" aria-hidden="true" data-count-to="377">377</span></dt>
+                  <dd>Orders</dd>
+                </div>
+                <div>
+                  <dt><span class="sr-only">308</span><span class="outcome-count" aria-hidden="true" data-count-to="308">308</span></dt>
+                  <dd>Customers</dd>
+                </div>
+              </dl>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="case-section next-project" aria-labelledby="next-title" data-reveal>
+        <a class="next-project-card" href="/projects/duuduu-mattress.html" data-cursor-label="View Next Project">
+          <div class="next-project-copy">
+            <div class="next-project-meta">
+              <span>Next Project</span>
+              <span>Shopify Growth Partnership</span>
+            </div>
+            <div class="next-project-intro">
+              <h2 id="next-title">DuuDuu Mattress</h2>
+              <p>Ongoing storefront development, campaign delivery, search growth, and ecommerce optimization for an Australian mattress brand.</p>
+            </div>
+            <span class="next-project-cta">View Case Study &nearr;</span>
+          </div>
+          <figure class="next-project-media" aria-hidden="true">
+            <img src="/projects/duuduu/duuduu-brand-lifestyle.webp" width="1000" height="791" loading="lazy" decoding="async" alt="" />
+          </figure>
+        </a>
+      </section>
+    </main>
+
+    <footer class="project-footer">
+      <div class="project-footer-inner">
+        <a href="/">Wesley Ting</a>
+        <a class="project-footer-email" href="mailto:wesleytingdev@gmail.com">wesleytingdev@gmail.com</a>
+        <a href="/#selected-work">View All Work</a>
+      </div>
+    </footer>
+
+    <script type="module" src="/src/scripts/shared/page-transition.js"></script>
+    <script type="module" src="/src/scripts/shared/site-menu.js"></script>
+    <script type="module" src="/src/scripts/shared/cursor-label.js"></script>
+    <script type="module" src="/src/scripts/shared/smooth-scroll.js"></script>
+    <script type="module" src="/src/scripts/projects/case-study.js"></script>
+    <script type="module" src="/src/scripts/projects/all-in-brownie.js"></script>
+  </body>
+</html>
