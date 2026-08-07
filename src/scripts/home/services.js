@@ -9,6 +9,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const headers = gsap.utils.toArray(".services-header");
   const copy = document.querySelector(".services-copy");
   const copyText = document.querySelector(".services-copy .animate-text");
+  const mobileLayout = window.matchMedia("(max-width: 1000px)");
 
   if (!services || !headerGroup || headers.length !== 3 || !copy || !copyText) return;
 
@@ -30,11 +31,10 @@ document.addEventListener("DOMContentLoaded", () => {
     scrollTrigger: {
       trigger: services,
       start: "top top",
-      end: () => `+=${window.innerHeight * 4.25}`,
+      end: () => `+=${window.innerHeight * (mobileLayout.matches ? 2.15 : 4.25)}`,
       pin: true,
       pinSpacing: true,
-      // Lenis already smooths the page scroll. A timed scrub here adds a
-      // second easing layer that keeps catching up as the pin releases.
+      // Keep the sequence tied directly to the user's scroll position.
       scrub: true,
       anticipatePin: 1,
       invalidateOnRefresh: true,
@@ -46,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
     .to(headers, { xPercent: 0, duration: 1 })
     .to(headers, { yPercent: -50, duration: 1 })
     .to(headers, {
-      scale: () => (window.innerWidth <= 1000 ? 0.3 : 0.1),
+      scale: () => (mobileLayout.matches ? 0.3 : 0.1),
       y: () => -window.innerHeight * 0.28,
       duration: 1,
     })

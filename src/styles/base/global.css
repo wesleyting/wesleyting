@@ -35,7 +35,8 @@
 
   --radius: 1.5rem;
   --pad-desktop: 2rem;
-  --pad-mobile: 1rem;
+  --pad-mobile: 1.5rem;
+  --site-gutter: 2.5rem;
 }
 
 * {
@@ -45,6 +46,7 @@
 }
 
 html {
+  background-color: #000;
   overflow-y: auto;
   scrollbar-gutter: stable;
   scrollbar-width: thin;
@@ -287,6 +289,10 @@ section {
 }
 
 @media (max-width: 1000px) {
+  :root {
+    --site-gutter: var(--pad-mobile);
+  }
+
   h1 {
     font-size: 5rem;
   }

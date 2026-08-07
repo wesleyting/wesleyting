@@ -14,6 +14,12 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   const isMobile = window.innerWidth <= 1000;
+  const usesNativeHomeScroll = isMobile && document.body.classList.contains("home-page");
+
+  if (usesNativeHomeScroll) {
+    return;
+  }
+
   const scrollProfile = document.body.dataset.scrollProfile;
   const isCaseStudy = scrollProfile === "case-study";
   const prefersReducedMotion = window.matchMedia(

@@ -5,7 +5,13 @@
   width: 100vw;
   height: 100svh;
   overflow: hidden;
+  visibility: hidden;
   pointer-events: none;
+}
+
+html[data-page-transition="pending"] .transition,
+body.transition-active .transition {
+  visibility: visible;
 }
 
 .transition-overlay {
@@ -19,7 +25,7 @@
 }
 
 html[data-page-transition="pending"] {
-  background-color: #7134ff;
+  background-color: #000;
 }
 
 html[data-page-transition="pending"] body > :not(.transition) {

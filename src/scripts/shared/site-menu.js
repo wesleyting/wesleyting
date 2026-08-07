@@ -126,7 +126,7 @@ function addNavItemHoverEffects() {
 }
 
 // menu functions
-function openMenu() {
+function openMenu({ focusFirstLink = false } = {}) {
   const navOverlay = document.querySelector(".nav-overlay");
   const menuToggleBtn = document.querySelector(".menu-toggle-btn");
   const navItems = document.querySelectorAll(".nav-item");
@@ -149,7 +149,9 @@ function openMenu() {
     duration: reduceMotion ? 0 : 0.3,
     onComplete: () => {
       isAnimating = false;
-      navOverlay.querySelector(".nav-item a")?.focus({ preventScroll: true });
+      if (focusFirstLink) {
+        navOverlay.querySelector(".nav-item a")?.focus({ preventScroll: true });
+      }
     },
   });
 
@@ -265,7 +267,7 @@ document.fonts.ready.then(() => {
 
   navOverlay.inert = true;
 
-  menuToggleBtn.addEventListener("click", () => {
+  menuToggleBtn.addEventListener("click", (event) => {
     if (isAnimating) {
       gsap.killTweensOf([navOverlay, navItems]);
       cleanupScrambleInstances();
@@ -274,7 +276,7 @@ document.fonts.ready.then(() => {
     }
 
     if (!isMenuOpen) {
-      openMenu();
+      openMenu({ focusFirstLink: event.detail === 0 });
     } else {
       closeMenu();
     }

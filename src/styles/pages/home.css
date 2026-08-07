@@ -222,10 +222,11 @@ a {
 }
 
 @media (max-width: 900px) {
-  nav,
+  .nav,
   section,
   .hero {
-    padding: 1.5em;
+    padding-right: var(--site-gutter);
+    padding-left: var(--site-gutter);
   }
 
   .hero {
@@ -834,11 +835,11 @@ img {
   }
 
   .sticky-cards {
-    height: 400svh;
+    height: 430svh;
   }
 
   .project-card {
-    width: calc(100% - 2rem);
+    width: calc(100% - var(--site-gutter) * 2);
     min-height: min(74svh, 700px);
     height: auto;
     padding: 1.55rem 1.25rem 1.55rem;
@@ -931,14 +932,26 @@ img {
     position: static;
     grid-row: 2;
     align-self: start;
-    width: calc(100% + 2.5rem);
+    width: 100%;
     height: auto;
-    margin-left: -1.25rem;
+    margin-left: 0;
+    padding: 0.15rem 0.15rem 0.65rem;
     min-height: 0;
     align-items: flex-start;
     gap: var(--project-gallery-gap);
-    overflow: hidden;
+    overflow-x: auto;
+    overflow-y: hidden;
     border-left: 0;
+    scroll-padding-inline: 0.15rem;
+    scroll-snap-type: x proximity;
+    overscroll-behavior-inline: contain;
+    scrollbar-width: none;
+    touch-action: pan-x pan-y;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .project-card-media::-webkit-scrollbar {
+    display: none;
   }
 
   .project-card-marquee,
@@ -946,10 +959,20 @@ img {
     height: auto;
   }
 
+  .project-card-marquee {
+    animation: none;
+    transform: translate3d(0, 0, 0);
+  }
+
+  .project-card-marquee-group--duplicate {
+    display: none;
+  }
+
   .project-card-shot {
-    flex: 0 0 clamp(220px, 70vw, 420px);
+    flex: 0 0 clamp(190px, 62vw, 280px);
     aspect-ratio: 3913 / 3094;
     border-radius: 6px;
+    scroll-snap-align: start;
   }
 
   .project-card-shot img {

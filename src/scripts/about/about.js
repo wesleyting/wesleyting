@@ -1,9 +1,62 @@
 import gsap from "gsap";
+import { Observer } from "gsap/Observer";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(Observer, ScrollTrigger);
 
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+const albumArtwork = import.meta.glob(
+  "../../assets/about/albums/*.{avif,jpeg,jpg,png,webp}",
+  { eager: true, import: "default" },
+);
+function formatAlbumSlug(slug) {
+  return slug
+    .split("-")
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(" ")
+    .replace(/^Ok\b/, "OK");
+}
+
+function getAlbumArtwork() {
+  return Object.entries(albumArtwork)
+    .map(([path, source]) => {
+      const filename = path.split(/[\\/]/).pop() || "";
+      const match = filename.match(/^album-(\d+)-(cover|mockup|padded)-(.+)\.[^.]+$/i);
+
+      if (!match) return null;
+
+      const [, order, type, slug] = match;
+
+      return {
+        filename,
+        order: Number.parseInt(order, 10),
+        type: type.toLowerCase(),
+        source,
+        title: formatAlbumSlug(slug),
+      };
+    })
+    .filter(Boolean)
+    .sort((first, second) => first.order - second.order || first.filename.localeCompare(second.filename));
+}
+
+function renderAlbumArtwork(albumSet) {
+  const fragment = document.createDocumentFragment();
+
+  getAlbumArtwork().forEach(({ type, source, title }) => {
+    const card = document.createElement("figure");
+    const image = document.createElement("img");
+
+    card.className = `listening-card listening-card--${type}`;
+    image.src = source;
+    image.alt = `${title} album artwork`;
+    image.loading = "lazy";
+    image.decoding = "async";
+    card.append(image);
+    fragment.append(card);
+  });
+
+  albumSet.replaceChildren(fragment);
+}
 
 function revealPage() {
   const titleLines = gsap.utils.toArray(".about-title-line > span");
@@ -15,7 +68,7 @@ function revealPage() {
   }
 
   gsap.set(titleLines, { yPercent: 112, rotate: 1.5 });
-  gsap.set(heroDetails, { autoAlpha: 0, y: 16 });
+  gsap.set(heroDetails, { autoAlpha: 0, y: 18 });
 
   const delay = window.__arrivedViaTransition ? 0.28 : 0.12;
   const timeline = gsap.timeline({ delay });
@@ -33,7 +86,7 @@ function revealPage() {
       {
         autoAlpha: 1,
         y: 0,
-        duration: 0.7,
+        duration: 0.72,
         ease: "power3.out",
         stagger: 0.1,
       },
@@ -57,76 +110,138 @@ function createScrollReveals() {
       },
     });
   });
-
-  gsap.utils.toArray("[data-reveal-group]").forEach((group) => {
-    const children = gsap.utils.toArray(group.children);
-    if (!children.length) return;
-
-    gsap.from(children, {
-      autoAlpha: 0,
-      y: 26,
-      duration: 0.76,
-      ease: "power3.out",
-      stagger: 0.09,
-      scrollTrigger: {
-        trigger: group,
-        start: "top 84%",
-        once: true,
-      },
-    });
-  });
 }
 
-function createProofInteraction() {
-  const proof = document.querySelector(".about-proof");
-  const mark = document.querySelector("[data-parallax-mark]");
-  const precisePointer = window.matchMedia("(hover: hover) and (pointer: fine)").matches;
+function createAlbumScroller() {
+  const section = document.querySelector(".about-listening");
+  const viewport = document.querySelector("[data-listening-viewport]");
+  const track = document.querySelector("[data-listening-track]");
+  const originalSet = document.querySelector("[data-listening-set]");
 
-  if (!proof || !mark || reduceMotion || !precisePointer) return;
+  if (!section || !viewport || !track || !originalSet) return;
 
-  const moveX = gsap.quickTo(mark, "x", { duration: 0.7, ease: "power3.out" });
-  const moveY = gsap.quickTo(mark, "y", { duration: 0.7, ease: "power3.out" });
-  const rotate = gsap.quickTo(mark, "rotation", { duration: 0.9, ease: "power3.out" });
+  renderAlbumArtwork(originalSet);
+  if (!originalSet.children.length) return;
 
-  proof.addEventListener("pointermove", (event) => {
-    const bounds = proof.getBoundingClientRect();
-    const x = (event.clientX - bounds.left) / bounds.width - 0.5;
-    const y = (event.clientY - bounds.top) / bounds.height - 0.5;
+  if (reduceMotion) {
+    viewport.classList.add("is-static");
+    return;
+  }
 
-    moveX(x * 24);
-    moveY(y * 18);
-    rotate(x * 2.5);
+  const duplicateSet = originalSet.cloneNode(true);
+  duplicateSet.classList.add("listening-set--duplicate");
+  duplicateSet.removeAttribute("data-listening-set");
+  duplicateSet.setAttribute("aria-hidden", "true");
+  duplicateSet.querySelectorAll("img").forEach((image) => {
+    image.alt = "";
+  });
+  track.append(duplicateSet);
+
+  const originalCards = [...originalSet.querySelectorAll(".listening-card")];
+  const cards = [...track.querySelectorAll(".listening-card")];
+  const tiltValues = originalCards.map(() => (Math.random() - 0.5) * 20);
+
+  let total = 0;
+  let isInView = false;
+  let wrapPosition = gsap.utils.wrap(-1, 0);
+
+  const wrapValue = (value) => wrapPosition(Number.parseFloat(value));
+  const moveTrack = gsap.quickTo(track, "x", {
+    duration: 0.5,
+    ease: "power3",
+    modifiers: {
+      x: gsap.utils.unitize(wrapValue),
+    },
   });
 
-  proof.addEventListener("pointerleave", () => {
-    moveX(0);
-    moveY(0);
-    rotate(0);
-  });
-}
+  const measureLoop = () => {
+    const styles = window.getComputedStyle(track);
+    const gap = Number.parseFloat(styles.columnGap || styles.gap) || 0;
+    const cycleWidth = originalSet.getBoundingClientRect().width + gap;
 
-function setupAnchorScroll() {
-  document.querySelectorAll('a[href^="#"]').forEach((link) => {
-    link.addEventListener("click", (event) => {
-      const target = document.querySelector(link.getAttribute("href"));
-      if (!target || !window.lenis) return;
+    if (cycleWidth <= 0) return;
 
-      event.preventDefault();
-      window.lenis.scrollTo(target, {
-        offset: 0,
-        duration: reduceMotion ? 0 : 1.1,
-      });
-      history.replaceState(null, "", link.getAttribute("href"));
-    });
+    wrapPosition = gsap.utils.wrap(-cycleWidth, 0);
+    total = wrapPosition(total);
+    gsap.set(track, { x: total });
+  };
+
+  const pressTimeline = gsap.timeline({ paused: true });
+  pressTimeline.to(cards, {
+    rotate: (index) => tiltValues[index % tiltValues.length],
+    xPercent: (index) => tiltValues[index % tiltValues.length],
+    yPercent: (index) => tiltValues[index % tiltValues.length],
+    scale: 0.95,
+    duration: 0.5,
+    ease: "back.inOut(3)",
   });
+
+  const finishInteraction = () => {
+    viewport.classList.remove("is-dragging");
+    pressTimeline.reverse();
+  };
+
+  const observer = Observer.create({
+    target: track,
+    type: "pointer,touch",
+    onPress: () => {
+      viewport.classList.add("is-dragging");
+      pressTimeline.play();
+    },
+    onDrag: (self) => {
+      total += self.deltaX;
+      moveTrack(total);
+    },
+    onRelease: finishInteraction,
+    onStop: finishInteraction,
+  });
+
+  const visibilityTrigger = ScrollTrigger.create({
+    trigger: section,
+    start: "top bottom",
+    end: "bottom top",
+    onToggle: (self) => {
+      isInView = self.isActive;
+    },
+  });
+
+  const tick = (_time, deltaTime) => {
+    const canMove = isInView && !document.hidden;
+
+    if (!canMove) return;
+
+    total -= deltaTime / 10;
+    moveTrack(total);
+  };
+
+  const resizeObserver = "ResizeObserver" in window
+    ? new ResizeObserver(measureLoop)
+    : null;
+
+  if (resizeObserver) {
+    resizeObserver.observe(originalSet);
+    resizeObserver.observe(viewport);
+  } else {
+    window.addEventListener("resize", measureLoop);
+  }
+
+  gsap.ticker.add(tick);
+  requestAnimationFrame(measureLoop);
+
+  window.addEventListener("pagehide", () => {
+    gsap.ticker.remove(tick);
+    observer.kill();
+    visibilityTrigger.kill();
+    resizeObserver?.disconnect();
+    window.removeEventListener("resize", measureLoop);
+  }, { once: true });
 }
 
 document.addEventListener("DOMContentLoaded", () => {
   document.fonts.ready.then(() => {
     revealPage();
     createScrollReveals();
-    createProofInteraction();
-    setupAnchorScroll();
+    createAlbumScroller();
     requestAnimationFrame(() => ScrollTrigger.refresh(true));
   });
 });

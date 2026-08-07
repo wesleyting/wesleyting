@@ -36,11 +36,43 @@ for (const pageDetails of pages) {
 
     expect(response?.ok()).toBe(true);
     await expect(page).toHaveTitle(pageDetails.title);
+    await expect(page.locator('meta[name="theme-color"]')).toHaveAttribute("content", "#000000");
     await expect(page.locator("main")).toBeVisible();
     await expect(page.locator("h1").first()).toBeVisible();
     expect(browserErrors).toEqual([]);
   });
 }
+
+test("the About page stays focused and exposes an accessible album carousel", async ({ page }) => {
+  const browserErrors = collectBrowserErrors(page);
+  await page.goto("/about.html", { waitUntil: "domcontentloaded" });
+  await page.evaluate(() => document.fonts.ready);
+
+  await expect(page.locator(".about-hero-title")).toContainText(
+    "I build digital experiences for the way businesses actually work.",
+  );
+  await expect(page.locator(".about-personal")).toContainText(
+    "Outside the browser, music is where I keep sharpening my taste.",
+  );
+  await expect(
+    page.locator(".about-capabilities, .about-process, .about-proof, .about-principles, .about-note, .about-contact, .about-return"),
+  ).toHaveCount(0);
+
+  const carousel = page.getByRole("region", { name: "Album artwork carousel" });
+  await expect(carousel.locator(".listening-set")).toHaveCount(2);
+  await expect(carousel.locator(".listening-card")).toHaveCount(20);
+  await expect(carousel.locator(".listening-card--cover")).toHaveCount(4);
+  await expect(carousel.locator(".listening-card--mockup")).toHaveCount(8);
+  await expect(carousel.locator(".listening-card--padded")).toHaveCount(8);
+  await expect(carousel.locator(".listening-set--duplicate")).toHaveAttribute("aria-hidden", "true");
+  const originalCards = carousel.locator("[data-listening-set] .listening-card");
+  await expect(originalCards).toHaveCount(10);
+  await expect(carousel.locator(".listening-card[href], .listening-card[data-cursor-label]")).toHaveCount(0);
+  await expect(
+    page.locator("[data-listening-toggle], #listening-instructions, .listening-controls"),
+  ).toHaveCount(0);
+  expect(browserErrors).toEqual([]);
+});
 
 test("the DuuDuu hero presents the project scope and live store", async ({
   page,

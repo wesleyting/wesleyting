@@ -6,19 +6,25 @@ gsap.registerPlugin(ScrollTrigger);
 document.addEventListener("DOMContentLoaded", () => {
   const intro = document.querySelector(".projects-intro");
   const cards = gsap.utils.toArray(".sticky-cards .project-card");
+  const isMobile = window.matchMedia("(max-width: 1000px)").matches;
 
   if (!cards.length) return;
 
   cards.forEach((card, index) => {
     const media = card.querySelector(".project-card-media");
-    const shots = media
-      ? Array.from(media.children).filter((child) =>
-          child.classList.contains("project-card-shot"),
-        )
-      : [];
+
+    if (!media) return;
+
+    if (isMobile) {
+      media.dataset.manualGallery = "true";
+      return;
+    }
+
+    const shots = Array.from(media.children).filter((child) =>
+      child.classList.contains("project-card-shot"),
+    );
 
     if (
-      !media ||
       shots.length < 2 ||
       media.dataset.marqueeReady === "true"
     ) {
@@ -70,19 +76,46 @@ document.addEventListener("DOMContentLoaded", () => {
   const totalCards = cards.length;
   const transitionCount = Math.max(1, totalCards - 1);
   const segmentSize = 1 / transitionCount;
-  const isMobile = window.matchMedia("(max-width: 1000px)").matches;
   const cardYOffset = isMobile ? 3.5 : 5;
   const cardScaleStep = isMobile ? 0.055 : 0.075;
   const exitYPercent = isMobile ? -170 : -200;
   const pastYPercent = isMobile ? -215 : -250;
   const exitRotation = isMobile ? 24 : 35;
 
+  if (isMobile) {
+    cards.forEach((card) => {
+      const media = card.querySelector(".project-card-media");
+      if (!media) return;
+
+      let pointerStartScroll = 0;
+      let galleryWasDragged = false;
+
+      media.addEventListener("pointerdown", () => {
+        pointerStartScroll = media.scrollLeft;
+        galleryWasDragged = false;
+      }, { passive: true });
+
+      media.addEventListener("scroll", () => {
+        if (Math.abs(media.scrollLeft - pointerStartScroll) > 8) {
+          galleryWasDragged = true;
+        }
+      }, { passive: true });
+
+      media.addEventListener("click", (event) => {
+        if (!galleryWasDragged) return;
+
+        event.preventDefault();
+        event.stopPropagation();
+        galleryWasDragged = false;
+      }, true);
+    });
+  }
+
   const renderCards = (progress) => {
     const activeIndex = Math.min(
       Math.floor(progress / segmentSize),
       totalCards - 1,
     );
-
     const segmentProgress =
       activeIndex === totalCards - 1
         ? 0
@@ -124,7 +157,7 @@ document.addEventListener("DOMContentLoaded", () => {
     trigger: ".sticky-cards",
     start: "top top",
     end: "bottom bottom",
-    scrub: isMobile ? 0.35 : true,
+    scrub: true,
     invalidateOnRefresh: true,
     onRefresh: (self) => renderCards(self.progress),
     onUpdate: ({ progress }) => renderCards(progress),

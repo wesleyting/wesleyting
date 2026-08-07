@@ -5,6 +5,16 @@ const overlay = document.querySelector(".transition-overlay");
 const DEPARTURE_COVER_SELECTOR = "[data-page-transition-departure]";
 let isNavigating = false;
 
+function restoreBrowserChromeColor() {
+  const themeColor = document.querySelector('meta[name="theme-color"]');
+  if (!themeColor) return;
+
+  themeColor.setAttribute("content", "#000001");
+  requestAnimationFrame(() => {
+    themeColor.setAttribute("content", "#000000");
+  });
+}
+
 function resetOverlay() {
   gsap.killTweensOf(overlay);
   gsap.set(overlay, { yPercent: 100 });
@@ -52,6 +62,7 @@ function revealDestination() {
     onComplete: () => {
       resetOverlay();
       document.body.classList.remove("transition-active");
+      restoreBrowserChromeColor();
     },
   });
 }
@@ -138,5 +149,6 @@ if (overlay) {
     sessionStorage.removeItem(TRANSITION_KEY);
     delete document.documentElement.dataset.pageTransition;
     resetOverlay();
+    restoreBrowserChromeColor();
   });
 }

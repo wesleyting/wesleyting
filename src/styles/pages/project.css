@@ -1610,7 +1610,7 @@
 
 @media (max-width: 900px) {
   .project-page main {
-    padding: 6.5rem 1rem 4rem;
+    padding: 6.5rem var(--site-gutter) 4rem;
   }
 
   .case-hero {
@@ -1841,7 +1841,7 @@
   }
 
   .project-footer {
-    width: calc(100% - 2rem);
+    width: calc(100% - var(--site-gutter) * 2);
     padding: 1.5rem 0 2rem;
   }
 
