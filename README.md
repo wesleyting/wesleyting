@@ -1,41 +1,13 @@
-# Wesley Ting Portfolio
+# Wesley Ting
 
-Personal portfolio for [wesleyting.com](https://wesleyting.com), featuring selected ecommerce work, campaign websites, and ongoing client projects.
+Web developer based in Vancouver, Canada. I build ecommerce storefronts, responsive frontend experiences, and practical web applications for real businesses.
 
-![Wesley Ting portfolio social preview](./public/og.png)
+Recent work includes Shopify development for growing brands, a Next.js competition site, and a Supabase-backed job analysis tool.
 
-## Highlights
+[Portfolio](https://wesleyting.com) · [LinkedIn](https://www.linkedin.com/in/wesleytingdev/)
 
-- Responsive, multi-page case studies for VegasPaulyC, All-In Brownie, and DuuDuu Mattress
-- Custom motion and scrolling interactions built with GSAP, Lenis, and SplitType
-- Accessible navigation, carousels, media controls, and image viewers
-- Netlify contact form with a dedicated success page
-- Search and sharing metadata, sitemap, robots file, and branded 404 page
-- Playwright end-to-end coverage across desktop and mobile layouts
+## Core stack
 
-## Stack
-
-- Vite
-- HTML, CSS, and JavaScript
-- GSAP, Lenis, and SplitType
-- Playwright
-- Netlify Forms
-
-## Local development
-
-```bash
-npm install
-npm run dev
-```
-
-Create a production build with:
-
-```bash
-npm run build
-```
-
-Run the browser test suite with:
-
-```bash
-npm run test:e2e
-```
+**Frontend:** HTML, CSS/SCSS, JavaScript, TypeScript, React, Next.js  
+**Ecommerce:** Shopify, Liquid  
+**Data and workflow:** Supabase, PostgreSQL, Git, Figma
