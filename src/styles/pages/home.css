@@ -383,11 +383,12 @@ img {
   will-change: transform, opacity;
 }
 
-.animate-text {
+.services-copy .animate-text {
   position: relative;
   width: min(1120px, 72vw);
   margin: 0 auto;
   color: #4f4f4f;
+  font-size: clamp(2.75rem, 3.6vw, 3.25rem);
   font-weight: 560;
   line-height: 1.12;
   letter-spacing: 0;
@@ -395,7 +396,7 @@ img {
   --clip-value: 100%;
 }
 
-.animate-text::before {
+.services-copy .animate-text::before {
   content: attr(data-text);
   position: absolute;
   top: 0;
@@ -406,7 +407,7 @@ img {
 }
 
 @media (max-width: 1200px), (max-height: 850px) {
-  .animate-text {
+  .services-copy .animate-text {
     width: min(100%, 1120px);
     font-size: clamp(1.5rem, 4.5vw, 2.5rem);
     line-height: 1.18;
@@ -414,7 +415,7 @@ img {
 }
 
 @media (max-width: 600px) {
-  .animate-text {
+  .services-copy .animate-text {
     font-size: clamp(1.7rem, 6.5vw, 1.9rem);
   }
 }

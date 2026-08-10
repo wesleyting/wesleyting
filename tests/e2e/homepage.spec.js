@@ -464,6 +464,45 @@ test("project card spacing stays balanced on mobile and tablet", async ({
   expect(browserErrors).toEqual([]);
 });
 
+test("the What I do copy stays readable and contained on large desktop", async ({
+  page,
+}) => {
+  const browserErrors = collectBrowserErrors(page);
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  await page.emulateMedia({ reducedMotion: "reduce" });
+
+  await page.goto("/", { waitUntil: "domcontentloaded" });
+  await page.evaluate(() => document.fonts.ready);
+
+  const metrics = await page
+    .locator(".services-copy .animate-text")
+    .evaluate((copy) => {
+      const section = copy.closest(".services");
+      const sectionBounds = section.getBoundingClientRect();
+      const copyBounds = copy.getBoundingClientRect();
+      const styles = getComputedStyle(copy);
+
+      return {
+        fontSize: Number.parseFloat(styles.fontSize),
+        copyHeight: copyBounds.height,
+        sectionHeight: sectionBounds.height,
+        fitsSection:
+          copyBounds.top >= sectionBounds.top - 1 &&
+          copyBounds.right <= sectionBounds.right + 1 &&
+          copyBounds.bottom <= sectionBounds.bottom + 1 &&
+          copyBounds.left >= sectionBounds.left - 1,
+        fitsOwnWidth: copy.scrollWidth <= copy.clientWidth + 1,
+      };
+    });
+
+  expect(metrics.fontSize).toBeGreaterThanOrEqual(32);
+  expect(metrics.fontSize).toBeLessThanOrEqual(56);
+  expect(metrics.copyHeight).toBeLessThanOrEqual(metrics.sectionHeight * 0.5);
+  expect(metrics.fitsSection).toBe(true);
+  expect(metrics.fitsOwnWidth).toBe(true);
+  expect(browserErrors).toEqual([]);
+});
+
 test("footer text reflows after crossing the responsive breakpoint", async ({
   page,
 }) => {
