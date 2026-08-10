@@ -73,12 +73,12 @@
         </figure>
 
         <div class="case-hero-inner" data-reveal-group>
-          <p class="case-eyebrow case-year"><span>2025&ndash;Present</span><span class="case-location">North America</span></p>
+          <p class="case-eyebrow case-year"><span>2025&ndash;2026</span><span class="case-location">North America</span></p>
           <h1 class="case-title" id="project-title">All-In Brownie</h1>
-          <p class="case-subtitle">A $10,000 naming competition built into an ecommerce launch.</p>
+          <p class="case-subtitle">A fan-named product launched across two brands.</p>
           <div class="case-hero-grid">
             <div class="case-copy case-intro-copy" data-reveal>
-              <p>I developed the Next.js competition site, the entry and consent flow, and the Shopify storefront for All-In Brownie. The same product later launched as BMF Brownie with a separate identity and storefront.</p>
+              <p>I developed the Next.js competition site, the entry and consent flow, and the Shopify storefront for All-In Brownie. The same product later launched as BMF Brownie for Cowboy Cerrone, with a separate identity and storefront.</p>
             </div>
             <div class="case-kpis all-in-kpis" aria-label="Project highlights" data-reveal-group>
               <article>
@@ -90,12 +90,12 @@
                 <p>Across the reported Shopify sales period.</p>
               </article>
               <article>
-                <span class="case-kpi-label">Order Volume</span>
+                <span class="case-kpi-label">Sales Volume</span>
                 <strong>
                   <span class="sr-only">677 units sold</span>
                   <span class="case-kpi-display" aria-hidden="true"><span class="case-kpi-count" data-count-to="677">677</span> units</span>
                 </strong>
-                <p>Sold across 377 Shopify orders.</p>
+                <p>Reported product volume across the sales period.</p>
               </article>
               <article>
                 <span class="case-kpi-label">Store Reach</span>
@@ -126,10 +126,11 @@
 
       <section class="case-section all-in-competition" aria-labelledby="competition-title">
         <div class="all-in-section-intro" data-reveal>
-          <p class="case-section-kicker">Competition Site</p>
-          <h2 id="competition-title">A $10,000 competition with a real entry system.</h2>
-          <p>I built the responsive Next.js site that collected submissions, enforced entry rules, recorded consent, and gave the team consistent data to review. GSAP handled the motion. Validation and privacy handling kept the entries usable.</p>
+          <h2 id="competition-title">The $10,000 Naming Competition</h2>
+          <p>Frankie asked his audience to name the brownie, and the $10,000 prize was split among everyone who submitted the selected name. I built the responsive Next.js entry site, including validation, eligibility checks, consent capture, and structured submissions for review.</p>
         </div>
+
+        <p class="sr-only" id="scroll-preview-instructions">Drag vertically to move through this preview. When focused, use the arrow keys, Page Up, or Page Down.</p>
 
         <div class="all-in-competition-layout">
           <figure class="all-in-campaign-art case-image-asset" data-reveal>
@@ -137,26 +138,35 @@
           </figure>
 
           <div class="all-in-competition-proof" data-reveal-group>
-            <figure class="all-in-media-frame all-in-site-demo">
-              <video muted loop playsinline preload="metadata" data-demo-video aria-label="Screen recording of the All-In Brownie naming competition website">
-                <source src="/projects/all-in-brownie/media/competition-site.mp4" type="video/mp4" />
-              </video>
-              <figcaption><span>Competition build</span><strong>Responsive entry site</strong></figcaption>
+            <figure class="all-in-browser all-in-browser--competition" data-scroll-region>
+              <div class="all-in-browser-bar">
+                <span class="all-in-browser-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                <button class="all-in-scroll-toggle" type="button" data-scroll-preview-toggle aria-pressed="false" aria-controls="competition-scroll-preview">Drag to scroll</button>
+              </div>
+              <div class="all-in-browser-crop all-in-scroll-preview" id="competition-scroll-preview" tabindex="0" role="region" aria-label="Scrollable preview of the All-In Brownie naming competition website" aria-describedby="scroll-preview-instructions">
+                <img src="/projects/all-in-brownie/media/competition-site-scroll.png" width="1920" height="2695" loading="lazy" decoding="async" draggable="false" alt="Full-page view of the 10,000 dollar All-In Brownie naming competition website" />
+              </div>
             </figure>
 
             <div class="all-in-competition-bottom">
               <figure class="all-in-media-frame all-in-announcement-video">
-                <video controls playsinline preload="metadata" poster="/projects/all-in-brownie/frankie-c-brownie-promotion.webp" aria-label="Frankie C announcing the 10,000 dollar brownie naming competition">
-                  <source src="/projects/all-in-brownie/media/contest-announcement.mp4" type="video/mp4" />
-                </video>
+                <div class="all-in-video-shell" data-video-shell>
+                  <video muted loop playsinline preload="metadata" data-autoplay-video poster="/projects/all-in-brownie/frankie-c-brownie-promotion.webp" aria-label="Frankie C announcing the 10,000 dollar brownie naming competition">
+                    <source src="/projects/all-in-brownie/media/contest-announcement.mp4" type="video/mp4" />
+                  </video>
+                  <div class="all-in-video-controls" aria-label="Video controls">
+                    <button type="button" data-video-mute aria-label="Turn sound on" aria-pressed="false">Sound on</button>
+                    <button type="button" data-video-fullscreen aria-label="Enter fullscreen">Expand</button>
+                  </div>
+                </div>
                 <figcaption><span>Campaign brief</span><strong>The public announcement</strong></figcaption>
               </figure>
 
               <ul class="all-in-tech-list" aria-label="Competition site responsibilities">
-                <li><span>Frontend</span><strong>Next.js</strong></li>
-                <li><span>Interaction</span><strong>GSAP</strong></li>
-                <li><span>Entry rules</span><strong>Validation</strong></li>
-                <li><span>Eligibility</span><strong>Consent</strong></li>
+                <li><span>Frontend</span><strong>Responsive Next.js</strong></li>
+                <li><span>Submissions</span><strong>Structured entry data</strong></li>
+                <li><span>Entry rules</span><strong>Form validation</strong></li>
+                <li><span>Privacy</span><strong>Consent capture</strong></li>
               </ul>
             </div>
           </div>
@@ -165,20 +175,22 @@
 
       <section class="case-section all-in-storefront" aria-labelledby="storefront-title">
         <div class="all-in-section-intro" data-reveal>
-          <p class="case-section-kicker">Ecommerce</p>
-          <h2 id="storefront-title">From campaign traffic to checkout.</h2>
-          <p>I carried the launch into Shopify, working across the storefront, product detail, subscriptions, and the purchase path. The competition site and store used different stacks but functioned as one customer journey.</p>
+          <h2 id="storefront-title">From Campaign Traffic to Checkout</h2>
+          <p>I built the Shopify storefront, product page, and checkout flow, including a subscription option for recurring brownie deliveries.</p>
         </div>
 
         <div class="all-in-storefront-stage" data-reveal>
-          <figure class="all-in-browser all-in-browser--desktop case-image-asset">
-            <div class="all-in-browser-bar" aria-hidden="true"><i></i><i></i><i></i><span>All-In Brownie storefront</span></div>
-            <div class="all-in-browser-crop">
-              <img src="/projects/all-in-brownie/media/storefront-desktop.png" width="1920" height="4000" loading="lazy" decoding="async" alt="Desktop view of the All-In Brownie Shopify storefront" />
+          <figure class="all-in-browser all-in-browser--desktop" data-scroll-region>
+            <div class="all-in-browser-bar">
+              <span class="all-in-browser-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+              <button class="all-in-scroll-toggle" type="button" data-scroll-preview-toggle aria-pressed="false" aria-controls="storefront-scroll-preview">Drag to scroll</button>
+            </div>
+            <div class="all-in-browser-crop all-in-scroll-preview" id="storefront-scroll-preview" tabindex="0" role="region" aria-label="Scrollable desktop preview of the All-In Brownie storefront" aria-describedby="scroll-preview-instructions">
+              <img src="/projects/all-in-brownie/media/storefront-desktop.png" width="1920" height="4000" loading="lazy" decoding="async" draggable="false" alt="Desktop view of the All-In Brownie Shopify storefront" />
             </div>
           </figure>
 
-          <figure class="all-in-phone case-image-asset">
+          <figure class="all-in-phone">
             <div class="all-in-phone-speaker" aria-hidden="true"></div>
             <div class="all-in-phone-crop">
               <img src="/projects/all-in-brownie/media/storefront-mobile.png" width="500" height="4208" loading="lazy" decoding="async" alt="Mobile view of the All-In Brownie Shopify storefront" />
@@ -190,30 +202,33 @@
           <figure class="all-in-product-detail case-image-asset">
             <img src="/projects/all-in-brownie/media/product-page-detail.png" width="1153" height="700" loading="lazy" decoding="async" alt="All-In Brownie Shopify product page with reviews, subscription options, and product details" />
           </figure>
-          <div class="all-in-product-portraits">
-            <figure class="case-image-asset">
-              <img src="/projects/all-in-brownie/media/frankie-product-portrait.jpg" width="1440" height="1920" loading="lazy" decoding="async" alt="Frankie C holding an All-In Brownie package" />
-            </figure>
-            <figure class="case-image-asset">
-              <img src="/projects/all-in-brownie/media/brownie-closeup.jpg" width="1440" height="1911" loading="lazy" decoding="async" alt="All-In Brownie product close-up on the launch set" />
-            </figure>
-          </div>
+          <figure class="all-in-product-portrait case-image-asset">
+            <img src="/projects/all-in-brownie/media/frankie-product-portrait.jpg" width="1440" height="1920" loading="lazy" decoding="async" alt="Frankie C holding an All-In Brownie package" />
+          </figure>
         </div>
       </section>
 
       <section class="case-section all-in-trust" aria-labelledby="trust-title">
         <div class="all-in-section-intro" data-reveal>
-          <p class="case-section-kicker">Results</p>
-          <h2 id="trust-title">Sales backed by customer proof.</h2>
-          <p>The reported performance data covers more than the launch itself: $24K+ in sales, 377 orders, 677 units sold, and nearly 32,000 store sessions. Reviews from the poker and fitness communities gave buyers proof beyond the brand&rsquo;s own claims.</p>
+          <h2 id="trust-title">Launch Performance</h2>
+          <p>This Shopify Analytics snapshot covers June 1 through July 31, 2025. Reviews from established names in poker and fitness added independent product proof.</p>
         </div>
 
-        <dl class="all-in-performance-grid" aria-label="All-In Brownie performance" data-reveal-group>
-          <div><dt>$24K+</dt><dd>Total sales</dd></div>
-          <div><dt>377</dt><dd>Orders</dd></div>
-          <div><dt>677</dt><dd>Units sold</dd></div>
-          <div><dt>31.9K</dt><dd>Store sessions</dd></div>
-        </dl>
+        <div class="all-in-results-proof" data-reveal-group>
+          <figure class="all-in-analytics-proof case-image-asset">
+            <img src="/projects/all-in-brownie/media/launch-window-analytics.png" width="1312" height="850" loading="lazy" decoding="async" alt="Shopify analytics dashboard for All-In Brownie from June 1 through July 31, 2025" />
+            <figcaption><span>Shopify Analytics</span><strong>Launch dashboard</strong></figcaption>
+          </figure>
+
+          <aside class="all-in-analytics-summary" aria-label="Shopify Analytics sales snapshot">
+            <p class="all-in-analytics-period"><span>Sales snapshot</span><strong>June 1&ndash;July 31, 2025</strong></p>
+            <dl class="all-in-performance-grid" aria-label="All-In Brownie launch performance">
+              <div><dt>$14.3K</dt><dd>Total sales</dd></div>
+              <div><dt>$12.7K</dt><dd>Net sales</dd></div>
+              <div><dt>$61.18</dt><dd>Average order value</dd></div>
+            </dl>
+          </aside>
+        </div>
 
         <div class="all-in-testimonials" data-reveal-group>
           <blockquote class="all-in-testimonial all-in-testimonial--featured">
@@ -244,44 +259,54 @@
 
       <section class="case-section all-in-stories" aria-labelledby="stories-title">
         <div class="all-in-stories-heading" data-reveal>
-          <p class="case-section-kicker">Campaign Content</p>
-          <h2 id="stories-title">The launch, in motion.</h2>
-          <p>Social content, poker events, and in-person reactions carried the product beyond the storefront.</p>
+          <h2 id="stories-title">Launch in Motion</h2>
         </div>
 
         <div class="all-in-story-carousel" data-story-carousel role="region" aria-roledescription="carousel" aria-label="All-In Brownie launch videos" data-reveal>
           <div class="all-in-story-stage">
-            <article class="all-in-story-slide is-active" data-story-slide aria-label="1 of 3: Poker community launch reel" aria-current="true">
-              <video controls playsinline preload="none" poster="/projects/all-in-brownie/media/poker-table.jpg" aria-describedby="story-one-caption">
+            <article class="all-in-story-slide is-active" data-story-slide data-video-shell aria-label="1 of 3: Poker community launch reel" aria-current="true">
+              <video muted loop playsinline preload="metadata" data-autoplay-video poster="/projects/all-in-brownie/media/poker-table.jpg" aria-describedby="story-one-caption">
                 <source src="/projects/all-in-brownie/media/launch-reel.mp4" type="video/mp4" />
               </video>
               <span class="all-in-story-tag" aria-hidden="true">Poker community</span>
+              <div class="all-in-video-controls" aria-label="Video controls">
+                <button type="button" data-video-mute aria-label="Turn sound on" aria-pressed="false">Sound on</button>
+                <button type="button" data-video-fullscreen aria-label="Enter fullscreen">Expand</button>
+              </div>
               <button class="all-in-story-select" type="button" data-story-select aria-label="Show poker community launch reel"></button>
               <p class="sr-only" id="story-one-caption">Tournament footage and community response to All-In Brownie.</p>
             </article>
 
-            <article class="all-in-story-slide is-after" data-story-slide aria-label="2 of 3: Casino taste reaction">
-              <video playsinline preload="none" poster="/projects/all-in-brownie/media/event-crowd.jpg" aria-describedby="story-two-caption">
+            <article class="all-in-story-slide is-after" data-story-slide data-video-shell aria-label="2 of 3: Casino taste reaction">
+              <video muted loop playsinline preload="metadata" data-autoplay-video poster="/projects/all-in-brownie/media/event-crowd.jpg" aria-describedby="story-two-caption">
                 <source src="/projects/all-in-brownie/media/casino-reaction.mp4" type="video/mp4" />
               </video>
-              <span class="all-in-story-tag" aria-hidden="true">Taste reaction</span>
+              <span class="all-in-story-tag" aria-hidden="true">Product reaction</span>
+              <div class="all-in-video-controls" aria-label="Video controls">
+                <button type="button" data-video-mute aria-label="Turn sound on" aria-pressed="false">Sound on</button>
+                <button type="button" data-video-fullscreen aria-label="Enter fullscreen">Expand</button>
+              </div>
               <button class="all-in-story-select" type="button" data-story-select aria-label="Show casino taste reaction"></button>
               <p class="sr-only" id="story-two-caption">A short in-person reaction to tasting All-In Brownie.</p>
             </article>
 
-            <article class="all-in-story-slide is-before" data-story-slide aria-label="3 of 3: Las Vegas launch event">
-              <video playsinline preload="none" poster="/projects/all-in-brownie/media/event-group.jpg" aria-describedby="story-three-caption">
+            <article class="all-in-story-slide is-before" data-story-slide data-video-shell aria-label="3 of 3: Las Vegas launch event">
+              <video muted loop playsinline preload="metadata" data-autoplay-video poster="/projects/all-in-brownie/media/event-group.jpg" aria-describedby="story-three-caption">
                 <source src="/projects/all-in-brownie/media/launch-event.mp4" type="video/mp4" />
               </video>
-              <span class="all-in-story-tag" aria-hidden="true">Launch event</span>
+              <span class="all-in-story-tag" aria-hidden="true">Las Vegas launch</span>
+              <div class="all-in-video-controls" aria-label="Video controls">
+                <button type="button" data-video-mute aria-label="Turn sound on" aria-pressed="false">Sound on</button>
+                <button type="button" data-video-fullscreen aria-label="Enter fullscreen">Expand</button>
+              </div>
               <button class="all-in-story-select" type="button" data-story-select aria-label="Show Las Vegas launch event"></button>
               <p class="sr-only" id="story-three-caption">All-In Brownie product sampling and launch activity in Las Vegas.</p>
             </article>
           </div>
-          <div class="all-in-story-controls">
-            <button type="button" data-story-previous aria-label="View previous launch video">&larr; Previous</button>
-            <span data-story-status aria-live="polite" aria-atomic="true">01 / 03</span>
-            <button type="button" data-story-next aria-label="View next launch video">Next &rarr;</button>
+          <div class="all-in-story-navigation">
+            <button type="button" data-story-previous aria-label="View previous launch video"><span aria-hidden="true">&lsaquo;</span></button>
+            <span class="sr-only" data-story-status aria-live="polite" aria-atomic="true">01 / 03</span>
+            <button type="button" data-story-next aria-label="View next launch video"><span aria-hidden="true">&rsaquo;</span></button>
           </div>
         </div>
       </section>
@@ -290,23 +315,32 @@
         <div class="all-in-bmf-panel">
           <div class="all-in-bmf-heading" data-reveal>
             <p class="case-section-kicker">Multi-Brand</p>
-            <h2 id="extension-title">The same product, rebuilt for BMF.</h2>
-            <p>BMF Brownie used the same underlying product but a different name, package, storefront, and audience. I built the second Shopify experience around that identity instead of treating it as a reskin.</p>
+            <h2 id="extension-title">Building BMF Brownie for Cowboy Cerrone</h2>
+            <p>BMF Brownie took the same core product into a separate brand built around Cowboy Cerrone. I developed Cowboy Cerrone&rsquo;s Shopify storefront and adapted the product presentation, packaging, and messaging for the BMF audience.</p>
           </div>
 
           <div class="all-in-bmf-stage" data-reveal-group>
-            <figure class="all-in-browser all-in-browser--bmf case-image-asset">
-              <div class="all-in-browser-bar" aria-hidden="true"><i></i><i></i><i></i><span>BMF Brownie storefront</span></div>
-              <div class="all-in-browser-crop">
-                <img src="/projects/all-in-brownie/media/bmf-storefront.png" width="1920" height="3945" loading="lazy" decoding="async" alt="Desktop view of the BMF Brownie Shopify storefront" />
+            <figure class="all-in-browser all-in-browser--bmf" data-scroll-region>
+              <div class="all-in-browser-bar">
+                <span class="all-in-browser-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+                <button class="all-in-scroll-toggle" type="button" data-scroll-preview-toggle aria-pressed="false" aria-controls="bmf-scroll-preview">Drag to scroll</button>
+              </div>
+              <div class="all-in-browser-crop all-in-scroll-preview" id="bmf-scroll-preview" tabindex="0" role="region" aria-label="Scrollable preview of Cowboy Cerrone's BMF Brownie storefront" aria-describedby="scroll-preview-instructions">
+                <img src="/projects/all-in-brownie/media/bmf-storefront.png" width="1920" height="3945" loading="lazy" decoding="async" draggable="false" alt="Desktop view of the BMF Brownie Shopify storefront" />
               </div>
             </figure>
 
             <figure class="all-in-bmf-video all-in-media-frame">
-              <video controls playsinline preload="none" poster="/projects/all-in-brownie/media/bmf-flatlay.webp" aria-label="Cowboy Cerrone presenting BMF Brownie packaging">
-                <source src="/projects/all-in-brownie/media/bmf-cowboy.mp4" type="video/mp4" />
-              </video>
-              <figcaption><span>BMF launch</span><strong>The second identity in market</strong></figcaption>
+              <div class="all-in-video-shell" data-video-shell>
+                <video muted loop playsinline preload="metadata" data-autoplay-video poster="/projects/all-in-brownie/media/bmf-flatlay.webp" aria-label="Cowboy Cerrone presenting BMF Brownie packaging">
+                  <source src="/projects/all-in-brownie/media/bmf-cowboy.mp4" type="video/mp4" />
+                </video>
+                <div class="all-in-video-controls" aria-label="Video controls">
+                  <button type="button" data-video-mute aria-label="Turn sound on" aria-pressed="false">Sound on</button>
+                  <button type="button" data-video-fullscreen aria-label="Enter fullscreen">Expand</button>
+                </div>
+              </div>
+              <figcaption><span>Cowboy Cerrone</span><strong>BMF Brownie launch</strong></figcaption>
             </figure>
 
             <figure class="all-in-bmf-flatlay case-image-asset">
@@ -319,20 +353,15 @@
       <section class="case-section outcome-summary all-in-outcome" aria-labelledby="outcome-title">
         <p class="case-section-kicker" data-reveal>Outcome</p>
         <div class="outcome-summary-statement" data-outcome-summary>
-          <h2 id="outcome-title" data-outcome-title>One launch, two storefronts.</h2>
+          <h2 id="outcome-title" data-outcome-title>One product, two brands, three builds.</h2>
           <div class="outcome-summary-copy" data-outcome-copy>
-            <p>I built the competition site, the All-In commerce path, and the BMF storefront around the same product. The reported result was 377 orders, 677 units sold, and nearly 32,000 store sessions.</p>
+            <p>The project moved from a fan-led naming competition into a subscription-ready All-In storefront, then into a separate BMF Brownie experience for Cowboy Cerrone. Each build supported a different part of the launch while keeping both brands distinct.</p>
             <div class="outcome-summary-footer">
-              <dl class="outcome-proof" aria-label="Additional project results">
-                <div>
-                  <dt><span class="sr-only">377</span><span class="outcome-count" aria-hidden="true" data-count-to="377">377</span></dt>
-                  <dd>Orders</dd>
-                </div>
-                <div>
-                  <dt><span class="sr-only">2</span><span class="outcome-count" aria-hidden="true" data-count-to="2">2</span></dt>
-                  <dd>Storefronts</dd>
-                </div>
-              </dl>
+              <ol class="all-in-outcome-route" aria-label="Project progression">
+                <li><span>01</span>Fan naming competition</li>
+                <li><span>02</span>All-In subscription storefront</li>
+                <li><span>03</span>BMF brand extension</li>
+              </ol>
             </div>
           </div>
         </div>
