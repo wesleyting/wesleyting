@@ -12,8 +12,12 @@ function collectBrowserErrors(page) {
   });
 
   page.on("console", (message) => {
-    if (message.type() === "error") {
-      errors.push(`console: ${message.text()}`);
+    const text = message.text();
+    const isSandboxedExternalResource =
+      text.includes("Failed to load resource") && text.includes("ERR_NETWORK_ACCESS_DENIED");
+
+    if (message.type() === "error" && !isSandboxedExternalResource) {
+      errors.push(`console: ${text}`);
     }
   });
 

@@ -1,14 +1,31 @@
 import { expect, test } from "@playwright/test";
 
 const pages = [
-  { path: "/", title: /Wesley Ting \| Frontend and Ecommerce Developer/ },
+  { path: "/", title: /Wesley Ting \| Frontend & Ecommerce Developer/ },
   { path: "/about.html", title: /About Wesley Ting/ },
   { path: "/contact.html", title: /Contact Wesley Ting/ },
+  { path: "/success.html", title: /Message Sent/ },
   { path: "/projects/all-in-brownie.html", title: /All-In Brownie/ },
   { path: "/projects/duuduu-mattress.html", title: /DuuDuu Mattress/ },
   { path: "/projects/vegaspaulyc.html", title: /VegasPaulyC/ },
-  { path: "/projects/token-studio.html", title: /Token Studio/ },
-  { path: "/projects/clearbooks-tech.html", title: /Clearbooks Tech/ },
+];
+
+const seoPages = [
+  { path: "/", canonical: "https://wesleyting.com/" },
+  { path: "/about.html", canonical: "https://wesleyting.com/about.html" },
+  { path: "/contact.html", canonical: "https://wesleyting.com/contact.html" },
+  {
+    path: "/projects/all-in-brownie.html",
+    canonical: "https://wesleyting.com/projects/all-in-brownie.html",
+  },
+  {
+    path: "/projects/duuduu-mattress.html",
+    canonical: "https://wesleyting.com/projects/duuduu-mattress.html",
+  },
+  {
+    path: "/projects/vegaspaulyc.html",
+    canonical: "https://wesleyting.com/projects/vegaspaulyc.html",
+  },
 ];
 
 test("the contact page presents a concise Netlify-ready inquiry form", async ({ page }) => {
@@ -19,6 +36,7 @@ test("the contact page presents a concise Netlify-ready inquiry form", async ({ 
   await expect(page.getByRole("heading", { level: 1 })).toContainText("building.");
 
   const form = page.locator('form[name="contact"]');
+  await expect(form).toHaveAttribute("action", "/success.html");
   await expect(form).toHaveAttribute("method", "POST");
   await expect(form).toHaveAttribute("data-netlify", "true");
   await expect(form).toHaveAttribute("data-netlify-honeypot", "bot-field");
@@ -38,13 +56,80 @@ function collectBrowserErrors(page) {
   });
 
   page.on("console", (message) => {
-    if (message.type() === "error") {
-      errors.push(`console: ${message.text()}`);
+    const text = message.text();
+    const isSandboxedExternalResource =
+      text.includes("Failed to load resource") && text.includes("ERR_NETWORK_ACCESS_DENIED");
+
+    if (message.type() === "error" && !isSandboxedExternalResource) {
+      errors.push(`console: ${text}`);
     }
   });
 
   return errors;
 }
+
+for (const pageDetails of seoPages) {
+  test(`${pageDetails.path} exposes production sharing metadata`, async ({ page }) => {
+    await page.goto(pageDetails.path, { waitUntil: "domcontentloaded" });
+
+    await expect(page.locator('meta[name="description"]')).toHaveAttribute("content", /\S+/);
+    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+      "href",
+      pageDetails.canonical,
+    );
+    await expect(page.locator('meta[property="og:url"]')).toHaveAttribute(
+      "content",
+      pageDetails.canonical,
+    );
+    await expect(page.locator('meta[property="og:image"]')).toHaveAttribute(
+      "content",
+      "https://wesleyting.com/og.png",
+    );
+    await expect(page.locator('meta[name="twitter:card"]')).toHaveAttribute(
+      "content",
+      "summary_large_image",
+    );
+    await expect(page.locator('meta[name="twitter:image"]')).toHaveAttribute(
+      "content",
+      "https://wesleyting.com/og.png",
+    );
+  });
+}
+
+test("the launch support files describe the production site", async ({ request, page }) => {
+  const [robotsResponse, sitemapResponse, manifestResponse] = await Promise.all([
+    request.get("/robots.txt"),
+    request.get("/sitemap.xml"),
+    request.get("/favicon/site.webmanifest"),
+  ]);
+
+  expect(robotsResponse.ok()).toBe(true);
+  expect(await robotsResponse.text()).toContain(
+    "Sitemap: https://wesleyting.com/sitemap.xml",
+  );
+
+  expect(sitemapResponse.ok()).toBe(true);
+  const sitemap = await sitemapResponse.text();
+  for (const pageDetails of seoPages) {
+    expect(sitemap).toContain(`<loc>${pageDetails.canonical}</loc>`);
+  }
+  expect(sitemap).not.toContain("token-studio");
+  expect(sitemap).not.toContain("clearbooks-tech");
+
+  expect(manifestResponse.ok()).toBe(true);
+  expect(await manifestResponse.json()).toMatchObject({
+    name: "Wesley Ting | Frontend & Ecommerce Developer",
+    short_name: "Wesley Ting",
+    start_url: "/",
+  });
+
+  await page.goto("/404.html", { waitUntil: "domcontentloaded" });
+  await expect(page).toHaveTitle("Page Not Found | Wesley Ting");
+  await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", "noindex");
+  await expect(page.getByRole("heading", { level: 1 })).toHaveText(
+    "This page doesn’t exist.",
+  );
+});
 
 for (const pageDetails of pages) {
   test(`${pageDetails.path} loads without browser errors`, async ({ page }) => {
@@ -221,36 +306,42 @@ test("the All-In Brownie case study exposes the launch system and media template
 
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("All-In Brownie");
   await expect(page.locator(".case-subtitle")).toHaveText(
-    "A playful ecommerce launch built around a community naming giveaway.",
+    "A fan-named product launched across two brands.",
   );
 
   const details = page.locator(".case-hero-details");
   await expect(details.locator("dt")).toHaveText(["Role", "Tech Stack", "Scope"]);
-  await expect(details).toContainText("Frontend Developer / Ecommerce Integration");
+  await expect(details).toContainText("Frontend Development / Ecommerce");
   await expect(details).toContainText("Next.js / GSAP / Shopify");
+  await expect(details).toContainText("Competition Site / Storefront / Multi-Brand");
 
-  const foundation = page.locator(".all-in-foundation");
-  await expect(foundation.locator("h3")).toHaveText([
-    "Responsive Experience",
-    "Form + Data Validation",
-    "Consent Management",
-  ]);
-
-  await expect(page.locator(".all-in-entry-route > div")).toHaveCount(4);
   const metrics = page.locator(".all-in-kpis");
-  await expect(metrics).toContainText("$24.6K");
+  await expect(metrics).toContainText("2025 Sales");
+  await expect(metrics).toContainText("$24K+ USD");
   await expect(metrics).toContainText("677 units");
   await expect(metrics).toContainText("31.9K sessions");
-  await expect(page.locator(".all-in-analytics-frame")).toContainText("$24,582.59");
+  await expect(page.getByRole("heading", { name: "The US$10,000 Naming Competition" })).toBeVisible();
+
+  const performance = page.locator(".all-in-trust");
+  await expect(performance).toContainText("June 1");
+  await expect(performance).toContainText("July 31, 2025");
+  await expect(performance).toContainText("USD sales snapshot");
+  await expect(performance).toContainText("$14.3K");
+  await expect(performance).toContainText("$12.7K");
+  await expect(performance).toContainText("$61.18");
   await expect(page.locator(".all-in-extension")).toContainText("BMF Brownie");
-  await expect(page.locator(".all-in-outcome .outcome-count")).toHaveText(["377", "308"]);
+  await expect(page.locator(".all-in-outcome-route li")).toHaveText([
+    "01Fan naming competition",
+    "02All-In subscription storefront",
+    "03BMF brand extension",
+  ]);
 
   const carousel = page.locator("[data-story-carousel]");
-  await expect(carousel.locator("[data-story-slide]")).toHaveCount(5);
+  await expect(carousel.locator("[data-story-slide]")).toHaveCount(3);
   await expect(carousel.locator('[data-story-slide][aria-current="true"]')).toHaveCount(1);
-  await expect(carousel.locator("[data-story-status]")).toHaveText("03 / 05");
+  await expect(carousel.locator("[data-story-status]")).toHaveText("01 / 03");
   await carousel.locator("[data-story-next]").click();
-  await expect(carousel.locator("[data-story-status]")).toHaveText("04 / 05");
+  await expect(carousel.locator("[data-story-status]")).toHaveText("02 / 03");
 });
 
 test("the homepage features projects in the intended order", async ({ page }) => {
@@ -293,6 +384,8 @@ test("the homepage features projects in the intended order", async ({ page }) =>
     "/projects/all-in-brownie/bmf-brownie-package-design.webp",
   ]);
   await expect(cards.nth(2)).toHaveAttribute("href", "/projects/duuduu-mattress.html");
+  await expect(cards.nth(2)).toContainText("Shopify Development");
+  await expect(cards.nth(2)).not.toContainText("Full-Stack Development");
   const tokenStudioCard = cards.nth(3);
   await expect(tokenStudioCard).toHaveAttribute("href", "https://tokenstoy.com/");
   await expect(tokenStudioCard).toHaveAttribute("target", "_blank");
@@ -337,6 +430,13 @@ test("the shared menu opens and closes with the keyboard", async ({ page }) => {
   await expect(menuButton).toHaveAttribute("aria-label", "Close menu");
   await expect(menu).toHaveAttribute("aria-hidden", "false");
   await expect(page.locator("body")).toHaveClass(/menu-is-open/);
+  const linkedIn = menu.getByRole("link", { name: "LinkedIn" });
+  await expect(linkedIn).toHaveAttribute(
+    "href",
+    "https://www.linkedin.com/in/wesleytingdev/",
+  );
+  await expect(linkedIn).toHaveAttribute("target", "_blank");
+  await expect(linkedIn).toHaveAttribute("rel", /noopener/);
 
   await page.keyboard.press("Escape");
   await expect(menuButton).toHaveAttribute("aria-expanded", "false");

@@ -14,8 +14,8 @@ const viewports = [
 const sharedStyleTargets = {
   hero: [".case-hero-inner", ["gridTemplateColumns", "columnGap", "rowGap"]],
   year: [".case-year", ["fontSize", "fontWeight", "lineHeight"]],
-  title: [".case-title", ["fontSize", "fontWeight", "lineHeight", "maxWidth"]],
-  subtitle: [".case-subtitle", ["fontSize", "fontWeight", "lineHeight", "maxWidth"]],
+  title: [".case-title", ["fontSize", "fontWeight", "lineHeight"]],
+  subtitle: [".case-subtitle", ["fontSize", "fontWeight", "lineHeight"]],
   details: [".case-hero-details", ["gridColumn", "gridRow", "paddingTop", "borderTopWidth"]],
 };
 
