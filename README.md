@@ -12,4 +12,3 @@ Recent work includes Shopify development for growing brands, a Next.js competiti
 **Ecommerce:** Shopify, Liquid  
 **APIs and data:** DeepSeek API, Supabase, PostgreSQL  
 **Tools and workflow:** Git, GitHub, Figma
-Testing and delivery: Playwright, Netlify, Vercel
