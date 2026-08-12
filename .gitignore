@@ -31,3 +31,5 @@ playwright/.cache/
 
 # Local high-resolution source artwork (optimized derivatives are committed)
 .asset-sources/
+# Private career documents (resumes, cover letters, and source drafts)
+/career-materials/
