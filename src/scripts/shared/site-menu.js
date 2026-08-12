@@ -255,6 +255,41 @@ function closeMenu({ restoreFocus = true } = {}) {
   isMenuOpen = false;
 }
 
+function resetMenuAfterHistoryRestore(event) {
+  if (!event.persisted) return;
+
+  const navOverlay = document.querySelector(".nav-overlay");
+  const menuToggleBtn = document.querySelector(".menu-toggle-btn");
+  const navItems = document.querySelectorAll(".nav-item");
+
+  if (!navOverlay || !menuToggleBtn) return;
+
+  gsap.killTweensOf([navOverlay, navItems]);
+  cleanupScrambleInstances();
+  resetAllTextToOriginal();
+
+  document.body.classList.remove("menu-is-open");
+  navOverlay.style.pointerEvents = "none";
+  navOverlay.setAttribute("aria-hidden", "true");
+  navOverlay.inert = true;
+  menuToggleBtn.classList.remove("menu-open");
+  menuToggleBtn.setAttribute("aria-expanded", "false");
+  menuToggleBtn.setAttribute("aria-label", "Open menu");
+
+  gsap.set(navOverlay, {
+    clipPath: "polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%)",
+  });
+  gsap.set(navItems, { opacity: 0, transform: "translateY(100%)" });
+
+  isMenuOpen = false;
+  isAnimating = false;
+  lastFocusedElement = null;
+  window.lenis?.resize?.();
+  window.lenis?.start?.();
+}
+
+window.addEventListener("pageshow", resetMenuAfterHistoryRestore);
+
 // main execution - wait for fonts to load
 document.fonts.ready.then(() => {
   initializeMenuToggleText();

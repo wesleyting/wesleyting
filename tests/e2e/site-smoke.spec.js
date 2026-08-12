@@ -306,7 +306,7 @@ test("the All-In Brownie case study exposes the launch system and media template
 
   await expect(page.getByRole("heading", { level: 1 })).toHaveText("All-In Brownie");
   await expect(page.locator(".case-subtitle")).toHaveText(
-    "A fan-named product launched across two brands.",
+    "A naming competition and two distinct brownie storefronts.",
   );
 
   const details = page.locator(".case-hero-details");
@@ -331,9 +331,9 @@ test("the All-In Brownie case study exposes the launch system and media template
   await expect(performance).toContainText("$61.18");
   await expect(page.locator(".all-in-extension")).toContainText("BMF Brownie");
   await expect(page.locator(".all-in-outcome-route li")).toHaveText([
-    "01Fan naming competition",
-    "02All-In subscription storefront",
-    "03BMF brand extension",
+    "01$10K naming competition",
+    "02All-In Shopify storefront",
+    "03BMF Brownie storefront",
   ]);
 
   const carousel = page.locator("[data-story-carousel]");

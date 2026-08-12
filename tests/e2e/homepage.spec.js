@@ -207,6 +207,7 @@ test("the hero video survives mobile to desktop to mobile resizing", async ({
   const scrollHint = page.locator(".hero-copy > p:last-child");
 
   await expect(scrollHint).toBeHidden();
+  expect(await page.evaluate(() => Boolean(window.lenis))).toBe(false);
   await expectHeroVideoToAdvance(page);
 
   const mediaCallsBeforeResize = await page.evaluate(() => ({
@@ -217,6 +218,7 @@ test("the hero video survives mobile to desktop to mobile resizing", async ({
 
   await page.setViewportSize(desktopViewport);
   await expect(scrollHint).toBeVisible();
+  await expect.poll(() => page.evaluate(() => Boolean(window.lenis))).toBe(true);
   await expect
     .poll(
       () => videoContainer.evaluate((element) => element.style.transform),
@@ -227,6 +229,7 @@ test("the hero video survives mobile to desktop to mobile resizing", async ({
 
   await page.setViewportSize(mobileViewport);
   await expect(scrollHint).toBeHidden();
+  await expect.poll(() => page.evaluate(() => Boolean(window.lenis))).toBe(false);
   await expect
     .poll(
       () =>
